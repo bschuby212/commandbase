@@ -15,6 +15,16 @@
       rel="stylesheet"
     />
     <title>Commands, Simplified. — Command Library</title>
+    <script>
+      try {
+        if (localStorage.getItem('commandbase:theme') === 'dark') {
+          document.documentElement.classList.add('dark')
+          document.documentElement.style.colorScheme = 'dark'
+        } else {
+          document.documentElement.style.colorScheme = 'light'
+        }
+      } catch (_) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
