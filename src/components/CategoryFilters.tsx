@@ -1,4 +1,10 @@
-import { LanguageIcon, ProgramIcon } from './FilterIcons'
+import {
+  FunctionFieldIcon,
+  LanguageFieldIcon,
+  LanguageIcon,
+  ProgramIcon,
+  ToolFieldIcon,
+} from './FilterIcons'
 import { FilterDropdown } from './FilterDropdown'
 import { LANGUAGE_FILTERS, PROGRAM_FILTERS } from '../lib/platformLabels'
 import type {
@@ -58,6 +64,7 @@ export function CategoryFilters({
         value={tool}
         options={toolOptions}
         onChange={onToolChange}
+        leadingIcon={<ToolFieldIcon />}
         className="min-w-0 flex-1 basis-0 sm:w-[9.75rem] sm:flex-none"
       />
       <FilterDropdown
@@ -65,6 +72,7 @@ export function CategoryFilters({
         value={language}
         options={languageOptions}
         onChange={onLanguageChange}
+        leadingIcon={<LanguageFieldIcon />}
         className="min-w-0 flex-1 basis-0 sm:w-[9.75rem] sm:flex-none"
       />
       <FilterDropdown
@@ -72,6 +80,7 @@ export function CategoryFilters({
         value={functionValue}
         options={functionOptions}
         onChange={(next) => onSecondaryChange(next === 'all' ? null : next)}
+        leadingIcon={<FunctionFieldIcon />}
         align="right"
         className="min-w-0 flex-1 basis-0 sm:w-[10.5rem] sm:flex-none"
       />

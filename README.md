@@ -9,7 +9,7 @@ A standalone, responsive quick-reference library for developer commands covering
 - Tool, language, and function dropdown filters
 - Fully client-side — no login or backend required
 - Keyboard accessible cards with visible focus states
-- Compact toolbar with search + tool/language/function dropdowns; cards scale 1→2→3→4 columns on larger screens
+- Compact toolbar with search + tool/language/function dropdowns; cards scale 1→2→3→4 columns (4 from 1440px up)
 
 ## Stack
 

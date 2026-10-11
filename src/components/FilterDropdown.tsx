@@ -11,6 +11,7 @@ type FilterDropdownProps<T extends string> = {
   value: T
   options: FilterOption<T>[]
   onChange: (value: T) => void
+  leadingIcon: ReactNode
   align?: 'left' | 'right'
   className?: string
 }
@@ -20,6 +21,7 @@ export function FilterDropdown<T extends string>({
   value,
   options,
   onChange,
+  leadingIcon,
   align = 'left',
   className = '',
 }: FilterDropdownProps<T>) {
@@ -60,8 +62,8 @@ export function FilterDropdown<T extends string>({
         onClick={() => setOpen((current) => !current)}
         className="inline-flex h-10 w-full items-center justify-between gap-1.5 rounded-lg bg-surface px-2.5 text-sm font-medium text-ink ring-1 ring-border transition hover:bg-surface-muted focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none"
       >
-        <span className="inline-flex min-w-0 items-center gap-1.5">
-          <span className="hidden shrink-0 sm:inline-flex">{selected.icon}</span>
+        <span className="inline-flex min-w-0 items-center gap-2">
+          <span className="shrink-0 text-ink-muted">{leadingIcon}</span>
           <span className="truncate">{selected.label}</span>
         </span>
         <svg

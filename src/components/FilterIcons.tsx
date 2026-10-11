@@ -153,3 +153,52 @@ export function LanguageIcon({
   const Icon = LANGUAGE_ICONS[language]
   return <Icon className={className} />
 }
+
+/** Fixed field icons shown on the left of each filter dropdown trigger. */
+export function ToolFieldIcon({ className }: IconProps) {
+  return (
+    <svg className={className} width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+      <path
+        d="M8.8 2.4a2.4 2.4 0 0 1 3.3 3.3L8.2 9.6a2.4 2.4 0 0 1-3.3-3.3l.5-.5"
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6.2 12.6a2.4 2.4 0 0 1-3.3-3.3l3.9-3.9a2.4 2.4 0 0 1 3.3 3.3l-.5.5"
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+export function LanguageFieldIcon({ className }: IconProps) {
+  return (
+    <svg className={className} width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+      <path
+        d="M4.2 4.2 1.8 7.5 4.2 10.8M10.8 4.2 13.2 7.5 10.8 10.8M8.4 3.2 6.6 11.8"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+export function FunctionFieldIcon({ className }: IconProps) {
+  return (
+    <svg className={className} width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+      <path
+        d="M8.3 1.8 3.4 8.3h3.4l-.8 4.9 4.9-6.5H7.5L8.3 1.8Z"
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
