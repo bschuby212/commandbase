@@ -1,4 +1,11 @@
-export type Platform = 'github' | 'cursor' | 'claude' | 'codex' | 'vscode'
+export type Platform =
+  | 'github'
+  | 'cursor'
+  | 'claude'
+  | 'codex'
+  | 'vscode'
+  | 'powershell'
+  | 'macterminal'
 
 export type CommandLanguage =
   | 'git'

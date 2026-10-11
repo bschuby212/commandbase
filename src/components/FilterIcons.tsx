@@ -64,6 +64,48 @@ function VsCodeIcon({ className }: IconProps) {
   )
 }
 
+function PowerShellIcon({ className }: IconProps) {
+  return (
+    <svg className={className} width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path
+        d="M2.2 3.4h9.6c.7 0 1.2.5 1.2 1.2v4.8c0 .7-.5 1.2-1.2 1.2H2.2c-.7 0-1.2-.5-1.2-1.2V4.6c0-.7.5-1.2 1.2-1.2Z"
+        stroke="currentColor"
+        strokeWidth="1.3"
+      />
+      <path
+        d="M3.6 5.1 6.2 7 3.6 8.9"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M7 9.2h3.2" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function MacTerminalIcon({ className }: IconProps) {
+  return (
+    <svg className={className} width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path
+        d="M3.2 2.6h7.6c.9 0 1.6.7 1.6 1.6v5.6c0 .9-.7 1.6-1.6 1.6H3.2c-.9 0-1.6-.7-1.6-1.6V4.2c0-.9.7-1.6 1.6-1.6Z"
+        stroke="currentColor"
+        strokeWidth="1.35"
+      />
+      <path
+        d="M4.2 5.4 5.8 7 4.2 8.6M7 9.2h2.8"
+        stroke="currentColor"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="4.2" cy="4" r="0.55" fill="currentColor" />
+      <circle cx="5.6" cy="4" r="0.55" fill="currentColor" />
+      <circle cx="7" cy="4" r="0.55" fill="currentColor" />
+    </svg>
+  )
+}
+
 function ShellIcon({ className }: IconProps) {
   return (
     <svg className={className} width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -120,6 +162,8 @@ const PROGRAM_ICONS: Record<PrimaryFilter, (props: IconProps) => ReactNode> = {
   claude: ClaudeIcon,
   codex: CodexIcon,
   vscode: VsCodeIcon,
+  powershell: PowerShellIcon,
+  macterminal: MacTerminalIcon,
 }
 
 const LANGUAGE_ICONS: Record<'all' | CommandLanguage, (props: IconProps) => ReactNode> = {

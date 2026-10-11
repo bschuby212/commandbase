@@ -12,6 +12,8 @@ export const PLATFORM_LABELS: Record<Platform, string> = {
   claude: 'Claude Code',
   codex: 'Codex',
   vscode: 'VS Code / Copilot',
+  powershell: 'PowerShell (Windows)',
+  macterminal: 'Mac Terminal',
 }
 
 export const LANGUAGE_LABELS: Record<CommandLanguage, string> = {
@@ -30,6 +32,8 @@ export const PROGRAM_FILTERS: { id: PrimaryFilter; label: string }[] = [
   { id: 'claude', label: 'Claude Code' },
   { id: 'codex', label: 'Codex' },
   { id: 'vscode', label: 'VS Code / Copilot' },
+  { id: 'powershell', label: 'PowerShell (Windows)' },
+  { id: 'macterminal', label: 'Mac Terminal' },
 ]
 
 export const LANGUAGE_FILTERS: { id: LanguageFilter; label: string }[] = [
