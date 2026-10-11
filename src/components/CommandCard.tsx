@@ -82,11 +82,11 @@ export function CommandCard({
         <code>{displayCommand}</code>
       </pre>
 
-      <div className="pointer-events-none mt-auto flex min-w-0 flex-wrap gap-1 pt-2.5">
+      <div className="pointer-events-none mt-auto flex min-w-0 flex-wrap gap-1.5 pt-2.5">
         {[LANGUAGE_LABELS[command.language], command.category].map((label) => (
           <span
             key={label}
-            className="rounded-md bg-surface-muted px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-ink-muted"
+            className="inline-flex items-center rounded-full bg-surface px-2 py-0.5 text-[10px] font-medium tracking-wide text-ink-muted"
           >
             {label}
           </span>
