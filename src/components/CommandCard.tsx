@@ -48,10 +48,10 @@ export function CommandCard({
       aria-pressed={copied}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      className={`group relative flex h-full min-w-0 cursor-pointer flex-col rounded-xl border bg-surface p-3.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition duration-150 select-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
+      className={`group relative flex h-full min-w-0 cursor-pointer flex-col rounded-xl border bg-surface p-3.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition duration-150 select-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none dark:border-transparent dark:shadow-[0_1px_2px_rgba(0,0,0,0.35)] dark:hover:border-transparent ${
         copied
-          ? 'border-success/35 shadow-[0_0_0_1px_rgba(22,163,74,0.12)]'
-          : 'border-border hover:-translate-y-px hover:border-border-strong hover:shadow-[0_6px_16px_rgba(15,23,42,0.05)]'
+          ? 'border-success/35 shadow-[0_0_0_1px_rgba(22,163,74,0.12)] dark:border-transparent dark:shadow-[0_0_0_1px_rgba(74,222,128,0.28)]'
+          : 'border-border hover:-translate-y-px hover:border-border-strong hover:shadow-[0_6px_16px_rgba(15,23,42,0.05)] dark:hover:shadow-[0_6px_16px_rgba(0,0,0,0.35)]'
       }`}
     >
       <div className="mb-2 flex items-start justify-between gap-2">
