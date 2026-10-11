@@ -53,7 +53,7 @@ export function CategoryFilters({
           type="button"
           aria-pressed={secondary === null}
           onClick={() => onSecondaryChange(null)}
-          className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none ${
+          className={`shrink-0 rounded-md px-3 py-1.5 text-xs font-medium transition focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none ${
             secondary === null
               ? 'bg-accent/10 text-accent ring-1 ring-accent/25'
               : 'text-ink-muted ring-1 ring-transparent hover:bg-surface-muted hover:text-ink'
@@ -69,7 +69,7 @@ export function CategoryFilters({
               type="button"
               aria-pressed={selected}
               onClick={() => onSecondaryChange(selected ? null : tag)}
-              className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none ${
+              className={`shrink-0 rounded-md px-3 py-1.5 text-xs font-medium transition focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none ${
                 selected
                   ? 'bg-accent/10 text-accent ring-1 ring-accent/25'
                   : 'text-ink-muted ring-1 ring-transparent hover:bg-surface-muted hover:text-ink'
