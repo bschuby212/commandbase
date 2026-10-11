@@ -48,7 +48,7 @@ export function CommandCard({
       aria-pressed={copied}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      className={`group relative flex h-full min-w-0 cursor-pointer flex-col rounded-xl border-0 bg-surface p-3.5 shadow-none transition duration-150 select-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
+      className={`group relative flex h-full min-w-0 cursor-pointer flex-col rounded-xl border-0 bg-surface p-3.5 shadow-[0_1px_2px_rgba(15,23,42,0.06)] transition duration-150 select-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none dark:shadow-[0_1px_2px_rgba(0,0,0,0.35)] ${
         copied
           ? 'bg-success/10'
           : 'hover:-translate-y-px hover:bg-white dark:hover:bg-surface-muted/80'
