@@ -63,7 +63,7 @@ export function CategoryFilters({
 
   return (
     <div
-      className={`relative z-30 flex min-w-0 items-center gap-2 ${className}`}
+      className={`relative z-30 flex items-center gap-2 ${className}`}
     >
       <FilterDropdown
         label="Tool"

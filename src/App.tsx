@@ -54,12 +54,12 @@ function App() {
         <PageHeader />
 
         <section className="animate-fade-up animation-delay-1 relative z-30 mt-6 sm:mt-8">
-          <div className="flex flex-col gap-2 min-[1100px]:flex-row min-[1100px]:items-center">
+          <div className="flex w-full flex-col gap-2 min-[1100px]:flex-row min-[1100px]:items-center">
             <CommandSearch
               value={search}
               onChange={setSearch}
               resultCount={filtered.length}
-              className="min-w-0 w-full min-[1100px]:max-w-[22rem] min-[1100px]:flex-none"
+              className="min-w-0 w-full min-[1100px]:min-w-[12rem] min-[1100px]:flex-1"
             />
             <CategoryFilters
               language={language}
@@ -71,7 +71,7 @@ function App() {
               favoriteFilter={favoriteFilter}
               onFavoriteFilterChange={setFavoriteFilter}
               availableSecondary={availableSecondary}
-              className="w-full min-[1100px]:min-w-0 min-[1100px]:flex-1"
+              className="w-full min-[1100px]:w-auto min-[1100px]:shrink-0"
             />
           </div>
         </section>
