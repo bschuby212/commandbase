@@ -13,6 +13,7 @@
   --color-ink-muted: #64748b;
   --color-ink-subtle: #94a3b8;
   --color-accent: #0284c7;
+  --color-success: #16a34a;
   --color-code-bg: #0b1220;
   --color-code-text: #e2e8f0;
   --color-danger: #dc2626;
@@ -62,6 +63,14 @@
   .animation-delay-2 {
     animation-delay: 140ms;
   }
+
+  .animate-check-pop {
+    animation: check-pop 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-check-draw {
+    animation: check-draw 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
 }
 
 @keyframes fade-up {
@@ -76,8 +85,37 @@
   }
 }
 
+@keyframes check-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+
+  65% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes check-draw {
+  from {
+    stroke-dashoffset: 24;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-up {
+  .animate-fade-up,
+  .animate-check-pop,
+  .animate-check-draw {
     animation: none;
   }
 }
