@@ -55,6 +55,7 @@ function App() {
             <CommandSearch
               value={search}
               onChange={setSearch}
+              resultCount={filtered.length}
               className="min-w-0 flex-1"
             />
             <CategoryFilters
@@ -70,9 +71,6 @@ function App() {
               className="w-full min-[1100px]:w-auto"
             />
           </div>
-          <p className="mt-2 text-sm text-ink-muted" aria-live="polite">
-            {filtered.length} {filtered.length === 1 ? 'command' : 'commands'}
-          </p>
         </section>
 
         {error ? (
