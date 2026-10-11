@@ -4,10 +4,13 @@ import { CommandSearch } from './components/CommandSearch'
 import { PageHeader } from './components/PageHeader'
 import { useClipboard } from './hooks/useClipboard'
 import { useCommandFilter } from './hooks/useCommandFilter'
+import { useFavorites } from './hooks/useFavorites'
 import { getCopyText } from './lib/getCopyText'
 import type { Command } from './types/command'
 
 function App() {
+  const { favoriteIds, isFavorite, toggleFavorite } = useFavorites()
+
   const {
     search,
     setSearch,
@@ -17,11 +20,13 @@ function App() {
     setTool,
     secondary,
     setSecondary,
+    favoriteFilter,
+    setFavoriteFilter,
     availableSecondary,
     filtered,
     resetFilters,
     getDisplayCommand,
-  } = useCommandFilter()
+  } = useCommandFilter(favoriteIds)
 
   const { copiedId, error, copy, clearError } = useClipboard()
 
@@ -46,7 +51,7 @@ function App() {
         <PageHeader />
 
         <section className="animate-fade-up animation-delay-1 relative z-30 mt-6 sm:mt-8">
-          <div className="flex flex-col gap-2 min-[960px]:flex-row min-[960px]:items-center">
+          <div className="flex flex-col gap-2 min-[1100px]:flex-row min-[1100px]:items-center">
             <CommandSearch
               value={search}
               onChange={setSearch}
@@ -59,8 +64,10 @@ function App() {
               onToolChange={setTool}
               secondary={secondary}
               onSecondaryChange={setSecondary}
+              favoriteFilter={favoriteFilter}
+              onFavoriteFilterChange={setFavoriteFilter}
               availableSecondary={availableSecondary}
-              className="w-full min-[960px]:w-auto"
+              className="w-full min-[1100px]:w-auto"
             />
           </div>
           <p className="mt-2 text-sm text-ink-muted" aria-live="polite">
@@ -81,7 +88,9 @@ function App() {
           <CommandGrid
             commands={filtered}
             copiedId={copiedId}
+            isFavorite={isFavorite}
             onCopy={handleCopy}
+            onToggleFavorite={toggleFavorite}
             getDisplayCommand={getDisplayCommand}
             onReset={handleReset}
           />

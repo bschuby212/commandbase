@@ -1,5 +1,6 @@
 import { useId, type KeyboardEvent, type MouseEvent } from 'react'
 import { CopyIconButton } from './CopyIconButton'
+import { FavoriteButton } from './FavoriteButton'
 import { LANGUAGE_LABELS } from '../lib/platformLabels'
 import type { Command } from '../types/command'
 
@@ -7,14 +8,18 @@ type CommandCardProps = {
   command: Command
   displayCommand: string
   copied: boolean
+  favorited: boolean
   onCopy: () => void
+  onToggleFavorite: () => void
 }
 
 export function CommandCard({
   command,
   displayCommand,
   copied,
+  favorited,
   onCopy,
+  onToggleFavorite,
 }: CommandCardProps) {
   const descriptionId = useId()
 
@@ -23,7 +28,6 @@ export function CommandCard({
   }
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
-    // Keep the whole card clickable even when interacting with nested content.
     event.preventDefault()
     handleActivate()
   }
@@ -50,30 +54,39 @@ export function CommandCard({
           : 'border-border hover:-translate-y-px hover:border-border-strong hover:shadow-[0_6px_16px_rgba(15,23,42,0.05)]'
       }`}
     >
-      <div className="pointer-events-none mb-2 flex items-start justify-between gap-2">
-        <div className="min-w-0 flex-1">
-          <h3 className="h-5 overflow-hidden text-sm leading-5 font-semibold tracking-tight text-ink line-clamp-1">
+      <div className="mb-2 flex items-start justify-between gap-2">
+        <div className="pointer-events-none min-w-0 flex-1">
+          <h3 className="line-clamp-1 text-sm leading-5 font-semibold tracking-tight text-ink">
             {command.title}
           </h3>
           <p
             id={descriptionId}
-            className="mt-0.5 min-h-10 overflow-hidden text-xs leading-5 text-ink-muted line-clamp-2"
+            className="mt-0.5 line-clamp-2 min-h-8 text-xs leading-4 text-ink-muted"
           >
             {command.description}
           </p>
         </div>
-        <CopyIconButton copied={copied} />
+        <div className="flex shrink-0 items-center gap-0.5">
+          <FavoriteButton
+            favorited={favorited}
+            onToggle={onToggleFavorite}
+            title={command.title}
+          />
+          <span className="pointer-events-none">
+            <CopyIconButton copied={copied} />
+          </span>
+        </div>
       </div>
 
-      <pre className="pointer-events-none flex min-h-[3.25rem] max-w-full items-center overflow-x-auto rounded-lg bg-code-bg px-2.5 py-2 font-mono text-[12px] leading-snug text-code-text whitespace-pre-wrap break-words [overflow-wrap:anywhere]">
-        <code className="min-w-0">{displayCommand}</code>
+      <pre className="pointer-events-none flex min-h-[3rem] max-w-full items-center overflow-x-auto rounded-lg bg-code-bg px-2.5 py-2 font-mono text-[12px] leading-snug text-code-text whitespace-pre-wrap break-words [overflow-wrap:anywhere]">
+        <code>{displayCommand}</code>
       </pre>
 
       <div className="pointer-events-none mt-auto flex min-w-0 flex-wrap gap-1 pt-2.5">
         {[LANGUAGE_LABELS[command.language], command.category].map((label) => (
           <span
             key={label}
-            className="rounded-md bg-surface-muted px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-ink-subtle"
+            className="rounded-md bg-surface-muted px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-ink-muted"
           >
             {label}
           </span>

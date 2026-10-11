@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { commands } from '../data/commands'
 import type {
   Command,
+  FavoriteFilter,
   LanguageFilter,
   PrimaryFilter,
   SecondaryCategory,
@@ -40,11 +41,12 @@ function matchesSearch(command: Command, query: string): boolean {
   return haystack.includes(query)
 }
 
-export function useCommandFilter() {
+export function useCommandFilter(favoriteIds: Set<string>) {
   const [search, setSearch] = useState('')
   const [language, setLanguage] = useState<LanguageFilter>('all')
   const [tool, setTool] = useState<PrimaryFilter>('all')
   const [secondary, setSecondary] = useState<SecondaryCategory | null>(null)
+  const [favoriteFilter, setFavoriteFilter] = useState<FavoriteFilter>('all')
 
   const handleLanguageChange = (next: LanguageFilter) => {
     setLanguage(next)
@@ -67,26 +69,33 @@ export function useCommandFilter() {
       if (language !== 'all' && command.language !== language) return false
       if (tool !== 'all' && command.platform !== tool) return false
       if (secondary && command.category !== secondary) return false
+      if (favoriteFilter === 'favorites' && !favoriteIds.has(command.id)) {
+        return false
+      }
       return matchesSearch(command, query)
     })
-  }, [language, tool, secondary, search])
+  }, [language, tool, secondary, favoriteFilter, favoriteIds, search])
 
   const availableSecondary = useMemo(() => {
     const pool = commands.filter((command) => {
       if (language !== 'all' && command.language !== language) return false
       if (tool !== 'all' && command.platform !== tool) return false
+      if (favoriteFilter === 'favorites' && !favoriteIds.has(command.id)) {
+        return false
+      }
       return true
     })
 
     const present = new Set(pool.map((command) => command.category))
     return ALL_SECONDARY.filter((category) => present.has(category))
-  }, [language, tool])
+  }, [language, tool, favoriteFilter, favoriteIds])
 
   const resetFilters = () => {
     setSearch('')
     setLanguage('all')
     setTool('all')
     setSecondary(null)
+    setFavoriteFilter('all')
   }
 
   return {
@@ -98,6 +107,8 @@ export function useCommandFilter() {
     setTool: handleToolChange,
     secondary,
     setSecondary: handleSecondaryChange,
+    favoriteFilter,
+    setFavoriteFilter,
     availableSecondary,
     filtered,
     totalCount: commands.length,

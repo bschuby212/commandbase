@@ -5,7 +5,9 @@ import type { Command } from '../types/command'
 type CommandGridProps = {
   commands: Command[]
   copiedId: string | null
+  isFavorite: (id: string) => boolean
   onCopy: (command: Command) => void
+  onToggleFavorite: (id: string) => void
   getDisplayCommand: (command: Command) => string
   onReset: () => void
 }
@@ -13,7 +15,9 @@ type CommandGridProps = {
 export function CommandGrid({
   commands,
   copiedId,
+  isFavorite,
   onCopy,
+  onToggleFavorite,
   getDisplayCommand,
   onReset,
 }: CommandGridProps) {
@@ -33,7 +37,9 @@ export function CommandGrid({
             command={command}
             displayCommand={getDisplayCommand(command)}
             copied={copiedId === command.id}
+            favorited={isFavorite(command.id)}
             onCopy={() => onCopy(command)}
+            onToggleFavorite={() => onToggleFavorite(command.id)}
           />
         </div>
       ))}

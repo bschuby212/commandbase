@@ -43,3 +43,4 @@ export type Command = {
 
 export type PrimaryFilter = 'all' | Platform
 export type LanguageFilter = 'all' | CommandLanguage
+export type FavoriteFilter = 'all' | 'favorites'

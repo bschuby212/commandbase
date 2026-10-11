@@ -1,4 +1,6 @@
+import type { ReactNode } from 'react'
 import {
+  FavoriteFieldIcon,
   FunctionFieldIcon,
   LanguageFieldIcon,
   LanguageIcon,
@@ -8,6 +10,7 @@ import {
 import { FilterDropdown } from './FilterDropdown'
 import { LANGUAGE_FILTERS, PROGRAM_FILTERS } from '../lib/platformLabels'
 import type {
+  FavoriteFilter,
   LanguageFilter,
   PrimaryFilter,
   SecondaryCategory,
@@ -20,6 +23,8 @@ type CategoryFiltersProps = {
   onToolChange: (value: PrimaryFilter) => void
   secondary: SecondaryCategory | null
   onSecondaryChange: (value: SecondaryCategory | null) => void
+  favoriteFilter: FavoriteFilter
+  onFavoriteFilterChange: (value: FavoriteFilter) => void
   availableSecondary: SecondaryCategory[]
   className?: string
 }
@@ -33,6 +38,8 @@ export function CategoryFilters({
   onToolChange,
   secondary,
   onSecondaryChange,
+  favoriteFilter,
+  onFavoriteFilterChange,
   availableSecondary,
   className = '',
 }: CategoryFiltersProps) {
@@ -55,6 +62,11 @@ export function CategoryFilters({
     ...availableSecondary.map((item) => ({ id: item, label: item })),
   ]
 
+  const favoriteOptions: { id: FavoriteFilter; label: string; icon: ReactNode }[] = [
+    { id: 'all', label: 'All commands', icon: <FavoriteFieldIcon /> },
+    { id: 'favorites', label: 'Favorites', icon: <FavoriteFieldIcon /> },
+  ]
+
   return (
     <div
       className={`relative z-30 flex min-w-0 items-center gap-2 ${className}`}
@@ -65,7 +77,7 @@ export function CategoryFilters({
         options={toolOptions}
         onChange={onToolChange}
         leadingIcon={<ToolFieldIcon />}
-        className="min-w-0 flex-1 basis-0 sm:w-[9.75rem] sm:flex-none"
+        className="min-w-0 flex-1 basis-0 min-[1100px]:w-[9.25rem] min-[1100px]:flex-none"
       />
       <FilterDropdown
         label="Language"
@@ -73,7 +85,7 @@ export function CategoryFilters({
         options={languageOptions}
         onChange={onLanguageChange}
         leadingIcon={<LanguageFieldIcon />}
-        className="min-w-0 flex-1 basis-0 sm:w-[9.75rem] sm:flex-none"
+        className="min-w-0 flex-1 basis-0 min-[1100px]:w-[9.25rem] min-[1100px]:flex-none"
       />
       <FilterDropdown
         label="Function"
@@ -81,8 +93,16 @@ export function CategoryFilters({
         options={functionOptions}
         onChange={(next) => onSecondaryChange(next === 'all' ? null : next)}
         leadingIcon={<FunctionFieldIcon />}
+        className="min-w-0 flex-1 basis-0 min-[1100px]:w-[9.75rem] min-[1100px]:flex-none"
+      />
+      <FilterDropdown
+        label="Favorite"
+        value={favoriteFilter}
+        options={favoriteOptions}
+        onChange={onFavoriteFilterChange}
+        leadingIcon={<FavoriteFieldIcon />}
         align="right"
-        className="min-w-0 flex-1 basis-0 sm:w-[10.5rem] sm:flex-none"
+        className="min-w-0 flex-1 basis-0 min-[1100px]:w-[9.25rem] min-[1100px]:flex-none"
       />
     </div>
   )
