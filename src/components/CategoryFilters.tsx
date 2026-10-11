@@ -101,7 +101,7 @@ export function CategoryFilters({
             onFavoriteFilterChange(favoritesOn ? 'all' : 'favorites')
           }
           className={`toolbar-shell-button gap-2 px-2.5 text-sm font-medium focus-visible:outline-none ${
-            favoritesOn ? 'bg-favorite/10 text-favorite' : 'text-ink'
+            favoritesOn ? 'text-white' : 'text-ink'
           }`}
         >
           <svg
