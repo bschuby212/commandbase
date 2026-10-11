@@ -42,36 +42,42 @@ function App() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.035)_1px,transparent_1px)] bg-size-[28px_28px] mask-[radial-gradient(ellipse_at_top,black_20%,transparent_72%)]" />
       </div>
 
-      <main className="mx-auto w-full max-w-[1400px] px-3 pt-8 pb-14 sm:px-6 sm:pt-12 lg:px-8 lg:pt-14">
+      <main className="mx-auto w-full max-w-[1680px] px-3 pt-8 pb-14 sm:px-6 sm:pt-10 lg:px-8">
         <PageHeader />
 
-        <section className="mt-8 space-y-4 sm:mt-10 sm:space-y-5">
-          <CommandSearch
-            value={search}
-            onChange={setSearch}
-            resultCount={filtered.length}
-          />
-          <CategoryFilters
-            language={language}
-            onLanguageChange={setLanguage}
-            tool={tool}
-            onToolChange={setTool}
-            secondary={secondary}
-            onSecondaryChange={setSecondary}
-            availableSecondary={availableSecondary}
-          />
+        <section className="animate-fade-up animation-delay-1 relative z-30 mt-6 sm:mt-8">
+          <div className="flex flex-col gap-2 min-[960px]:flex-row min-[960px]:items-center">
+            <CommandSearch
+              value={search}
+              onChange={setSearch}
+              className="min-w-0 flex-1"
+            />
+            <CategoryFilters
+              language={language}
+              onLanguageChange={setLanguage}
+              tool={tool}
+              onToolChange={setTool}
+              secondary={secondary}
+              onSecondaryChange={setSecondary}
+              availableSecondary={availableSecondary}
+              className="w-full min-[960px]:w-auto"
+            />
+          </div>
+          <p className="mt-2 text-sm text-ink-muted" aria-live="polite">
+            {filtered.length} {filtered.length === 1 ? 'command' : 'commands'}
+          </p>
         </section>
 
         {error ? (
           <div
             role="alert"
-            className="mt-5 rounded-xl border border-danger/20 bg-danger/5 px-4 py-3 text-sm text-danger"
+            className="mt-4 rounded-xl border border-danger/20 bg-danger/5 px-4 py-3 text-sm text-danger"
           >
             {error}
           </div>
         ) : null}
 
-        <section className="mt-6 sm:mt-8" aria-label="Command results">
+        <section className="mt-5 sm:mt-6" aria-label="Command results">
           <CommandGrid
             commands={filtered}
             copiedId={copiedId}

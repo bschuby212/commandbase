@@ -50,7 +50,7 @@ export function FilterDropdown<T extends string>({
   }, [open])
 
   return (
-    <div ref={rootRef} className={`relative min-w-0 w-full ${className}`}>
+    <div ref={rootRef} className={`relative min-w-0 ${className}`}>
       <button
         type="button"
         aria-haspopup="listbox"
@@ -58,10 +58,10 @@ export function FilterDropdown<T extends string>({
         aria-controls={listId}
         aria-label={label}
         onClick={() => setOpen((current) => !current)}
-        className="inline-flex w-full min-h-10 items-center justify-between gap-2 rounded-lg bg-surface px-3 py-2 text-sm font-medium text-ink ring-1 ring-border transition hover:bg-surface-muted focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none"
+        className="inline-flex h-10 w-full items-center justify-between gap-1.5 rounded-lg bg-surface px-2.5 text-sm font-medium text-ink ring-1 ring-border transition hover:bg-surface-muted focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none"
       >
         <span className="inline-flex min-w-0 items-center gap-1.5">
-          {selected.icon}
+          <span className="hidden shrink-0 sm:inline-flex">{selected.icon}</span>
           <span className="truncate">{selected.label}</span>
         </span>
         <svg

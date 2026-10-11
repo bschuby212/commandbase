@@ -15,6 +15,7 @@ type CategoryFiltersProps = {
   secondary: SecondaryCategory | null
   onSecondaryChange: (value: SecondaryCategory | null) => void
   availableSecondary: SecondaryCategory[]
+  className?: string
 }
 
 type FunctionFilter = 'all' | SecondaryCategory
@@ -27,6 +28,7 @@ export function CategoryFilters({
   secondary,
   onSecondaryChange,
   availableSecondary,
+  className = '',
 }: CategoryFiltersProps) {
   const functionValue: FunctionFilter = secondary ?? 'all'
 
@@ -48,18 +50,22 @@ export function CategoryFilters({
   ]
 
   return (
-    <div className="animate-fade-up animation-delay-2 relative z-30 grid grid-cols-1 gap-2 sm:grid-cols-2 min-[900px]:grid-cols-3">
+    <div
+      className={`relative z-30 flex min-w-0 items-center gap-2 ${className}`}
+    >
       <FilterDropdown
         label="Tool"
         value={tool}
         options={toolOptions}
         onChange={onToolChange}
+        className="min-w-0 flex-1 basis-0 sm:w-[9.75rem] sm:flex-none"
       />
       <FilterDropdown
         label="Language"
         value={language}
         options={languageOptions}
         onChange={onLanguageChange}
+        className="min-w-0 flex-1 basis-0 sm:w-[9.75rem] sm:flex-none"
       />
       <FilterDropdown
         label="Function"
@@ -67,7 +73,7 @@ export function CategoryFilters({
         options={functionOptions}
         onChange={(next) => onSecondaryChange(next === 'all' ? null : next)}
         align="right"
-        className="sm:col-span-2 min-[900px]:col-span-1"
+        className="min-w-0 flex-1 basis-0 sm:w-[10.5rem] sm:flex-none"
       />
     </div>
   )
