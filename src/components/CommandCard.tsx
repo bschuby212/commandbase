@@ -101,20 +101,22 @@ export function CommandCard({
           </p>
         ) : null}
 
-        <div className="mt-2.5 flex items-center justify-between gap-2">
-          <p className="min-w-0 truncate text-[11px] text-ink-subtle">
-            <span className="text-ink-muted">{LANGUAGE_LABELS[command.language]}</span>
-            <span aria-hidden="true"> · </span>
-            <span>{PLATFORM_LABELS[command.platform]}</span>
-            <span aria-hidden="true"> · </span>
-            <span>{command.category}</span>
-            {command.type !== 'terminal' ? (
-              <>
-                <span aria-hidden="true"> · </span>
-                <span>{TYPE_LABELS[command.type]}</span>
-              </>
-            ) : null}
-          </p>
+        <div className="mt-2.5 flex items-end justify-between gap-2">
+          <div className="flex min-w-0 flex-wrap gap-1">
+            {[
+              LANGUAGE_LABELS[command.language],
+              PLATFORM_LABELS[command.platform],
+              command.category,
+              ...(command.type !== 'terminal' ? [TYPE_LABELS[command.type]] : []),
+            ].map((label) => (
+              <span
+                key={label}
+                className="rounded-md bg-surface-muted px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-ink-subtle"
+              >
+                {label}
+              </span>
+            ))}
+          </div>
           <CopyFeedback visible={copied} />
         </div>
       </div>
