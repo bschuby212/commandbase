@@ -11,12 +11,10 @@ function App() {
   const {
     search,
     setSearch,
-    filterMode,
-    setFilterMode,
-    program,
-    setProgram,
     language,
     setLanguage,
+    tool,
+    setTool,
     secondary,
     setSecondary,
     availableSecondary,
@@ -54,12 +52,10 @@ function App() {
             resultCount={filtered.length}
           />
           <CategoryFilters
-            filterMode={filterMode}
-            onFilterModeChange={setFilterMode}
-            program={program}
-            onProgramChange={setProgram}
             language={language}
             onLanguageChange={setLanguage}
+            tool={tool}
+            onToolChange={setTool}
             secondary={secondary}
             onSecondaryChange={setSecondary}
             availableSecondary={availableSecondary}

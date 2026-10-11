@@ -6,7 +6,7 @@ A standalone, responsive quick-reference library for developer commands covering
 
 - One-click copy for terminal commands, slash commands, and keyboard shortcuts
 - Real-time search across titles, descriptions, syntax, and keywords
-- Toggle filtering by language or program, plus secondary category tags
+- Language chips and category tags on one row, plus a tool dropdown
 - Fully client-side — no login or backend required
 - Keyboard accessible cards with visible focus states
 - Responsive from phone to desktop, including narrow side-by-side windows

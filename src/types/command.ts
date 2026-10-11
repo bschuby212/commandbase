@@ -41,7 +41,5 @@ export type Command = {
   shortcut?: ShortcutKeys
 }
 
-export type FilterMode = 'language' | 'program'
-
 export type PrimaryFilter = 'all' | Platform
 export type LanguageFilter = 'all' | CommandLanguage

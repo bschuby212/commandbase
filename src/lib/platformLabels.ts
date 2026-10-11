@@ -1,7 +1,6 @@
 import type {
   CommandLanguage,
   CommandType,
-  FilterMode,
   LanguageFilter,
   Platform,
   PrimaryFilter,
@@ -41,11 +40,6 @@ export const LANGUAGE_FILTERS: { id: LanguageFilter; label: string }[] = [
   { id: 'python', label: 'Python' },
   { id: 'docker', label: 'Docker' },
   { id: 'editor', label: 'Editor' },
-]
-
-export const FILTER_MODE_OPTIONS: { id: FilterMode; label: string }[] = [
-  { id: 'language', label: 'Language' },
-  { id: 'program', label: 'Program' },
 ]
 
 export const TYPE_LABELS: Record<CommandType, string> = {

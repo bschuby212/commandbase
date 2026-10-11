@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react'
 import { commands } from '../data/commands'
 import type {
   Command,
-  FilterMode,
   LanguageFilter,
   PrimaryFilter,
   SecondaryCategory,
@@ -43,25 +42,17 @@ function matchesSearch(command: Command, query: string): boolean {
 
 export function useCommandFilter() {
   const [search, setSearch] = useState('')
-  const [filterMode, setFilterMode] = useState<FilterMode>('language')
-  const [program, setProgram] = useState<PrimaryFilter>('all')
   const [language, setLanguage] = useState<LanguageFilter>('all')
+  const [tool, setTool] = useState<PrimaryFilter>('all')
   const [secondary, setSecondary] = useState<SecondaryCategory | null>(null)
-
-  const handleFilterModeChange = (next: FilterMode) => {
-    setFilterMode(next)
-    setProgram('all')
-    setLanguage('all')
-    setSecondary(null)
-  }
-
-  const handleProgramChange = (next: PrimaryFilter) => {
-    setProgram(next)
-    setSecondary(null)
-  }
 
   const handleLanguageChange = (next: LanguageFilter) => {
     setLanguage(next)
+    setSecondary(null)
+  }
+
+  const handleToolChange = (next: PrimaryFilter) => {
+    setTool(next)
     setSecondary(null)
   }
 
@@ -73,49 +64,38 @@ export function useCommandFilter() {
     const query = search.trim().toLowerCase()
 
     return commands.filter((command) => {
-      if (filterMode === 'program' && program !== 'all' && command.platform !== program) {
-        return false
-      }
-      if (filterMode === 'language' && language !== 'all' && command.language !== language) {
-        return false
-      }
+      if (language !== 'all' && command.language !== language) return false
+      if (tool !== 'all' && command.platform !== tool) return false
       if (secondary && command.category !== secondary) return false
       return matchesSearch(command, query)
     })
-  }, [filterMode, program, language, secondary, search])
+  }, [language, tool, secondary, search])
 
   const availableSecondary = useMemo(() => {
     const pool = commands.filter((command) => {
-      if (filterMode === 'program' && program !== 'all' && command.platform !== program) {
-        return false
-      }
-      if (filterMode === 'language' && language !== 'all' && command.language !== language) {
-        return false
-      }
+      if (language !== 'all' && command.language !== language) return false
+      if (tool !== 'all' && command.platform !== tool) return false
       return true
     })
 
     const present = new Set(pool.map((command) => command.category))
     return ALL_SECONDARY.filter((category) => present.has(category))
-  }, [filterMode, program, language])
+  }, [language, tool])
 
   const resetFilters = () => {
     setSearch('')
-    setFilterMode('language')
-    setProgram('all')
     setLanguage('all')
+    setTool('all')
     setSecondary(null)
   }
 
   return {
     search,
     setSearch,
-    filterMode,
-    setFilterMode: handleFilterModeChange,
-    program,
-    setProgram: handleProgramChange,
     language,
     setLanguage: handleLanguageChange,
+    tool,
+    setTool: handleToolChange,
     secondary,
     setSecondary: handleSecondaryChange,
     availableSecondary,
