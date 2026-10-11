@@ -59,7 +59,7 @@ function App() {
               value={search}
               onChange={setSearch}
               resultCount={filtered.length}
-              className="min-w-0 flex-1"
+              className="min-w-0 w-full min-[1100px]:max-w-[22rem] min-[1100px]:flex-none"
             />
             <CategoryFilters
               language={language}
@@ -71,7 +71,7 @@ function App() {
               favoriteFilter={favoriteFilter}
               onFavoriteFilterChange={setFavoriteFilter}
               availableSecondary={availableSecondary}
-              className="w-full min-[1100px]:w-auto"
+              className="w-full min-[1100px]:min-w-0 min-[1100px]:flex-1"
             />
           </div>
         </section>

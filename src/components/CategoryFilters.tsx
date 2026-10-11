@@ -71,7 +71,7 @@ export function CategoryFilters({
         options={toolOptions}
         onChange={onToolChange}
         leadingIcon={<ToolFieldIcon />}
-        className="min-w-0 flex-1 basis-0 min-[1100px]:w-[9.25rem] min-[1100px]:flex-none"
+        className="min-w-0 flex-1 basis-0 min-[1100px]:w-[9.5rem] min-[1100px]:flex-none min-[1100px]:shrink-0"
       />
       <FilterDropdown
         label="Language"
@@ -79,7 +79,7 @@ export function CategoryFilters({
         options={languageOptions}
         onChange={onLanguageChange}
         leadingIcon={<LanguageFieldIcon />}
-        className="min-w-0 flex-1 basis-0 min-[1100px]:w-[9.25rem] min-[1100px]:flex-none"
+        className="min-w-0 flex-1 basis-0 min-[1100px]:w-[11.75rem] min-[1100px]:flex-none min-[1100px]:shrink-0"
       />
       <FilterDropdown
         label="Function"
@@ -87,7 +87,7 @@ export function CategoryFilters({
         options={functionOptions}
         onChange={(next) => onSecondaryChange(next === 'all' ? null : next)}
         leadingIcon={<FunctionFieldIcon />}
-        className="min-w-0 flex-1 basis-0 min-[1100px]:w-[9.75rem] min-[1100px]:flex-none"
+        className="min-w-0 flex-1 basis-0 min-[1100px]:w-[11.5rem] min-[1100px]:flex-none min-[1100px]:shrink-0"
       />
       <div
         className="toolbar-shell shrink-0"
