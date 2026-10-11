@@ -24,7 +24,7 @@
   --color-code-bg: #0b1220;
   --color-code-text: #e2e8f0;
   --color-danger: #dc2626;
-  --color-grid-line: rgba(15, 23, 42, 0.06);
+  --color-grid-line: rgba(15, 23, 42, 0.03);
 }
 
 @layer base {
@@ -73,7 +73,7 @@
     --color-code-bg: #000000;
     --color-code-text: #e4e4e7;
     --color-danger: #f87171;
-    --color-grid-line: rgba(250, 250, 250, 0.06);
+    --color-grid-line: rgba(250, 250, 250, 0.03);
   }
 
   .dark ::selection {
@@ -87,7 +87,7 @@
     background-image:
       linear-gradient(to right, var(--color-grid-line) 1px, transparent 1px),
       linear-gradient(to bottom, var(--color-grid-line) 1px, transparent 1px);
-    background-size: 28px 28px;
+    background-size: 64px 64px;
   }
 
   /*
