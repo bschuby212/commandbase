@@ -11,12 +11,17 @@ function App() {
   const {
     search,
     setSearch,
-    primary,
-    setPrimary,
+    filterMode,
+    setFilterMode,
+    program,
+    setProgram,
+    language,
+    setLanguage,
     secondary,
     setSecondary,
     availableSecondary,
     filtered,
+    resetFilters,
     getDisplayCommand,
   } = useCommandFilter()
 
@@ -27,32 +32,34 @@ function App() {
   }
 
   const handleReset = () => {
-    setSearch('')
-    setPrimary('all')
-    setSecondary(null)
+    resetFilters()
     clearError()
   }
 
   return (
-    <div className="relative min-h-dvh overflow-x-hidden">
-      <div className="pointer-events-none absolute inset-0 -z-10">
+    <div className="relative min-h-dvh overflow-x-clip">
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute inset-0 bg-page" />
-        <div className="absolute top-[-12%] left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.14),transparent_68%)] blur-2xl" />
+        <div className="absolute top-[-12%] left-1/2 h-[320px] w-[min(820px,140vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.14),transparent_68%)] blur-2xl" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.035)_1px,transparent_1px)] bg-size-[28px_28px] mask-[radial-gradient(ellipse_at_top,black_20%,transparent_72%)]" />
       </div>
 
-      <main className="mx-auto w-full max-w-[1160px] px-4 pt-10 pb-16 sm:px-6 sm:pt-14 lg:px-8">
+      <main className="mx-auto w-full max-w-[1160px] px-3 pt-8 pb-14 sm:px-6 sm:pt-12 lg:px-8 lg:pt-14">
         <PageHeader />
 
-        <section className="mt-10 space-y-5 sm:mt-12">
+        <section className="mt-8 space-y-4 sm:mt-10 sm:space-y-5">
           <CommandSearch
             value={search}
             onChange={setSearch}
             resultCount={filtered.length}
           />
           <CategoryFilters
-            primary={primary}
-            onPrimaryChange={setPrimary}
+            filterMode={filterMode}
+            onFilterModeChange={setFilterMode}
+            program={program}
+            onProgramChange={setProgram}
+            language={language}
+            onLanguageChange={setLanguage}
             secondary={secondary}
             onSecondaryChange={setSecondary}
             availableSecondary={availableSecondary}
@@ -68,7 +75,7 @@ function App() {
           </div>
         ) : null}
 
-        <section className="mt-8" aria-label="Command results">
+        <section className="mt-6 sm:mt-8" aria-label="Command results">
           <CommandGrid
             commands={filtered}
             copiedId={copiedId}

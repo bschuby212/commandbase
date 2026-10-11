@@ -1,6 +1,6 @@
 import { useId, type KeyboardEvent } from 'react'
 import { CopyFeedback } from './CopyFeedback'
-import { PLATFORM_LABELS, TYPE_LABELS } from '../lib/platformLabels'
+import { LANGUAGE_LABELS, PLATFORM_LABELS, TYPE_LABELS } from '../lib/platformLabels'
 import type { Command } from '../types/command'
 
 type CommandCardProps = {
@@ -13,15 +13,7 @@ type CommandCardProps = {
 function CopyIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <rect
-        x="6"
-        y="6"
-        width="9"
-        height="9"
-        rx="2"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      />
+      <rect x="6" y="6" width="9" height="9" rx="2" stroke="currentColor" strokeWidth="1.5" />
       <path
         d="M12 6V4.5A1.5 1.5 0 0 0 10.5 3H4.5A1.5 1.5 0 0 0 3 4.5v6A1.5 1.5 0 0 0 4.5 12H6"
         stroke="currentColor"
@@ -54,7 +46,7 @@ export function CommandCard({
       aria-label={`Copy command: ${command.title}`}
       onClick={onCopy}
       onKeyDown={handleKeyDown}
-      className="group relative flex h-full cursor-pointer flex-col rounded-xl border border-border bg-surface p-3.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition duration-150 hover:-translate-y-px hover:border-border-strong hover:shadow-[0_6px_16px_rgba(15,23,42,0.05)] focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none"
+      className="group relative flex h-full min-w-0 cursor-pointer flex-col rounded-xl border border-border bg-surface p-3.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition duration-150 hover:-translate-y-px hover:border-border-strong hover:shadow-[0_6px_16px_rgba(15,23,42,0.05)] focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none"
     >
       <div className="mb-2 flex items-start justify-between gap-2">
         <div className="min-w-0">
@@ -92,8 +84,8 @@ export function CommandCard({
         </span>
       </div>
 
-      <div className="mt-auto">
-        <pre className="overflow-x-auto rounded-lg bg-code-bg px-2.5 py-2 font-mono text-[12px] leading-snug text-code-text whitespace-pre-wrap break-words">
+      <div className="mt-auto min-w-0">
+        <pre className="max-w-full overflow-x-auto rounded-lg bg-code-bg px-2.5 py-2 font-mono text-[12px] leading-snug text-code-text whitespace-pre-wrap break-words [overflow-wrap:anywhere]">
           <code>{displayCommand}</code>
         </pre>
 
@@ -111,7 +103,9 @@ export function CommandCard({
 
         <div className="mt-2.5 flex items-center justify-between gap-2">
           <p className="min-w-0 truncate text-[11px] text-ink-subtle">
-            <span className="text-ink-muted">{PLATFORM_LABELS[command.platform]}</span>
+            <span className="text-ink-muted">{LANGUAGE_LABELS[command.language]}</span>
+            <span aria-hidden="true"> · </span>
+            <span>{PLATFORM_LABELS[command.platform]}</span>
             <span aria-hidden="true"> · </span>
             <span>{command.category}</span>
             {command.type !== 'terminal' ? (

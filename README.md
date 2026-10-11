@@ -6,9 +6,10 @@ A standalone, responsive quick-reference library for developer commands covering
 
 - One-click copy for terminal commands, slash commands, and keyboard shortcuts
 - Real-time search across titles, descriptions, syntax, and keywords
-- Primary platform filters plus secondary category tags
+- Toggle filtering by language or program, plus secondary category tags
 - Fully client-side — no login or backend required
 - Keyboard accessible cards with visible focus states
+- Responsive from phone to desktop, including narrow side-by-side windows
 
 ## Stack
 
@@ -42,6 +43,7 @@ type Command = {
   description: string
   command: string
   platform: 'github' | 'cursor' | 'claude' | 'codex' | 'vscode'
+  language: 'git' | 'shell' | 'javascript' | 'python' | 'docker' | 'editor'
   category: string
   type: 'terminal' | 'slash' | 'shortcut'
   keywords: string[]

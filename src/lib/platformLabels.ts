@@ -1,4 +1,11 @@
-import type { CommandType, Platform, PrimaryFilter } from '../types/command'
+import type {
+  CommandLanguage,
+  CommandType,
+  FilterMode,
+  LanguageFilter,
+  Platform,
+  PrimaryFilter,
+} from '../types/command'
 
 export const PLATFORM_LABELS: Record<Platform, string> = {
   github: 'Git & GitHub',
@@ -8,13 +15,37 @@ export const PLATFORM_LABELS: Record<Platform, string> = {
   vscode: 'VS Code / Copilot',
 }
 
-export const PRIMARY_FILTERS: { id: PrimaryFilter; label: string }[] = [
+export const LANGUAGE_LABELS: Record<CommandLanguage, string> = {
+  git: 'Git',
+  shell: 'Shell',
+  javascript: 'JavaScript',
+  python: 'Python',
+  docker: 'Docker',
+  editor: 'Editor',
+}
+
+export const PROGRAM_FILTERS: { id: PrimaryFilter; label: string }[] = [
   { id: 'all', label: 'All' },
   { id: 'github', label: 'Git & GitHub' },
   { id: 'cursor', label: 'Cursor' },
   { id: 'claude', label: 'Claude Code' },
   { id: 'codex', label: 'Codex' },
   { id: 'vscode', label: 'VS Code / Copilot' },
+]
+
+export const LANGUAGE_FILTERS: { id: LanguageFilter; label: string }[] = [
+  { id: 'all', label: 'All' },
+  { id: 'git', label: 'Git' },
+  { id: 'shell', label: 'Shell' },
+  { id: 'javascript', label: 'JavaScript' },
+  { id: 'python', label: 'Python' },
+  { id: 'docker', label: 'Docker' },
+  { id: 'editor', label: 'Editor' },
+]
+
+export const FILTER_MODE_OPTIONS: { id: FilterMode; label: string }[] = [
+  { id: 'language', label: 'Language' },
+  { id: 'program', label: 'Program' },
 ]
 
 export const TYPE_LABELS: Record<CommandType, string> = {

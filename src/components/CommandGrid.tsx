@@ -22,11 +22,11 @@ export function CommandGrid({
   }
 
   return (
-    <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
       {commands.map((command, index) => (
         <div
           key={command.id}
-          className="animate-fade-up h-full"
+          className="animate-fade-up h-full min-w-0"
           style={{ animationDelay: `${Math.min(index, 8) * 40 + 120}ms` }}
         >
           <CommandCard

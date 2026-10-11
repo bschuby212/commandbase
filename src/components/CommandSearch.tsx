@@ -36,7 +36,7 @@ export function CommandSearch({
           placeholder="Search by name, description, syntax, or keyword…"
           autoComplete="off"
           spellCheck={false}
-          className="w-full rounded-xl border border-border bg-surface px-12 py-3.5 text-base text-ink shadow-sm outline-none transition placeholder:text-ink-subtle focus:border-accent/40 focus:ring-4 focus:ring-accent/10"
+          className="w-full rounded-xl border border-border bg-surface py-3 pr-16 pl-11 text-[16px] text-ink shadow-sm outline-none transition placeholder:text-ink-subtle focus:border-accent/40 focus:ring-4 focus:ring-accent/10 sm:py-3.5 sm:pr-20 sm:pl-12 sm:text-base"
         />
         {value ? (
           <button

@@ -1,5 +1,13 @@
 export type Platform = 'github' | 'cursor' | 'claude' | 'codex' | 'vscode'
 
+export type CommandLanguage =
+  | 'git'
+  | 'shell'
+  | 'javascript'
+  | 'python'
+  | 'docker'
+  | 'editor'
+
 export type CommandType = 'terminal' | 'slash' | 'shortcut'
 
 export type SecondaryCategory =
@@ -23,6 +31,7 @@ export type Command = {
   /** Terminal or slash command text. Unused for pure shortcuts. */
   command: string
   platform: Platform
+  language: CommandLanguage
   category: SecondaryCategory
   type: CommandType
   keywords: string[]
@@ -32,4 +41,7 @@ export type Command = {
   shortcut?: ShortcutKeys
 }
 
+export type FilterMode = 'language' | 'program'
+
 export type PrimaryFilter = 'all' | Platform
+export type LanguageFilter = 'all' | CommandLanguage
