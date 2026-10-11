@@ -53,36 +53,38 @@ export function FilterDropdown<T extends string>({
 
   return (
     <div ref={rootRef} className={`relative min-w-0 ${className}`}>
-      <button
-        type="button"
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        aria-controls={listId}
-        aria-label={label}
-        onClick={() => setOpen((current) => !current)}
-        className="toolbar-control inline-flex h-10 w-full items-center justify-between gap-1.5 rounded-lg px-2.5 text-sm font-medium text-ink transition hover:bg-surface-muted focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none"
-      >
-        <span className="inline-flex min-w-0 items-center gap-2">
-          <span className="shrink-0 text-ink-muted">{leadingIcon}</span>
-          <span className="truncate">{selected.label}</span>
-        </span>
-        <svg
-          width="12"
-          height="12"
-          viewBox="0 0 12 12"
-          fill="none"
-          aria-hidden="true"
-          className={`shrink-0 text-ink-subtle transition ${open ? 'rotate-180' : ''}`}
+      <div className={`toolbar-shell ${open ? 'relative z-50' : ''}`}>
+        <button
+          type="button"
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          aria-controls={listId}
+          aria-label={label}
+          onClick={() => setOpen((current) => !current)}
+          className="toolbar-shell-button justify-between gap-1.5 px-2.5 text-sm font-medium text-ink focus-visible:outline-none"
         >
-          <path
-            d="M3 4.5 6 7.5 9 4.5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
+          <span className="inline-flex min-w-0 items-center gap-2">
+            <span className="shrink-0 text-ink-muted">{leadingIcon}</span>
+            <span className="truncate">{selected.label}</span>
+          </span>
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="none"
+            aria-hidden="true"
+            className={`shrink-0 text-ink-subtle transition ${open ? 'rotate-180' : ''}`}
+          >
+            <path
+              d="M3 4.5 6 7.5 9 4.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
 
       {open ? (
         <ul

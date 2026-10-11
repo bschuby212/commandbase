@@ -89,37 +89,40 @@ export function CategoryFilters({
         leadingIcon={<FunctionFieldIcon />}
         className="min-w-0 flex-1 basis-0 min-[1100px]:w-[9.75rem] min-[1100px]:flex-none"
       />
-      <button
-        type="button"
-        aria-pressed={favoritesOn}
-        aria-label={favoritesOn ? 'Show all commands' : 'Show favorites only'}
-        onClick={() =>
-          onFavoriteFilterChange(favoritesOn ? 'all' : 'favorites')
-        }
-        className={`toolbar-control inline-flex h-10 shrink-0 items-center gap-2 rounded-lg px-2.5 text-sm font-medium transition focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none ${
-          favoritesOn
-            ? 'border-favorite/30 bg-favorite/10 text-favorite'
-            : 'text-ink hover:bg-surface-muted'
-        }`}
+      <div
+        className="toolbar-shell shrink-0"
+        data-tone={favoritesOn ? 'favorite' : undefined}
       >
-        <svg
-          width="15"
-          height="15"
-          viewBox="0 0 15 15"
-          fill="none"
-          aria-hidden="true"
-          className="shrink-0"
+        <button
+          type="button"
+          aria-pressed={favoritesOn}
+          aria-label={favoritesOn ? 'Show all commands' : 'Show favorites only'}
+          onClick={() =>
+            onFavoriteFilterChange(favoritesOn ? 'all' : 'favorites')
+          }
+          className={`toolbar-shell-button gap-2 px-2.5 text-sm font-medium focus-visible:outline-none ${
+            favoritesOn ? 'bg-favorite/10 text-favorite' : 'text-ink'
+          }`}
         >
-          <path
-            d="M7.5 12.6S2.4 9.4 2.4 5.9A2.85 2.85 0 0 1 7.5 4.3 2.85 2.85 0 0 1 12.6 5.9c0 3.5-5.1 6.7-5.1 6.7Z"
-            stroke="currentColor"
-            strokeWidth="1.35"
-            strokeLinejoin="round"
-            fill={favoritesOn ? 'currentColor' : 'none'}
-          />
-        </svg>
-        <span>Favorites</span>
-      </button>
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 15 15"
+            fill="none"
+            aria-hidden="true"
+            className="shrink-0"
+          >
+            <path
+              d="M7.5 12.6S2.4 9.4 2.4 5.9A2.85 2.85 0 0 1 7.5 4.3 2.85 2.85 0 0 1 12.6 5.9c0 3.5-5.1 6.7-5.1 6.7Z"
+              stroke="currentColor"
+              strokeWidth="1.35"
+              strokeLinejoin="round"
+              fill={favoritesOn ? 'currentColor' : 'none'}
+            />
+          </svg>
+          <span>Favorites</span>
+        </button>
+      </div>
     </div>
   )
 }
