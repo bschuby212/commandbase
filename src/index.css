@@ -10,9 +10,9 @@
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --color-page: #ffffff;
+  --color-page: #f4f4f5;
   --color-surface: #ffffff;
-  --color-surface-muted: #f4f4f5;
+  --color-surface-muted: #ececee;
   --color-border: #e4e4e7;
   --color-border-strong: #d4d4d8;
   --color-ink: #0f172a;

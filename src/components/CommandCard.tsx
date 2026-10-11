@@ -48,10 +48,10 @@ export function CommandCard({
       aria-pressed={copied}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      className={`group relative flex h-full min-w-0 cursor-pointer flex-col rounded-xl border-0 bg-surface-muted p-3.5 shadow-none transition duration-150 select-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
+      className={`group relative flex h-full min-w-0 cursor-pointer flex-col rounded-xl border-0 bg-surface p-3.5 shadow-none transition duration-150 select-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
         copied
           ? 'bg-success/10'
-          : 'hover:-translate-y-px hover:bg-[#ececee] dark:hover:bg-surface-muted/80'
+          : 'hover:-translate-y-px hover:bg-white dark:hover:bg-surface-muted/80'
       }`}
     >
       <div className="mb-2 flex items-start justify-between gap-2">
@@ -86,7 +86,7 @@ export function CommandCard({
         {[LANGUAGE_LABELS[command.language], command.category].map((label) => (
           <span
             key={label}
-            className="inline-flex items-center rounded-full bg-surface px-2 py-0.5 text-[10px] font-medium tracking-wide text-ink-muted"
+            className="inline-flex items-center rounded-full bg-surface-muted px-2 py-0.5 text-[10px] font-medium tracking-wide text-ink-muted"
           >
             {label}
           </span>
