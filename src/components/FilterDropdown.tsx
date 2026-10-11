@@ -1,19 +1,30 @@
-import { useEffect, useId, useRef, useState } from 'react'
-import { ProgramIcon } from './FilterIcons'
-import { PLATFORM_LABELS, PROGRAM_FILTERS } from '../lib/platformLabels'
-import type { PrimaryFilter } from '../types/command'
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 
-type ToolDropdownProps = {
-  value: PrimaryFilter
-  onChange: (value: PrimaryFilter) => void
+export type FilterOption<T extends string> = {
+  id: T
+  label: string
+  icon?: ReactNode
 }
 
-export function ToolDropdown({ value, onChange }: ToolDropdownProps) {
+type FilterDropdownProps<T extends string> = {
+  label: string
+  value: T
+  options: FilterOption<T>[]
+  onChange: (value: T) => void
+  align?: 'left' | 'right'
+}
+
+export function FilterDropdown<T extends string>({
+  label,
+  value,
+  options,
+  onChange,
+  align = 'left',
+}: FilterDropdownProps<T>) {
   const [open, setOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
   const listId = useId()
-  const selected = PROGRAM_FILTERS.find((filter) => filter.id === value) ?? PROGRAM_FILTERS[0]
-  const label = value === 'all' ? 'All tools' : PLATFORM_LABELS[value]
+  const selected = options.find((option) => option.id === value) ?? options[0]
 
   useEffect(() => {
     if (!open) return
@@ -37,24 +48,27 @@ export function ToolDropdown({ value, onChange }: ToolDropdownProps) {
   }, [open])
 
   return (
-    <div ref={rootRef} className="relative shrink-0">
+    <div ref={rootRef} className="relative min-w-0 flex-1 sm:flex-none">
       <button
         type="button"
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={listId}
+        aria-label={label}
         onClick={() => setOpen((current) => !current)}
-        className="inline-flex min-h-9 items-center gap-1.5 rounded-lg bg-surface px-3 py-1.5 text-sm font-medium text-ink ring-1 ring-border transition hover:bg-surface-muted focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none"
+        className="inline-flex w-full min-h-10 items-center justify-between gap-2 rounded-lg bg-surface px-3 py-2 text-sm font-medium text-ink ring-1 ring-border transition hover:bg-surface-muted focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none sm:w-auto sm:min-w-[9.5rem]"
       >
-        <ProgramIcon platform={selected.id} />
-        <span className="max-w-[9rem] truncate sm:max-w-none">{label}</span>
+        <span className="inline-flex min-w-0 items-center gap-1.5">
+          {selected.icon}
+          <span className="truncate">{selected.label}</span>
+        </span>
         <svg
           width="12"
           height="12"
           viewBox="0 0 12 12"
           fill="none"
           aria-hidden="true"
-          className={`text-ink-subtle transition ${open ? 'rotate-180' : ''}`}
+          className={`shrink-0 text-ink-subtle transition ${open ? 'rotate-180' : ''}`}
         >
           <path
             d="M3 4.5 6 7.5 9 4.5"
@@ -70,20 +84,21 @@ export function ToolDropdown({ value, onChange }: ToolDropdownProps) {
         <ul
           id={listId}
           role="listbox"
-          aria-label="Tool"
-          className="absolute top-[calc(100%+0.35rem)] right-0 z-50 min-w-[12.5rem] overflow-hidden rounded-xl border border-border bg-surface py-1 shadow-[0_12px_32px_rgba(15,23,42,0.12)]"
+          aria-label={label}
+          className={`absolute top-[calc(100%+0.35rem)] z-50 max-h-72 min-w-full overflow-y-auto rounded-xl border border-border bg-surface py-1 shadow-[0_12px_32px_rgba(15,23,42,0.12)] sm:min-w-[12.5rem] ${
+            align === 'right' ? 'right-0' : 'left-0'
+          }`}
         >
-          {PROGRAM_FILTERS.map((filter) => {
-            const active = filter.id === value
-            const optionLabel = filter.id === 'all' ? 'All tools' : filter.label
+          {options.map((option) => {
+            const active = option.id === value
             return (
-              <li key={filter.id}>
+              <li key={option.id}>
                 <button
                   type="button"
                   role="option"
                   aria-selected={active}
                   onClick={() => {
-                    onChange(filter.id)
+                    onChange(option.id)
                     setOpen(false)
                   }}
                   className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition focus-visible:bg-surface-muted focus-visible:outline-none ${
@@ -92,8 +107,8 @@ export function ToolDropdown({ value, onChange }: ToolDropdownProps) {
                       : 'text-ink-muted hover:bg-surface-muted hover:text-ink'
                   }`}
                 >
-                  <ProgramIcon platform={filter.id} />
-                  <span>{optionLabel}</span>
+                  {option.icon}
+                  <span>{option.label}</span>
                 </button>
               </li>
             )
