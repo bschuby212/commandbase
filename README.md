@@ -1,6 +1,6 @@
 # Command Library
 
-A standalone, responsive quick-reference library for developer commands covering Git/GitHub, Cursor, and Claude Code.
+A standalone, responsive quick-reference library for developer commands covering Git/GitHub, Cursor, Claude Code, Codex, and VS Code / Copilot.
 
 ## Features
 
@@ -41,7 +41,7 @@ type Command = {
   title: string
   description: string
   command: string
-  platform: 'github' | 'cursor' | 'claude'
+  platform: 'github' | 'cursor' | 'claude' | 'codex' | 'vscode'
   category: string
   type: 'terminal' | 'slash' | 'shortcut'
   keywords: string[]

@@ -8,8 +8,8 @@ export function PageHeader() {
         Commands, Simplified.
       </h1>
       <p className="mx-auto mt-4 max-w-2xl text-pretty text-base leading-relaxed text-ink-muted sm:text-lg">
-        Your go-to collection of commands for GitHub, Cursor, and Claude. Find
-        what you need, copy it, and get back to building.
+        Your go-to collection of commands for GitHub, Cursor, Claude, Codex, and
+        VS Code. Find what you need, copy it, and get back to building.
       </p>
     </header>
   )

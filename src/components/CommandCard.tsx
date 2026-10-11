@@ -12,7 +12,7 @@ type CommandCardProps = {
 
 function CopyIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+    <svg width="15" height="15" viewBox="0 0 18 18" fill="none" aria-hidden="true">
       <rect
         x="6"
         y="6"
@@ -54,22 +54,22 @@ export function CommandCard({
       aria-label={`Copy command: ${command.title}`}
       onClick={onCopy}
       onKeyDown={handleKeyDown}
-      className="group relative flex h-full min-h-[220px] cursor-pointer flex-col rounded-2xl border border-border bg-surface p-5 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-[0_8px_24px_rgba(15,23,42,0.06)] focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none"
+      className="group relative flex h-full cursor-pointer flex-col rounded-xl border border-border bg-surface p-3.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition duration-150 hover:-translate-y-px hover:border-border-strong hover:shadow-[0_6px_16px_rgba(15,23,42,0.05)] focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none"
     >
-      <div className="mb-3 flex items-start justify-between gap-3">
+      <div className="mb-2 flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <h3 className="text-base font-semibold tracking-tight text-ink">
+          <h3 className="text-sm font-semibold tracking-tight text-ink">
             {command.title}
           </h3>
           <p
             id={descriptionId}
-            className="mt-1 text-sm leading-relaxed text-ink-muted"
+            className="mt-0.5 text-xs leading-snug text-ink-muted"
           >
             {command.description}
           </p>
         </div>
         <span
-          className={`mt-0.5 shrink-0 rounded-md p-1.5 transition ${
+          className={`mt-0.5 shrink-0 rounded-md p-1 transition ${
             copied
               ? 'bg-accent/10 text-accent'
               : 'text-ink-subtle group-hover:bg-surface-muted group-hover:text-ink'
@@ -77,7 +77,7 @@ export function CommandCard({
           aria-hidden="true"
         >
           {copied ? (
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <svg width="15" height="15" viewBox="0 0 18 18" fill="none">
               <path
                 d="M4 9.5L7.5 13L14 5.5"
                 stroke="currentColor"
@@ -93,24 +93,24 @@ export function CommandCard({
       </div>
 
       <div className="mt-auto">
-        <pre className="overflow-x-auto rounded-xl bg-code-bg px-3.5 py-3 font-mono text-[13px] leading-relaxed text-code-text whitespace-pre-wrap break-words">
+        <pre className="overflow-x-auto rounded-lg bg-code-bg px-2.5 py-2 font-mono text-[12px] leading-snug text-code-text whitespace-pre-wrap break-words">
           <code>{displayCommand}</code>
         </pre>
 
         {command.notes ? (
-          <p className="mt-3 text-xs leading-relaxed text-ink-subtle">
+          <p className="mt-1.5 text-[11px] leading-snug text-ink-subtle">
             {command.notes}
           </p>
         ) : null}
 
         {command.destructive ? (
-          <p className="mt-2 text-xs font-medium text-danger">
+          <p className="mt-1.5 text-[11px] font-medium text-danger">
             Potentially destructive — review before running.
           </p>
         ) : null}
 
-        <div className="mt-4 flex items-center justify-between gap-3">
-          <p className="min-w-0 text-xs text-ink-subtle">
+        <div className="mt-2.5 flex items-center justify-between gap-2">
+          <p className="min-w-0 truncate text-[11px] text-ink-subtle">
             <span className="text-ink-muted">{PLATFORM_LABELS[command.platform]}</span>
             <span aria-hidden="true"> · </span>
             <span>{command.category}</span>

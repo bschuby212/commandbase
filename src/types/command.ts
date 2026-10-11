@@ -1,4 +1,4 @@
-export type Platform = 'github' | 'cursor' | 'claude'
+export type Platform = 'github' | 'cursor' | 'claude' | 'codex' | 'vscode'
 
 export type CommandType = 'terminal' | 'slash' | 'shortcut'
 

@@ -16,6 +16,8 @@ const SECONDARY_BY_PRIMARY: Record<PrimaryFilter, SecondaryCategory[]> = {
   github: ['Repositories', 'Commits & Changes', 'Branches'],
   cursor: ['Navigation', 'Utilities', 'Setup'],
   claude: ['Sessions', 'Setup', 'Utilities'],
+  codex: ['Sessions', 'Setup', 'Utilities'],
+  vscode: ['Navigation', 'Utilities', 'Setup'],
 }
 
 function matchesSearch(command: Command, query: string): boolean {

@@ -5,7 +5,7 @@ type CopyFeedbackProps = {
 export function CopyFeedback({ visible }: CopyFeedbackProps) {
   return (
     <span
-      className={`inline-flex items-center gap-1.5 text-sm font-medium transition-all duration-200 ${
+      className={`inline-flex items-center gap-1 text-xs font-medium transition-all duration-200 ${
         visible
           ? 'translate-y-0 text-accent opacity-100'
           : 'pointer-events-none translate-y-0.5 text-ink-muted opacity-0'
@@ -13,8 +13,8 @@ export function CopyFeedback({ visible }: CopyFeedbackProps) {
       aria-live="polite"
     >
       <svg
-        width="16"
-        height="16"
+        width="13"
+        height="13"
         viewBox="0 0 16 16"
         fill="none"
         aria-hidden="true"
