@@ -17,7 +17,7 @@ type CategoryFiltersProps = {
   availableSecondary: SecondaryCategory[]
 }
 
-type TagFilter = 'all' | SecondaryCategory
+type FunctionFilter = 'all' | SecondaryCategory
 
 export function CategoryFilters({
   language,
@@ -28,18 +28,7 @@ export function CategoryFilters({
   onSecondaryChange,
   availableSecondary,
 }: CategoryFiltersProps) {
-  const tagValue: TagFilter = secondary ?? 'all'
-
-  const languageOptions = LANGUAGE_FILTERS.map((filter) => ({
-    id: filter.id,
-    label: filter.id === 'all' ? 'All languages' : filter.label,
-    icon: <LanguageIcon language={filter.id} />,
-  }))
-
-  const tagOptions: { id: TagFilter; label: string }[] = [
-    { id: 'all', label: 'All tags' },
-    ...availableSecondary.map((tag) => ({ id: tag, label: tag })),
-  ]
+  const functionValue: FunctionFilter = secondary ?? 'all'
 
   const toolOptions = PROGRAM_FILTERS.map((filter) => ({
     id: filter.id,
@@ -47,8 +36,25 @@ export function CategoryFilters({
     icon: <ProgramIcon platform={filter.id} />,
   }))
 
+  const languageOptions = LANGUAGE_FILTERS.map((filter) => ({
+    id: filter.id,
+    label: filter.id === 'all' ? 'All languages' : filter.label,
+    icon: <LanguageIcon language={filter.id} />,
+  }))
+
+  const functionOptions: { id: FunctionFilter; label: string }[] = [
+    { id: 'all', label: 'All functions' },
+    ...availableSecondary.map((item) => ({ id: item, label: item })),
+  ]
+
   return (
-    <div className="animate-fade-up animation-delay-2 relative z-30 grid grid-cols-1 gap-2 sm:grid-cols-3">
+    <div className="animate-fade-up animation-delay-2 relative z-30 grid grid-cols-1 gap-2 sm:grid-cols-2 min-[900px]:grid-cols-3">
+      <FilterDropdown
+        label="Tool"
+        value={tool}
+        options={toolOptions}
+        onChange={onToolChange}
+      />
       <FilterDropdown
         label="Language"
         value={language}
@@ -56,17 +62,12 @@ export function CategoryFilters({
         onChange={onLanguageChange}
       />
       <FilterDropdown
-        label="Tag"
-        value={tagValue}
-        options={tagOptions}
+        label="Function"
+        value={functionValue}
+        options={functionOptions}
         onChange={(next) => onSecondaryChange(next === 'all' ? null : next)}
-      />
-      <FilterDropdown
-        label="Tool"
-        value={tool}
-        options={toolOptions}
-        onChange={onToolChange}
         align="right"
+        className="sm:col-span-2 min-[900px]:col-span-1"
       />
     </div>
   )

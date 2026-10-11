@@ -12,6 +12,7 @@ type FilterDropdownProps<T extends string> = {
   options: FilterOption<T>[]
   onChange: (value: T) => void
   align?: 'left' | 'right'
+  className?: string
 }
 
 export function FilterDropdown<T extends string>({
@@ -20,6 +21,7 @@ export function FilterDropdown<T extends string>({
   options,
   onChange,
   align = 'left',
+  className = '',
 }: FilterDropdownProps<T>) {
   const [open, setOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
@@ -48,7 +50,7 @@ export function FilterDropdown<T extends string>({
   }, [open])
 
   return (
-    <div ref={rootRef} className="relative min-w-0 flex-1 sm:flex-none">
+    <div ref={rootRef} className={`relative min-w-0 w-full ${className}`}>
       <button
         type="button"
         aria-haspopup="listbox"
@@ -56,7 +58,7 @@ export function FilterDropdown<T extends string>({
         aria-controls={listId}
         aria-label={label}
         onClick={() => setOpen((current) => !current)}
-        className="inline-flex w-full min-h-10 items-center justify-between gap-2 rounded-lg bg-surface px-3 py-2 text-sm font-medium text-ink ring-1 ring-border transition hover:bg-surface-muted focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none sm:w-auto sm:min-w-[9.5rem]"
+        className="inline-flex w-full min-h-10 items-center justify-between gap-2 rounded-lg bg-surface px-3 py-2 text-sm font-medium text-ink ring-1 ring-border transition hover:bg-surface-muted focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none"
       >
         <span className="inline-flex min-w-0 items-center gap-1.5">
           {selected.icon}

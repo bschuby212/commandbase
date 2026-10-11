@@ -22,7 +22,7 @@ export function CommandGrid({
   }
 
   return (
-    <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-3 min-[768px]:grid-cols-2 min-[1440px]:grid-cols-3">
       {commands.map((command, index) => (
         <div
           key={command.id}
