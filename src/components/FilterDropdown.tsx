@@ -60,7 +60,7 @@ export function FilterDropdown<T extends string>({
         aria-controls={listId}
         aria-label={label}
         onClick={() => setOpen((current) => !current)}
-        className="inline-flex h-10 w-full items-center justify-between gap-1.5 rounded-lg bg-surface px-2.5 text-sm font-medium text-ink shadow-sm ring-1 ring-border transition hover:bg-surface-muted focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none"
+        className="toolbar-control inline-flex h-10 w-full items-center justify-between gap-1.5 rounded-lg px-2.5 text-sm font-medium text-ink transition hover:bg-surface-muted focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none"
       >
         <span className="inline-flex min-w-0 items-center gap-2">
           <span className="shrink-0 text-ink-muted">{leadingIcon}</span>

@@ -35,7 +35,7 @@ export function CommandSearch({
         placeholder="Search commands…"
         autoComplete="off"
         spellCheck={false}
-        className="w-full rounded-lg border border-border bg-surface py-2.5 pr-14 pl-9 text-[16px] text-ink shadow-sm outline-none transition placeholder:text-ink-subtle focus:border-accent/40 focus:ring-4 focus:ring-accent/10 sm:text-sm"
+        className="toolbar-control h-10 w-full rounded-lg py-0 pr-14 pl-9 text-[16px] text-ink outline-none transition placeholder:text-ink-subtle focus:border-accent/40 focus:ring-4 focus:ring-accent/10 sm:text-sm"
       />
       {value ? (
         <button

@@ -96,10 +96,10 @@ export function CategoryFilters({
         onClick={() =>
           onFavoriteFilterChange(favoritesOn ? 'all' : 'favorites')
         }
-        className={`inline-flex h-10 shrink-0 items-center gap-2 rounded-lg px-2.5 text-sm font-medium shadow-sm ring-1 transition focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none ${
+        className={`toolbar-control inline-flex h-10 shrink-0 items-center gap-2 rounded-lg px-2.5 text-sm font-medium transition focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none ${
           favoritesOn
-            ? 'bg-favorite/10 text-favorite ring-favorite/30'
-            : 'bg-surface text-ink ring-border hover:bg-surface-muted'
+            ? 'border-favorite/30 bg-favorite/10 text-favorite'
+            : 'text-ink hover:bg-surface-muted'
         }`}
       >
         <svg
