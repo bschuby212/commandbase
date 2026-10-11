@@ -1,6 +1,6 @@
 import { useId, type KeyboardEvent, type MouseEvent } from 'react'
 import { CopyIconButton } from './CopyIconButton'
-import { LANGUAGE_LABELS, PLATFORM_LABELS, TYPE_LABELS } from '../lib/platformLabels'
+import { LANGUAGE_LABELS } from '../lib/platformLabels'
 import type { Command } from '../types/command'
 
 type CommandCardProps = {
@@ -51,13 +51,13 @@ export function CommandCard({
       }`}
     >
       <div className="pointer-events-none mb-2 flex items-start justify-between gap-2">
-        <div className="min-w-0">
-          <h3 className="text-sm font-semibold tracking-tight text-ink">
+        <div className="min-w-0 flex-1">
+          <h3 className="h-5 overflow-hidden text-sm leading-5 font-semibold tracking-tight text-ink line-clamp-1">
             {command.title}
           </h3>
           <p
             id={descriptionId}
-            className="mt-0.5 text-xs leading-snug text-ink-muted"
+            className="mt-0.5 min-h-10 overflow-hidden text-xs leading-5 text-ink-muted line-clamp-2"
           >
             {command.description}
           </p>
@@ -65,38 +65,19 @@ export function CommandCard({
         <CopyIconButton copied={copied} />
       </div>
 
-      <div className="pointer-events-none mt-auto min-w-0">
-        <pre className="max-w-full overflow-x-auto rounded-lg bg-code-bg px-2.5 py-2 font-mono text-[12px] leading-snug text-code-text whitespace-pre-wrap break-words [overflow-wrap:anywhere]">
-          <code>{displayCommand}</code>
-        </pre>
+      <pre className="pointer-events-none flex min-h-[3.25rem] max-w-full items-center overflow-x-auto rounded-lg bg-code-bg px-2.5 py-2 font-mono text-[12px] leading-snug text-code-text whitespace-pre-wrap break-words [overflow-wrap:anywhere]">
+        <code className="min-w-0">{displayCommand}</code>
+      </pre>
 
-        {command.notes ? (
-          <p className="mt-1.5 text-[11px] leading-snug text-ink-subtle">
-            {command.notes}
-          </p>
-        ) : null}
-
-        {command.destructive ? (
-          <p className="mt-1.5 text-[11px] font-medium text-danger">
-            Potentially destructive — review before running.
-          </p>
-        ) : null}
-
-        <div className="mt-2.5 flex min-w-0 flex-wrap gap-1">
-          {[
-            LANGUAGE_LABELS[command.language],
-            PLATFORM_LABELS[command.platform],
-            command.category,
-            ...(command.type !== 'terminal' ? [TYPE_LABELS[command.type]] : []),
-          ].map((label) => (
-            <span
-              key={label}
-              className="rounded-md bg-surface-muted px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-ink-subtle"
-            >
-              {label}
-            </span>
-          ))}
-        </div>
+      <div className="pointer-events-none mt-auto flex min-w-0 flex-wrap gap-1 pt-2.5">
+        {[LANGUAGE_LABELS[command.language], command.category].map((label) => (
+          <span
+            key={label}
+            className="rounded-md bg-surface-muted px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-ink-subtle"
+          >
+            {label}
+          </span>
+        ))}
       </div>
 
       <span className="sr-only" aria-live="polite">
