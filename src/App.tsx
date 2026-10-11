@@ -2,14 +2,17 @@ import { CategoryFilters } from './components/CategoryFilters'
 import { CommandGrid } from './components/CommandGrid'
 import { CommandSearch } from './components/CommandSearch'
 import { PageHeader } from './components/PageHeader'
+import { ThemeToggle } from './components/ThemeToggle'
 import { useClipboard } from './hooks/useClipboard'
 import { useCommandFilter } from './hooks/useCommandFilter'
 import { useFavorites } from './hooks/useFavorites'
+import { useTheme } from './hooks/useTheme'
 import { getCopyText } from './lib/getCopyText'
 import type { Command } from './types/command'
 
 function App() {
   const { favoriteIds, isFavorite, toggleFavorite } = useFavorites()
+  const { isDark, toggleTheme } = useTheme()
 
   const {
     search,
@@ -41,10 +44,10 @@ function App() {
 
   return (
     <div className="relative min-h-dvh overflow-x-clip">
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-page" />
-        <div className="absolute top-[-12%] left-1/2 h-[320px] w-[min(820px,140vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.14),transparent_68%)] blur-2xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.035)_1px,transparent_1px)] bg-size-[28px_28px] mask-[radial-gradient(ellipse_at_top,black_20%,transparent_72%)]" />
+      <div className="page-grid pointer-events-none absolute inset-0 -z-10" />
+
+      <div className="absolute top-3 right-3 z-40 sm:top-5 sm:right-5">
+        <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
       </div>
 
       <main className="mx-auto w-full max-w-[1680px] px-3 pt-8 pb-14 sm:px-6 sm:pt-10 lg:px-8">
