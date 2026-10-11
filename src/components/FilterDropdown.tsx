@@ -65,7 +65,13 @@ export function FilterDropdown<T extends string>({
         >
           <span className="inline-flex min-w-0 items-center gap-2">
             <span className="shrink-0 text-ink-muted">{leadingIcon}</span>
-            <span className="truncate">{selected.label}</span>
+            <span
+              className={
+                value === 'all' ? 'whitespace-nowrap' : 'truncate'
+              }
+            >
+              {selected.label}
+            </span>
           </span>
           <svg
             width="12"
