@@ -37,7 +37,6 @@ export function CommandCard({
   copied,
   onCopy,
 }: CommandCardProps) {
-  const labelId = useId()
   const descriptionId = useId()
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -51,7 +50,6 @@ export function CommandCard({
     <div
       role="button"
       tabIndex={0}
-      aria-labelledby={labelId}
       aria-describedby={descriptionId}
       aria-label={`Copy command: ${command.title}`}
       onClick={onCopy}
@@ -60,7 +58,7 @@ export function CommandCard({
     >
       <div className="mb-3 flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <h3 id={labelId} className="text-base font-semibold tracking-tight text-ink">
+          <h3 className="text-base font-semibold tracking-tight text-ink">
             {command.title}
           </h3>
           <p
