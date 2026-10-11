@@ -73,7 +73,7 @@
     --color-code-bg: #000000;
     --color-code-text: #e4e4e7;
     --color-danger: #f87171;
-    --color-grid-line: rgba(250, 250, 250, 0.016);
+    --color-grid-line: rgba(250, 250, 250, 0.022);
   }
 
   .dark ::selection {
