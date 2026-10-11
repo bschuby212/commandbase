@@ -24,7 +24,7 @@
   --color-code-bg: #0b1220;
   --color-code-text: #e2e8f0;
   --color-danger: #dc2626;
-  --color-grid-line: rgba(15, 23, 42, 0.0255);
+  --color-grid-line: rgba(15, 23, 42, 0.014);
 }
 
 @layer base {
