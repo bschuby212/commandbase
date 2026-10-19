@@ -1,4 +1,5 @@
 import type { Command } from '../types/command'
+import { designerCommands } from './designerCommands'
 
 export const commands: Command[] = [
   {
@@ -3054,4 +3055,5 @@ export const commands: Command[] = [
     notes: "Destructive. Double-check <path>. Never run rm -rf / or ~.",
   },
 
+  ...designerCommands,
 ]
