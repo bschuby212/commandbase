@@ -89,7 +89,7 @@ export function CategoryFilters({
   return (
     <>
       {/* Mobile: one Filters control that opens a bottom sheet */}
-      <div className={`relative z-30 min-[1100px]:hidden ${className}`}>
+      <div className={`relative z-30 min-[1040px]:hidden ${className}`}>
         <div className="toolbar-shell">
           <button
             type="button"
@@ -129,7 +129,7 @@ export function CategoryFilters({
 
       {/* Desktop: inline filter dropdowns */}
       <div
-        className={`relative z-30 hidden items-center gap-2 min-[1100px]:flex ${className}`}
+        className={`relative z-30 hidden items-center gap-2 min-[1040px]:flex ${className}`}
       >
         <FilterDropdown
           label="Tool"

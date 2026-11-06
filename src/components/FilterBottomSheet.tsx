@@ -62,7 +62,7 @@ export function FilterBottomSheet({
 
   return (
     <div
-      className="fixed inset-0 z-[80] min-[1100px]:hidden"
+      className="fixed inset-0 z-[80] min-[1040px]:hidden"
       role="presentation"
       onPointerDown={(event) => {
         // Tap/click outside the sheet closes it.
