@@ -106,17 +106,12 @@ export function FilterBottomSheet({
         </div>
 
         <div className="flex shrink-0 items-center justify-between gap-3 border-b border-border px-4 py-3">
-          <div className="min-w-0">
-            <h2
-              id={titleId}
-              className="text-base font-semibold tracking-tight text-ink"
-            >
-              Filters
-            </h2>
-            <p className="text-xs text-ink-muted">
-              Multi-select · tap again to remove
-            </p>
-          </div>
+          <h2
+            id={titleId}
+            className="text-lg font-semibold tracking-tight text-ink"
+          >
+            Filters
+          </h2>
           <div className="flex shrink-0 items-center gap-2">
             {chips.length > 0 ? (
               <button
@@ -146,7 +141,7 @@ export function FilterBottomSheet({
                   key={chip.id}
                   type="button"
                   onClick={chip.onRemove}
-                  className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-border bg-surface-muted px-2.5 py-1 text-xs font-medium text-ink transition hover:border-ink/20 hover:bg-page focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none"
+                  className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-border bg-surface-muted px-3 py-1.5 text-sm font-medium text-ink transition hover:border-ink/20 hover:bg-page focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none"
                   aria-label={`Remove filter ${chip.label}`}
                 >
                   <span className="truncate">{chip.label}</span>
@@ -197,17 +192,17 @@ export function FilterBottomSheet({
           </SheetSection>
 
           <SheetSection label="Favorites">
-            <button
-              type="button"
-              aria-pressed={favoritesOn}
-              onClick={onFavoritesToggle}
-              className={`flex w-full items-center justify-between rounded-xl border px-3.5 py-3 text-left text-sm font-medium transition focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
-                favoritesOn
-                  ? 'border-ink bg-ink text-page'
-                  : 'border-border bg-surface text-ink hover:bg-surface-muted'
-              }`}
-            >
-              <span className="inline-flex items-center gap-2">
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                aria-pressed={favoritesOn}
+                onClick={onFavoritesToggle}
+                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[15px] font-medium transition focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
+                  favoritesOn
+                    ? 'border-ink bg-ink text-page'
+                    : 'border-border bg-surface text-ink hover:bg-surface-muted'
+                }`}
+              >
                 <svg
                   width="15"
                   height="15"
@@ -224,12 +219,9 @@ export function FilterBottomSheet({
                     fill={favoritesOn ? 'currentColor' : 'none'}
                   />
                 </svg>
-                Favorites only
-              </span>
-              <span className="text-xs opacity-70">
-                {favoritesOn ? 'On' : 'Off'}
-              </span>
-            </button>
+                Favorites
+              </button>
+            </div>
           </SheetSection>
         </div>
       </div>
@@ -247,7 +239,7 @@ function SheetSection({
 }) {
   return (
     <section className="mb-5 last:mb-0">
-      <h3 className="mb-2 text-[11px] font-semibold tracking-[0.08em] text-ink-subtle uppercase">
+      <h3 className="mb-2.5 text-sm font-semibold tracking-wide text-ink-muted">
         {label}
       </h3>
       {children}
@@ -265,54 +257,30 @@ function OptionList({
   onToggle: (id: string) => void
 }) {
   return (
-    <ul className="overflow-hidden rounded-xl border border-border">
-      {options.map((option, index) => {
+    <div className="flex flex-wrap gap-2">
+      {options.map((option) => {
         const active = selectedIds.includes(option.id)
         return (
-          <li
+          <button
             key={option.id}
-            className={index > 0 ? 'border-t border-border' : undefined}
+            type="button"
+            aria-pressed={active}
+            onClick={() => onToggle(option.id)}
+            className={`inline-flex max-w-full items-center gap-2 rounded-full border px-3.5 py-2 text-[15px] font-medium transition focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
+              active
+                ? 'border-accent bg-accent/10 text-accent'
+                : 'border-border bg-surface text-ink hover:bg-surface-muted'
+            }`}
           >
-            <button
-              type="button"
-              aria-pressed={active}
-              onClick={() => onToggle(option.id)}
-              className={`flex w-full items-center gap-2.5 px-3.5 py-2.5 text-left text-sm transition focus-visible:bg-surface-muted focus-visible:outline-none active:bg-surface-muted ${
-                active
-                  ? 'bg-accent/10 font-medium text-accent'
-                  : 'text-ink hover:bg-surface-muted'
-              }`}
-            >
-              {option.icon ? (
-                <span className="shrink-0 text-current opacity-80">
-                  {option.icon}
-                </span>
-              ) : null}
-              <span className="min-w-0 flex-1 truncate">{option.label}</span>
-              <span
-                className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border ${
-                  active
-                    ? 'border-accent bg-accent text-white'
-                    : 'border-border-strong bg-surface'
-                }`}
-                aria-hidden="true"
-              >
-                {active ? (
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path
-                      d="M2.5 6.2 4.8 8.5 9.5 3.5"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                ) : null}
+            {option.icon ? (
+              <span className="shrink-0 text-current opacity-80">
+                {option.icon}
               </span>
-            </button>
-          </li>
+            ) : null}
+            <span className="truncate">{option.label}</span>
+          </button>
         )
       })}
-    </ul>
+    </div>
   )
 }
