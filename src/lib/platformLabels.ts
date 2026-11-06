@@ -15,7 +15,7 @@ export const PLATFORM_LABELS: Record<Platform, string> = {
   powershell: 'PowerShell (Windows)',
   macterminal: 'Mac Terminal',
   /** Internal bucket for tool-agnostic prompts — not shown in the Tools filter. */
-  aiprompt: 'Prompts (QA, design critique, handoff & polish)',
+  aiprompt: 'Prompts (automated QA, design critique, Figma fidelity, handoff & polish)',
 }
 
 export const LANGUAGE_LABELS: Record<CommandLanguage, string> = {
@@ -26,7 +26,7 @@ export const LANGUAGE_LABELS: Record<CommandLanguage, string> = {
   docker: 'Docker',
   editor: 'Editor',
   /** Plain-language instructions to paste into any AI tool — not shell/code. */
-  prompt: 'Prompts (QA, design critique, handoff & polish)',
+  prompt: 'Prompts (automated QA, design critique, Figma fidelity, handoff & polish)',
 }
 
 export const PROGRAM_FILTERS: { id: PrimaryFilter; label: string }[] = [
@@ -54,5 +54,5 @@ export const TYPE_LABELS: Record<CommandType, string> = {
   terminal: 'Terminal',
   slash: 'Slash command',
   shortcut: 'Shortcut',
-  prompt: 'Prompts (QA, design critique, handoff & polish)',
+  prompt: 'Prompts (automated QA, design critique, Figma fidelity, handoff & polish)',
 }
