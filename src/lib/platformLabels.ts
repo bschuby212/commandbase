@@ -59,11 +59,7 @@ export const TYPE_LABELS: Record<CommandType, string> = {
 }
 
 /** Short hover copy for Function filter items. */
-export const FUNCTION_DESCRIPTIONS: Record<
-  SecondaryCategory | 'all',
-  string
-> = {
-  all: 'Show commands from every function.',
+export const FUNCTION_DESCRIPTIONS: Record<SecondaryCategory, string> = {
   Repositories: 'Clone, init, remotes, and repo setup.',
   'Commits & Changes': 'Stage, commit, diff, stash, and undo.',
   Branches: 'Create, switch, merge, and clean up branches.',
@@ -74,8 +70,7 @@ export const FUNCTION_DESCRIPTIONS: Record<
   Prompts: 'Paste-ready AI asks for review, critique, polish, and handoff.',
 }
 
-export const TOOL_DESCRIPTIONS: Record<PrimaryFilter, string> = {
-  all: 'Show commands for every tool.',
+export const TOOL_DESCRIPTIONS: Partial<Record<PrimaryFilter, string>> = {
   github: 'Git and GitHub workflows.',
   cursor: 'Cursor editor and agent commands.',
   claude: 'Claude Code CLI and slash commands.',
@@ -83,16 +78,13 @@ export const TOOL_DESCRIPTIONS: Record<PrimaryFilter, string> = {
   vscode: 'VS Code and Copilot shortcuts.',
   powershell: 'Windows PowerShell setup and fixes.',
   macterminal: 'Mac Terminal, Homebrew, and shell fixes.',
-  aiprompt: 'Tool-agnostic prompts for any AI.',
 }
 
-export const LANGUAGE_DESCRIPTIONS: Record<LanguageFilter, string> = {
-  all: 'Show commands in every language.',
+export const LANGUAGE_DESCRIPTIONS: Partial<Record<LanguageFilter, string>> = {
   git: 'Git command syntax.',
   shell: 'Shell and terminal commands.',
   javascript: 'Node, npm, and JavaScript tooling.',
   python: 'Python, pip, and virtualenvs.',
   docker: 'Docker and Compose commands.',
   editor: 'Editor shortcuts and slash commands.',
-  prompt: 'Plain-language AI prompts.',
 }

@@ -78,7 +78,8 @@ export function CategoryFilters({
       PROGRAM_FILTERS.map((filter) => ({
         id: filter.id,
         label: filter.id === 'all' ? 'All tools' : filter.label,
-        description: TOOL_DESCRIPTIONS[filter.id],
+        description:
+          filter.id === 'all' ? undefined : TOOL_DESCRIPTIONS[filter.id],
         icon: <ProgramIcon platform={filter.id} />,
       })),
     [],
@@ -89,7 +90,8 @@ export function CategoryFilters({
       LANGUAGE_FILTERS.map((filter) => ({
         id: filter.id,
         label: filter.id === 'all' ? 'All languages' : filter.label,
-        description: LANGUAGE_DESCRIPTIONS[filter.id],
+        description:
+          filter.id === 'all' ? undefined : LANGUAGE_DESCRIPTIONS[filter.id],
         icon: <LanguageIcon language={filter.id} />,
       })),
     [],
@@ -98,13 +100,9 @@ export function CategoryFilters({
   const functionOptions: {
     id: FunctionFilter
     label: string
-    description: string
+    description?: string
   }[] = [
-    {
-      id: 'all',
-      label: 'All functions',
-      description: FUNCTION_DESCRIPTIONS.all,
-    },
+    { id: 'all', label: 'All functions' },
     ...availableSecondary.map((item) => ({
       id: item,
       label: item,
