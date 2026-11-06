@@ -2,7 +2,7 @@ import type { Command } from '../types/command'
 
 /**
  * Tool-agnostic plain-language prompts (not shell/code commands).
- * Discover via Language → Prompt only and Function (Design, QA, …).
+ * Discover via Function → AI prompts (or Design, QA, Implementation, …).
  * Copied in full; cards only show a short preview ending in ….
  */
 export const aiPrompts: Command[] = [

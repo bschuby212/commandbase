@@ -27,6 +27,8 @@ export type SecondaryCategory =
   | 'Navigation'
   | 'Sessions'
   | 'Utilities'
+  /** Special function filter: all plain-language AI prompts (any subcategory). */
+  | 'AI prompts'
   | 'QA'
   | 'Design'
   | 'Implementation'
