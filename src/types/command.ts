@@ -27,7 +27,7 @@ export type SecondaryCategory =
   | 'Navigation'
   | 'Sessions'
   | 'Utilities'
-  | 'Prompts (automated QA, design critique, Figma fidelity, handoff & polish)'
+  | 'Prompts (review, critique, polish & handoff)'
 
 export type ShortcutKeys = {
   mac: string
