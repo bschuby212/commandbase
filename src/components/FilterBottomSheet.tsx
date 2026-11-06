@@ -37,6 +37,7 @@ export function FilterBottomSheet({
   activeCount,
 }: FilterBottomSheetProps) {
   const titleId = useId()
+  const panelRef = useRef<HTMLDivElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
@@ -60,19 +61,31 @@ export function FilterBottomSheet({
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-[80] min-[1100px]:hidden" role="presentation">
-      <button
-        type="button"
-        aria-label="Close filters"
-        className="absolute inset-0 bg-ink/40 backdrop-blur-[2px] transition"
-        onClick={onClose}
+    <div
+      className="fixed inset-0 z-[80] min-[1100px]:hidden"
+      role="presentation"
+      onPointerDown={(event) => {
+        // Tap/click outside the sheet closes it.
+        if (
+          panelRef.current &&
+          !panelRef.current.contains(event.target as Node)
+        ) {
+          onClose()
+        }
+      }}
+    >
+      <div
+        className="absolute inset-0 bg-ink/40 backdrop-blur-[2px]"
+        aria-hidden="true"
       />
 
       <div
+        ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
         className="animate-sheet-up absolute inset-x-0 bottom-0 flex max-h-[min(88dvh,40rem)] flex-col rounded-t-2xl border border-border bg-surface shadow-[0_-16px_48px_rgba(15,23,42,0.18)]"
+        onPointerDown={(event) => event.stopPropagation()}
       >
         <div className="flex shrink-0 flex-col items-center pt-2.5 pb-1">
           <div className="h-1 w-10 rounded-full bg-border-strong" aria-hidden="true" />
@@ -85,8 +98,8 @@ export function FilterBottomSheet({
             </h2>
             <p className="text-xs text-ink-muted">
               {activeCount > 0
-                ? `${activeCount} active`
-                : 'Tool, language, function, favorites'}
+                ? `${activeCount} active · tap again to clear`
+                : 'Tap to select · tap again to clear'}
             </p>
           </div>
           <div className="flex shrink-0 items-center gap-2">
@@ -116,6 +129,7 @@ export function FilterBottomSheet({
               options={toolOptions}
               value={tool}
               onChange={onToolChange}
+              clearValue="all"
             />
           </SheetSection>
 
@@ -124,6 +138,7 @@ export function FilterBottomSheet({
               options={languageOptions}
               value={language}
               onChange={onLanguageChange}
+              clearValue="all"
             />
           </SheetSection>
 
@@ -132,6 +147,7 @@ export function FilterBottomSheet({
               options={functionOptions}
               value={functionValue}
               onChange={onFunctionChange}
+              clearValue="all"
             />
           </SheetSection>
 
@@ -166,7 +182,7 @@ export function FilterBottomSheet({
                 Favorites only
               </span>
               <span className="text-xs opacity-70">
-                {favoritesOn ? 'On' : 'Off'}
+                {favoritesOn ? 'On · tap to clear' : 'Off'}
               </span>
             </button>
           </SheetSection>
@@ -197,10 +213,12 @@ function OptionList({
   options,
   value,
   onChange,
+  clearValue,
 }: {
   options: FilterOption<string>[]
   value: string
   onChange: (value: string) => void
+  clearValue: string
 }) {
   return (
     <ul className="overflow-hidden rounded-xl border border-border">
@@ -213,8 +231,16 @@ function OptionList({
           >
             <button
               type="button"
-              onClick={() => onChange(option.id)}
-              className={`flex w-full items-center gap-2.5 px-3.5 py-2.5 text-left text-sm transition focus-visible:bg-surface-muted focus-visible:outline-none ${
+              aria-pressed={active}
+              onClick={() => {
+                // Tap selects; tap the active choice again clears back to "all".
+                if (active && option.id !== clearValue) {
+                  onChange(clearValue)
+                  return
+                }
+                onChange(option.id)
+              }}
+              className={`flex w-full items-center gap-2.5 px-3.5 py-2.5 text-left text-sm transition focus-visible:bg-surface-muted focus-visible:outline-none active:bg-surface-muted ${
                 active
                   ? 'bg-accent/10 font-medium text-accent'
                   : 'text-ink hover:bg-surface-muted'
