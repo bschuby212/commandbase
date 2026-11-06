@@ -154,16 +154,17 @@ export function FilterBottomSheet({
 
           <SheetSection label="Favorites">
             <div className="flex flex-wrap gap-2">
-              <button
-                type="button"
-                aria-pressed={favoritesOn}
-                onClick={onFavoritesToggle}
-                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[15px] font-medium transition focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
-                  favoritesOn
-                    ? 'border-ink bg-ink text-page'
-                    : 'border-border bg-surface text-ink hover:bg-surface-muted'
-                }`}
-              >
+            <button
+              type="button"
+              aria-pressed={favoritesOn}
+              title="Only show commands you have favorited."
+              onClick={onFavoritesToggle}
+              className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[15px] font-medium transition focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
+                favoritesOn
+                  ? 'border-ink bg-ink text-page'
+                  : 'border-border bg-surface text-ink hover:bg-surface-muted'
+              }`}
+            >
                 <svg
                   width="15"
                   height="15"
@@ -226,21 +227,21 @@ function OptionList({
             key={option.id}
             type="button"
             aria-pressed={active}
+            aria-description={option.description}
+            title={option.description}
             onClick={() => onToggle(option.id)}
-            className={`inline-flex max-w-full items-start gap-2 rounded-2xl border px-3.5 py-2 text-[15px] font-medium transition focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
+            className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[15px] font-medium transition focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
               active
                 ? 'border-accent bg-accent/10 text-accent'
                 : 'border-border bg-surface text-ink hover:bg-surface-muted'
             }`}
           >
             {option.icon ? (
-              <span className="mt-0.5 shrink-0 text-current opacity-80">
+              <span className="shrink-0 text-current opacity-80">
                 {option.icon}
               </span>
             ) : null}
-            <span className="max-w-[14rem] whitespace-normal leading-snug [overflow-wrap:anywhere] line-clamp-2">
-              {option.label}
-            </span>
+            <span>{option.label}</span>
           </button>
         )
       })}

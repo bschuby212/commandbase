@@ -3,6 +3,7 @@ import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 export type FilterOption<T extends string> = {
   id: T
   label: string
+  description?: string
   icon?: ReactNode
 }
 
@@ -53,29 +54,20 @@ export function FilterDropdown<T extends string>({
 
   return (
     <div ref={rootRef} className={`relative min-w-0 ${className}`}>
-      <div
-        className={`toolbar-shell !h-auto min-h-10 ${open ? 'relative z-50' : ''}`}
-      >
+      <div className={`toolbar-shell ${open ? 'relative z-50' : ''}`}>
         <button
           type="button"
           aria-haspopup="listbox"
           aria-expanded={open}
           aria-controls={listId}
           aria-label={label}
+          title={selected.description}
           onClick={() => setOpen((current) => !current)}
-          className="toolbar-shell-button !h-auto min-h-10 justify-between gap-1.5 px-2.5 py-1.5 text-sm font-medium text-ink focus-visible:outline-none"
+          className="toolbar-shell-button justify-between gap-1.5 px-2.5 text-sm font-medium text-ink focus-visible:outline-none"
         >
-          <span className="inline-flex min-w-0 items-start gap-2 py-0.5">
-            <span className="mt-0.5 shrink-0 text-ink-muted">{leadingIcon}</span>
-            <span
-              className={
-                value === 'all'
-                  ? 'whitespace-nowrap'
-                  : 'line-clamp-2 whitespace-normal leading-snug'
-              }
-            >
-              {selected.label}
-            </span>
+          <span className="inline-flex min-w-0 items-center gap-2">
+            <span className="shrink-0 text-ink-muted">{leadingIcon}</span>
+            <span className="truncate">{selected.label}</span>
           </span>
           <svg
             width="12"
@@ -83,7 +75,7 @@ export function FilterDropdown<T extends string>({
             viewBox="0 0 12 12"
             fill="none"
             aria-hidden="true"
-            className={`mt-1 shrink-0 text-ink-subtle transition ${open ? 'rotate-180' : ''}`}
+            className={`shrink-0 text-ink-subtle transition ${open ? 'rotate-180' : ''}`}
           >
             <path
               d="M3 4.5 6 7.5 9 4.5"
@@ -108,27 +100,33 @@ export function FilterDropdown<T extends string>({
           {options.map((option) => {
             const active = option.id === value
             return (
-              <li key={option.id}>
+              <li key={option.id} className="relative">
                 <button
                   type="button"
                   role="option"
                   aria-selected={active}
+                  aria-description={option.description}
+                  title={option.description}
                   onClick={() => {
                     onChange(option.id)
                     setOpen(false)
                   }}
-                  className={`flex w-full items-start gap-2 px-3 py-2.5 text-left text-sm transition focus-visible:bg-surface-muted focus-visible:outline-none ${
+                  className={`group/option flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition focus-visible:bg-surface-muted focus-visible:outline-none ${
                     active
                       ? 'bg-accent/10 font-medium text-accent'
                       : 'text-ink-muted hover:bg-surface-muted hover:text-ink'
                   }`}
                 >
-                  {option.icon ? (
-                    <span className="mt-0.5 shrink-0">{option.icon}</span>
+                  {option.icon}
+                  <span className="truncate">{option.label}</span>
+                  {option.description ? (
+                    <span
+                      role="tooltip"
+                      className="pointer-events-none absolute bottom-[calc(100%+0.35rem)] left-3 z-[60] hidden w-max max-w-[16rem] rounded-lg border border-border bg-ink px-2.5 py-1.5 text-xs leading-snug font-normal whitespace-normal text-page shadow-lg group-hover/option:block group-focus-visible/option:block"
+                    >
+                      {option.description}
+                    </span>
                   ) : null}
-                  <span className="min-w-0 whitespace-normal leading-snug [overflow-wrap:anywhere]">
-                    {option.label}
-                  </span>
                 </button>
               </li>
             )

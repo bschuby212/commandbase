@@ -4,6 +4,7 @@ import type {
   LanguageFilter,
   Platform,
   PrimaryFilter,
+  SecondaryCategory,
 } from '../types/command'
 
 export const PLATFORM_LABELS: Record<Platform, string> = {
@@ -15,7 +16,7 @@ export const PLATFORM_LABELS: Record<Platform, string> = {
   powershell: 'PowerShell (Windows)',
   macterminal: 'Mac Terminal',
   /** Internal bucket for tool-agnostic prompts — not shown in the Tools filter. */
-  aiprompt: 'Prompts (review, critique, polish & handoff)',
+  aiprompt: 'Prompts',
 }
 
 export const LANGUAGE_LABELS: Record<CommandLanguage, string> = {
@@ -26,7 +27,7 @@ export const LANGUAGE_LABELS: Record<CommandLanguage, string> = {
   docker: 'Docker',
   editor: 'Editor',
   /** Plain-language instructions to paste into any AI tool — not shell/code. */
-  prompt: 'Prompts (review, critique, polish & handoff)',
+  prompt: 'Prompts',
 }
 
 export const PROGRAM_FILTERS: { id: PrimaryFilter; label: string }[] = [
@@ -54,5 +55,44 @@ export const TYPE_LABELS: Record<CommandType, string> = {
   terminal: 'Terminal',
   slash: 'Slash command',
   shortcut: 'Shortcut',
-  prompt: 'Prompts (review, critique, polish & handoff)',
+  prompt: 'Prompts',
+}
+
+/** Short hover copy for Function filter items. */
+export const FUNCTION_DESCRIPTIONS: Record<
+  SecondaryCategory | 'all',
+  string
+> = {
+  all: 'Show commands from every function.',
+  Repositories: 'Clone, init, remotes, and repo setup.',
+  'Commits & Changes': 'Stage, commit, diff, stash, and undo.',
+  Branches: 'Create, switch, merge, and clean up branches.',
+  Setup: 'Install tools, env, auth, and first-time config.',
+  Navigation: 'Move around files, panels, and the editor.',
+  Sessions: 'Start, resume, and manage AI or terminal sessions.',
+  Utilities: 'Everyday helpers, ports, caches, and cleanup.',
+  Prompts: 'Paste-ready AI asks for review, critique, polish, and handoff.',
+}
+
+export const TOOL_DESCRIPTIONS: Record<PrimaryFilter, string> = {
+  all: 'Show commands for every tool.',
+  github: 'Git and GitHub workflows.',
+  cursor: 'Cursor editor and agent commands.',
+  claude: 'Claude Code CLI and slash commands.',
+  codex: 'Codex CLI and session commands.',
+  vscode: 'VS Code and Copilot shortcuts.',
+  powershell: 'Windows PowerShell setup and fixes.',
+  macterminal: 'Mac Terminal, Homebrew, and shell fixes.',
+  aiprompt: 'Tool-agnostic prompts for any AI.',
+}
+
+export const LANGUAGE_DESCRIPTIONS: Record<LanguageFilter, string> = {
+  all: 'Show commands in every language.',
+  git: 'Git command syntax.',
+  shell: 'Shell and terminal commands.',
+  javascript: 'Node, npm, and JavaScript tooling.',
+  python: 'Python, pip, and virtualenvs.',
+  docker: 'Docker and Compose commands.',
+  editor: 'Editor shortcuts and slash commands.',
+  prompt: 'Plain-language AI prompts.',
 }

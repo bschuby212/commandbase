@@ -8,7 +8,13 @@ import {
 } from './FilterIcons'
 import { FilterBottomSheet } from './FilterBottomSheet'
 import { FilterDropdown } from './FilterDropdown'
-import { LANGUAGE_FILTERS, PROGRAM_FILTERS } from '../lib/platformLabels'
+import {
+  FUNCTION_DESCRIPTIONS,
+  LANGUAGE_DESCRIPTIONS,
+  LANGUAGE_FILTERS,
+  PROGRAM_FILTERS,
+  TOOL_DESCRIPTIONS,
+} from '../lib/platformLabels'
 import type {
   CommandLanguage,
   FavoriteFilter,
@@ -72,6 +78,7 @@ export function CategoryFilters({
       PROGRAM_FILTERS.map((filter) => ({
         id: filter.id,
         label: filter.id === 'all' ? 'All tools' : filter.label,
+        description: TOOL_DESCRIPTIONS[filter.id],
         icon: <ProgramIcon platform={filter.id} />,
       })),
     [],
@@ -82,14 +89,27 @@ export function CategoryFilters({
       LANGUAGE_FILTERS.map((filter) => ({
         id: filter.id,
         label: filter.id === 'all' ? 'All languages' : filter.label,
+        description: LANGUAGE_DESCRIPTIONS[filter.id],
         icon: <LanguageIcon language={filter.id} />,
       })),
     [],
   )
 
-  const functionOptions: { id: FunctionFilter; label: string }[] = [
-    { id: 'all', label: 'All functions' },
-    ...availableSecondary.map((item) => ({ id: item, label: item })),
+  const functionOptions: {
+    id: FunctionFilter
+    label: string
+    description: string
+  }[] = [
+    {
+      id: 'all',
+      label: 'All functions',
+      description: FUNCTION_DESCRIPTIONS.all,
+    },
+    ...availableSecondary.map((item) => ({
+      id: item,
+      label: item,
+      description: FUNCTION_DESCRIPTIONS[item],
+    })),
   ]
 
   const activeCount =
