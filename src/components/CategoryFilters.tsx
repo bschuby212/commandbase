@@ -6,12 +6,19 @@ import {
   ProgramIcon,
   ToolFieldIcon,
 } from './FilterIcons'
-import { FilterBottomSheet } from './FilterBottomSheet'
+import { FilterBottomSheet, type FilterChip } from './FilterBottomSheet'
 import { FilterDropdown } from './FilterDropdown'
-import { LANGUAGE_FILTERS, PROGRAM_FILTERS } from '../lib/platformLabels'
+import {
+  LANGUAGE_FILTERS,
+  LANGUAGE_LABELS,
+  PLATFORM_LABELS,
+  PROGRAM_FILTERS,
+} from '../lib/platformLabels'
 import type {
+  CommandLanguage,
   FavoriteFilter,
   LanguageFilter,
+  Platform,
   PrimaryFilter,
   SecondaryCategory,
 } from '../types/command'
@@ -26,7 +33,19 @@ type CategoryFiltersProps = {
   favoriteFilter: FavoriteFilter
   onFavoriteFilterChange: (value: FavoriteFilter) => void
   availableSecondary: SecondaryCategory[]
+  tools: Platform[]
+  languages: CommandLanguage[]
+  functions: SecondaryCategory[]
+  onToggleTool: (value: Platform) => void
+  onToggleLanguage: (value: CommandLanguage) => void
+  onToggleFunction: (value: SecondaryCategory) => void
+  onRemoveTool: (value: Platform) => void
+  onRemoveLanguage: (value: CommandLanguage) => void
+  onRemoveFunction: (value: SecondaryCategory) => void
+  onClearSheetFilters: () => void
   className?: string
+  mobileOnly?: boolean
+  desktopOnly?: boolean
 }
 
 type FunctionFilter = 'all' | SecondaryCategory
@@ -41,7 +60,19 @@ export function CategoryFilters({
   favoriteFilter,
   onFavoriteFilterChange,
   availableSecondary,
+  tools,
+  languages,
+  functions,
+  onToggleTool,
+  onToggleLanguage,
+  onToggleFunction,
+  onRemoveTool,
+  onRemoveLanguage,
+  onRemoveFunction,
+  onClearSheetFilters,
   className = '',
+  mobileOnly = false,
+  desktopOnly = false,
 }: CategoryFiltersProps) {
   const [sheetOpen, setSheetOpen] = useState(false)
   const functionValue: FunctionFilter = secondary ?? 'all'
@@ -72,146 +103,171 @@ export function CategoryFilters({
     ...availableSecondary.map((item) => ({ id: item, label: item })),
   ]
 
-  const activeCount = [
-    tool !== 'all',
-    language !== 'all',
-    secondary !== null,
-    favoritesOn,
-  ].filter(Boolean).length
+  const activeCount =
+    tools.length +
+    languages.length +
+    functions.length +
+    (favoritesOn ? 1 : 0)
 
-  const clearFilters = () => {
-    onToolChange('all')
-    onLanguageChange('all')
-    onSecondaryChange(null)
-    onFavoriteFilterChange('all')
-  }
+  const chips: FilterChip[] = [
+    ...tools.map((id) => ({
+      id: `tool-${id}`,
+      label: PLATFORM_LABELS[id],
+      onRemove: () => onRemoveTool(id),
+    })),
+    ...languages.map((id) => ({
+      id: `lang-${id}`,
+      label: LANGUAGE_LABELS[id],
+      onRemove: () => onRemoveLanguage(id),
+    })),
+    ...functions.map((id) => ({
+      id: `fn-${id}`,
+      label: id,
+      onRemove: () => onRemoveFunction(id),
+    })),
+    ...(favoritesOn
+      ? [
+          {
+            id: 'favorites',
+            label: 'Favorites',
+            onRemove: () => onFavoriteFilterChange('all'),
+          },
+        ]
+      : []),
+  ]
+
+  const showMobile = !desktopOnly
+  const showDesktop = !mobileOnly
+  const showSheet = showMobile
 
   return (
     <>
-      {/* Mobile: one Filters control that opens a bottom sheet */}
-      <div className={`relative z-30 min-[1040px]:hidden ${className}`}>
-        <div className="toolbar-shell">
-          <button
-            type="button"
-            aria-haspopup="dialog"
-            aria-expanded={sheetOpen}
-            onClick={() => setSheetOpen(true)}
-            className="toolbar-shell-button justify-between gap-2 px-3 text-sm font-medium text-ink focus-visible:outline-none"
-          >
-            <span className="inline-flex min-w-0 items-center gap-2">
-              <FilterGlyph />
-              <span>Filters</span>
-              {activeCount > 0 ? (
-                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-ink px-1.5 text-[11px] font-semibold text-page tabular-nums">
-                  {activeCount}
-                </span>
-              ) : null}
-            </span>
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 12 12"
-              fill="none"
-              aria-hidden="true"
-              className="shrink-0 text-ink-subtle"
+      {showMobile ? (
+        <div className={`relative z-30 w-full ${className}`}>
+          <div className="toolbar-shell w-full">
+            <button
+              type="button"
+              aria-haspopup="dialog"
+              aria-expanded={sheetOpen}
+              onClick={() => setSheetOpen(true)}
+              className="toolbar-shell-button justify-between gap-2 px-3 text-sm font-medium text-ink focus-visible:outline-none"
             >
-              <path
-                d="M3 4.5 6 7.5 9 4.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
+              <span className="inline-flex min-w-0 items-center gap-2">
+                <FilterGlyph />
+                <span>Filters</span>
+                {activeCount > 0 ? (
+                  <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-ink px-1.5 text-[11px] font-semibold text-page tabular-nums">
+                    {activeCount}
+                  </span>
+                ) : null}
+              </span>
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                aria-hidden="true"
+                className="shrink-0 text-ink-subtle"
+              >
+                <path
+                  d="M3 4.5 6 7.5 9 4.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
+      ) : null}
 
-      {/* Desktop: inline filter dropdowns */}
-      <div
-        className={`relative z-30 hidden items-center gap-2 min-[1040px]:flex ${className}`}
-      >
-        <FilterDropdown
-          label="Tool"
-          value={tool}
-          options={toolOptions}
-          onChange={onToolChange}
-          leadingIcon={<ToolFieldIcon />}
-          className="w-[9.5rem] shrink-0"
-        />
-        <FilterDropdown
-          label="Language"
-          value={language}
-          options={languageOptions}
-          onChange={onLanguageChange}
-          leadingIcon={<LanguageFieldIcon />}
-          className="w-[11.75rem] shrink-0"
-        />
-        <FilterDropdown
-          label="Function"
-          value={functionValue}
-          options={functionOptions}
-          onChange={(next) => onSecondaryChange(next === 'all' ? null : next)}
-          leadingIcon={<FunctionFieldIcon />}
-          className="w-[15.5rem] shrink-0"
-        />
-        <div
-          className="toolbar-shell shrink-0"
-          data-tone={favoritesOn ? 'favorite' : undefined}
-        >
-          <button
-            type="button"
-            aria-pressed={favoritesOn}
-            aria-label={favoritesOn ? 'Show all commands' : 'Show favorites only'}
-            onClick={() =>
-              onFavoriteFilterChange(favoritesOn ? 'all' : 'favorites')
-            }
-            className={`toolbar-shell-button gap-2 px-2.5 text-sm font-medium focus-visible:outline-none ${
-              favoritesOn ? 'text-white' : 'text-ink'
-            }`}
+      {showDesktop ? (
+        <div className={`relative z-30 items-center gap-2 ${className}`}>
+          <FilterDropdown
+            label="Tool"
+            value={tool}
+            options={toolOptions}
+            onChange={onToolChange}
+            leadingIcon={<ToolFieldIcon />}
+            className="min-w-0 flex-1 basis-0"
+          />
+          <FilterDropdown
+            label="Language"
+            value={language}
+            options={languageOptions}
+            onChange={onLanguageChange}
+            leadingIcon={<LanguageFieldIcon />}
+            className="min-w-0 flex-1 basis-0"
+          />
+          <FilterDropdown
+            label="Function"
+            value={functionValue}
+            options={functionOptions}
+            onChange={(next) => onSecondaryChange(next === 'all' ? null : next)}
+            leadingIcon={<FunctionFieldIcon />}
+            className="min-w-0 flex-1 basis-0"
+          />
+          <div
+            className="toolbar-shell shrink-0"
+            data-tone={favoritesOn ? 'favorite' : undefined}
           >
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 15 15"
-              fill="none"
-              aria-hidden="true"
-              className="shrink-0"
+            <button
+              type="button"
+              aria-pressed={favoritesOn}
+              aria-label={
+                favoritesOn ? 'Show all commands' : 'Show favorites only'
+              }
+              onClick={() =>
+                onFavoriteFilterChange(favoritesOn ? 'all' : 'favorites')
+              }
+              className={`toolbar-shell-button gap-2 px-2.5 text-sm font-medium focus-visible:outline-none ${
+                favoritesOn ? 'text-white' : 'text-ink'
+              }`}
             >
-              <path
-                d="M7.5 12.6S2.4 9.4 2.4 5.9A2.85 2.85 0 0 1 7.5 4.3 2.85 2.85 0 0 1 12.6 5.9c0 3.5-5.1 6.7-5.1 6.7Z"
-                stroke="currentColor"
-                strokeWidth="1.35"
-                strokeLinejoin="round"
-                fill={favoritesOn ? 'currentColor' : 'none'}
-              />
-            </svg>
-            <span>Favorites</span>
-          </button>
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 15 15"
+                fill="none"
+                aria-hidden="true"
+                className="shrink-0"
+              >
+                <path
+                  d="M7.5 12.6S2.4 9.4 2.4 5.9A2.85 2.85 0 0 1 7.5 4.3 2.85 2.85 0 0 1 12.6 5.9c0 3.5-5.1 6.7-5.1 6.7Z"
+                  stroke="currentColor"
+                  strokeWidth="1.35"
+                  strokeLinejoin="round"
+                  fill={favoritesOn ? 'currentColor' : 'none'}
+                />
+              </svg>
+              <span>Favorites</span>
+            </button>
+          </div>
         </div>
-      </div>
+      ) : null}
 
-      <FilterBottomSheet
-        open={sheetOpen}
-        onClose={() => setSheetOpen(false)}
-        toolOptions={toolOptions}
-        tool={tool}
-        onToolChange={(value) => onToolChange(value as PrimaryFilter)}
-        languageOptions={languageOptions}
-        language={language}
-        onLanguageChange={(value) => onLanguageChange(value as LanguageFilter)}
-        functionOptions={functionOptions}
-        functionValue={functionValue}
-        onFunctionChange={(value) =>
-          onSecondaryChange(value === 'all' ? null : (value as SecondaryCategory))
-        }
-        favoritesOn={favoritesOn}
-        onFavoritesToggle={() =>
-          onFavoriteFilterChange(favoritesOn ? 'all' : 'favorites')
-        }
-        onClear={clearFilters}
-        activeCount={activeCount}
-      />
+      {showSheet ? (
+        <FilterBottomSheet
+          open={sheetOpen}
+          onClose={() => setSheetOpen(false)}
+          toolOptions={toolOptions}
+          selectedTools={tools}
+          onToggleTool={onToggleTool}
+          languageOptions={languageOptions}
+          selectedLanguages={languages}
+          onToggleLanguage={onToggleLanguage}
+          functionOptions={functionOptions}
+          selectedFunctions={functions}
+          onToggleFunction={onToggleFunction}
+          favoritesOn={favoritesOn}
+          onFavoritesToggle={() =>
+            onFavoriteFilterChange(favoritesOn ? 'all' : 'favorites')
+          }
+          chips={chips}
+          onClear={onClearSheetFilters}
+        />
+      ) : null}
     </>
   )
 }

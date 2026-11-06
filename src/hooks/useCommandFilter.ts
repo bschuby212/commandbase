@@ -2,8 +2,10 @@ import { useMemo, useState } from 'react'
 import { commands } from '../data/commands'
 import type {
   Command,
+  CommandLanguage,
   FavoriteFilter,
   LanguageFilter,
+  Platform,
   PrimaryFilter,
   SecondaryCategory,
 } from '../types/command'
@@ -43,45 +45,91 @@ function matchesSearch(command: Command, query: string): boolean {
   return haystack.includes(query)
 }
 
+function toggleInList<T>(list: T[], value: T): T[] {
+  return list.includes(value)
+    ? list.filter((item) => item !== value)
+    : [...list, value]
+}
+
 export function useCommandFilter(favoriteIds: Set<string>) {
   const [search, setSearch] = useState('')
-  const [language, setLanguage] = useState<LanguageFilter>('all')
-  const [tool, setTool] = useState<PrimaryFilter>('all')
-  const [secondary, setSecondary] = useState<SecondaryCategory | null>(null)
+  /** Empty = all tools */
+  const [tools, setTools] = useState<Platform[]>([])
+  /** Empty = all languages */
+  const [languages, setLanguages] = useState<CommandLanguage[]>([])
+  /** Empty = all functions */
+  const [functions, setFunctions] = useState<SecondaryCategory[]>([])
   const [favoriteFilter, setFavoriteFilter] = useState<FavoriteFilter>('all')
 
-  const handleLanguageChange = (next: LanguageFilter) => {
-    setLanguage(next)
-    setSecondary(null)
+  // Desktop dropdowns stay single-select: map to/from the multi arrays.
+  const tool: PrimaryFilter = tools.length === 1 ? tools[0] : 'all'
+  const language: LanguageFilter =
+    languages.length === 1 ? languages[0] : 'all'
+  const secondary: SecondaryCategory | null =
+    functions.length === 1 ? functions[0] : null
+
+  const setTool = (next: PrimaryFilter) => {
+    setTools(next === 'all' ? [] : [next])
+    setFunctions([])
   }
 
-  const handleToolChange = (next: PrimaryFilter) => {
-    setTool(next)
-    setSecondary(null)
+  const setLanguage = (next: LanguageFilter) => {
+    setLanguages(next === 'all' ? [] : [next])
+    setFunctions([])
   }
 
-  const handleSecondaryChange = (next: SecondaryCategory | null) => {
-    setSecondary(next)
+  const setSecondary = (next: SecondaryCategory | null) => {
+    setFunctions(next ? [next] : [])
+  }
+
+  const toggleTool = (value: Platform) => {
+    setTools((current) => toggleInList(current, value))
+  }
+
+  const toggleLanguage = (value: CommandLanguage) => {
+    setLanguages((current) => toggleInList(current, value))
+  }
+
+  const toggleFunction = (value: SecondaryCategory) => {
+    setFunctions((current) => toggleInList(current, value))
+  }
+
+  const removeTool = (value: Platform) => {
+    setTools((current) => current.filter((item) => item !== value))
+  }
+
+  const removeLanguage = (value: CommandLanguage) => {
+    setLanguages((current) => current.filter((item) => item !== value))
+  }
+
+  const removeFunction = (value: SecondaryCategory) => {
+    setFunctions((current) => current.filter((item) => item !== value))
   }
 
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase()
 
     return commands.filter((command) => {
-      if (language !== 'all' && command.language !== language) return false
-      if (tool !== 'all' && command.platform !== tool) return false
-      if (secondary && command.category !== secondary) return false
+      if (tools.length > 0 && !tools.includes(command.platform)) return false
+      if (languages.length > 0 && !languages.includes(command.language)) {
+        return false
+      }
+      if (functions.length > 0 && !functions.includes(command.category)) {
+        return false
+      }
       if (favoriteFilter === 'favorites' && !favoriteIds.has(command.id)) {
         return false
       }
       return matchesSearch(command, query)
     })
-  }, [language, tool, secondary, favoriteFilter, favoriteIds, search])
+  }, [tools, languages, functions, favoriteFilter, favoriteIds, search])
 
   const availableSecondary = useMemo(() => {
     const pool = commands.filter((command) => {
-      if (language !== 'all' && command.language !== language) return false
-      if (tool !== 'all' && command.platform !== tool) return false
+      if (tools.length > 0 && !tools.includes(command.platform)) return false
+      if (languages.length > 0 && !languages.includes(command.language)) {
+        return false
+      }
       if (favoriteFilter === 'favorites' && !favoriteIds.has(command.id)) {
         return false
       }
@@ -90,31 +138,48 @@ export function useCommandFilter(favoriteIds: Set<string>) {
 
     const present = new Set(pool.map((command) => command.category))
     return ALL_SECONDARY.filter((category) => present.has(category))
-  }, [language, tool, favoriteFilter, favoriteIds])
+  }, [tools, languages, favoriteFilter, favoriteIds])
 
   const resetFilters = () => {
     setSearch('')
-    setLanguage('all')
-    setTool('all')
-    setSecondary(null)
+    setTools([])
+    setLanguages([])
+    setFunctions([])
+    setFavoriteFilter('all')
+  }
+
+  const clearSheetFilters = () => {
+    setTools([])
+    setLanguages([])
+    setFunctions([])
     setFavoriteFilter('all')
   }
 
   return {
     search,
     setSearch,
+    tools,
+    languages,
+    functions,
+    toggleTool,
+    toggleLanguage,
+    toggleFunction,
+    removeTool,
+    removeLanguage,
+    removeFunction,
     language,
-    setLanguage: handleLanguageChange,
+    setLanguage,
     tool,
-    setTool: handleToolChange,
+    setTool,
     secondary,
-    setSecondary: handleSecondaryChange,
+    setSecondary,
     favoriteFilter,
     setFavoriteFilter,
     availableSecondary,
     filtered,
     totalCount: commands.length,
     resetFilters,
+    clearSheetFilters,
     getDisplayCommand,
   }
 }

@@ -26,6 +26,16 @@ function App() {
     favoriteFilter,
     setFavoriteFilter,
     availableSecondary,
+    tools,
+    languages,
+    functions,
+    toggleTool,
+    toggleLanguage,
+    toggleFunction,
+    removeTool,
+    removeLanguage,
+    removeFunction,
+    clearSheetFilters,
     filtered,
     resetFilters,
     getDisplayCommand,
@@ -42,39 +52,57 @@ function App() {
     clearError()
   }
 
+  const filterProps = {
+    language,
+    onLanguageChange: setLanguage,
+    tool,
+    onToolChange: setTool,
+    secondary,
+    onSecondaryChange: setSecondary,
+    favoriteFilter,
+    onFavoriteFilterChange: setFavoriteFilter,
+    availableSecondary,
+    tools,
+    languages,
+    functions,
+    onToggleTool: toggleTool,
+    onToggleLanguage: toggleLanguage,
+    onToggleFunction: toggleFunction,
+    onRemoveTool: removeTool,
+    onRemoveLanguage: removeLanguage,
+    onRemoveFunction: removeFunction,
+    onClearSheetFilters: clearSheetFilters,
+  }
+
   return (
-    <div className="relative min-h-dvh overflow-x-clip">
+    <div className="relative min-h-dvh">
       <div className="page-grid pointer-events-none absolute inset-0 -z-10" />
 
       <div className="absolute top-3 right-3 z-40 sm:top-5 sm:right-5">
         <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
       </div>
 
-      <main className="mx-auto w-full max-w-[1680px] px-3 pt-8 pb-14 sm:px-6 sm:pt-10 lg:px-8">
+      <main className="mx-auto w-full max-w-[1680px] overflow-x-clip px-3 pt-8 pb-14 sm:px-6 sm:pt-10 lg:px-8">
         <PageHeader />
 
         <section className="animate-fade-up animation-delay-1 relative z-30 mt-6 sm:mt-8">
-          <div className="flex w-full flex-col gap-2 min-[1040px]:flex-row min-[1040px]:items-center">
-            <div className="flex min-w-0 w-full items-center gap-2 min-[1040px]:contents">
-              <CommandSearch
-                value={search}
-                onChange={setSearch}
-                resultCount={filtered.length}
-                className="min-w-0 flex-1 min-[1040px]:min-w-[12rem]"
-              />
-              <CategoryFilters
-                language={language}
-                onLanguageChange={setLanguage}
-                tool={tool}
-                onToolChange={setTool}
-                secondary={secondary}
-                onSecondaryChange={setSecondary}
-                favoriteFilter={favoriteFilter}
-                onFavoriteFilterChange={setFavoriteFilter}
-                availableSecondary={availableSecondary}
-                className="w-[7.75rem] shrink-0 min-[1040px]:w-auto"
-              />
-            </div>
+          <div className="flex w-full flex-col gap-2">
+            <CommandSearch
+              value={search}
+              onChange={setSearch}
+              resultCount={filtered.length}
+              className="min-w-0 w-full"
+            />
+            <CategoryFilters
+              {...filterProps}
+              className="w-full min-[1024px]:hidden"
+              mobileOnly
+            />
+            <CategoryFilters
+              {...filterProps}
+              className="hidden w-full min-[1024px]:flex"
+              desktopOnly
+            />
           </div>
         </section>
 

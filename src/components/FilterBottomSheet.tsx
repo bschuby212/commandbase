@@ -1,40 +1,52 @@
 import { useEffect, useId, useRef, type ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 import type { FilterOption } from './FilterDropdown'
+import type {
+  CommandLanguage,
+  Platform,
+  SecondaryCategory,
+} from '../types/command'
+
+export type FilterChip = {
+  id: string
+  label: string
+  onRemove: () => void
+}
 
 type FilterBottomSheetProps = {
   open: boolean
   onClose: () => void
   toolOptions: FilterOption<string>[]
-  tool: string
-  onToolChange: (value: string) => void
+  selectedTools: Platform[]
+  onToggleTool: (value: Platform) => void
   languageOptions: FilterOption<string>[]
-  language: string
-  onLanguageChange: (value: string) => void
+  selectedLanguages: CommandLanguage[]
+  onToggleLanguage: (value: CommandLanguage) => void
   functionOptions: FilterOption<string>[]
-  functionValue: string
-  onFunctionChange: (value: string) => void
+  selectedFunctions: SecondaryCategory[]
+  onToggleFunction: (value: SecondaryCategory) => void
   favoritesOn: boolean
   onFavoritesToggle: () => void
+  chips: FilterChip[]
   onClear: () => void
-  activeCount: number
 }
 
 export function FilterBottomSheet({
   open,
   onClose,
   toolOptions,
-  tool,
-  onToolChange,
+  selectedTools,
+  onToggleTool,
   languageOptions,
-  language,
-  onLanguageChange,
+  selectedLanguages,
+  onToggleLanguage,
   functionOptions,
-  functionValue,
-  onFunctionChange,
+  selectedFunctions,
+  onToggleFunction,
   favoritesOn,
   onFavoritesToggle,
+  chips,
   onClear,
-  activeCount,
 }: FilterBottomSheetProps) {
   const titleId = useId()
   const panelRef = useRef<HTMLDivElement>(null)
@@ -58,14 +70,13 @@ export function FilterBottomSheet({
     }
   }, [open, onClose])
 
-  if (!open) return null
+  if (!open || typeof document === 'undefined') return null
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-[80] flex items-end min-[1040px]:hidden"
+      className="fixed inset-0 z-[200]"
       role="presentation"
       onPointerDown={(event) => {
-        // Tap/click outside the sheet closes it.
         if (
           panelRef.current &&
           !panelRef.current.contains(event.target as Node)
@@ -75,7 +86,7 @@ export function FilterBottomSheet({
       }}
     >
       <div
-        className="absolute inset-0 bg-ink/40 backdrop-blur-[2px]"
+        className="fixed inset-0 bg-ink/45 backdrop-blur-[2px]"
         aria-hidden="true"
       />
 
@@ -84,26 +95,30 @@ export function FilterBottomSheet({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="animate-sheet-up relative z-10 flex h-[75dvh] w-full flex-col rounded-t-2xl border border-border bg-surface shadow-[0_-16px_48px_rgba(15,23,42,0.18)] min-[640px]:h-[50dvh]"
+        className="animate-sheet-up fixed inset-x-0 bottom-0 z-[201] flex h-[75dvh] w-full flex-col rounded-t-2xl border border-border bg-surface shadow-[0_-16px_48px_rgba(15,23,42,0.22)] min-[640px]:h-[50dvh]"
         onPointerDown={(event) => event.stopPropagation()}
       >
         <div className="flex shrink-0 flex-col items-center pt-2.5 pb-1">
-          <div className="h-1 w-10 rounded-full bg-border-strong" aria-hidden="true" />
+          <div
+            className="h-1 w-10 rounded-full bg-border-strong"
+            aria-hidden="true"
+          />
         </div>
 
         <div className="flex shrink-0 items-center justify-between gap-3 border-b border-border px-4 py-3">
           <div className="min-w-0">
-            <h2 id={titleId} className="text-base font-semibold tracking-tight text-ink">
+            <h2
+              id={titleId}
+              className="text-base font-semibold tracking-tight text-ink"
+            >
               Filters
             </h2>
             <p className="text-xs text-ink-muted">
-              {activeCount > 0
-                ? `${activeCount} active · tap again to clear`
-                : 'Tap to select · tap again to clear'}
+              Multi-select · tap again to remove
             </p>
           </div>
           <div className="flex shrink-0 items-center gap-2">
-            {activeCount > 0 ? (
+            {chips.length > 0 ? (
               <button
                 type="button"
                 onClick={onClear}
@@ -123,31 +138,61 @@ export function FilterBottomSheet({
           </div>
         </div>
 
+        {chips.length > 0 ? (
+          <div className="shrink-0 border-b border-border px-4 py-3">
+            <div className="flex flex-wrap gap-2">
+              {chips.map((chip) => (
+                <button
+                  key={chip.id}
+                  type="button"
+                  onClick={chip.onRemove}
+                  className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-border bg-surface-muted px-2.5 py-1 text-xs font-medium text-ink transition hover:border-ink/20 hover:bg-page focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none"
+                  aria-label={`Remove filter ${chip.label}`}
+                >
+                  <span className="truncate">{chip.label}</span>
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    aria-hidden="true"
+                    className="shrink-0 text-ink-muted"
+                  >
+                    <path
+                      d="M3 3l6 6M9 3 3 9"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
           <SheetSection label="Tool">
             <OptionList
-              options={toolOptions}
-              value={tool}
-              onChange={onToolChange}
-              clearValue="all"
+              options={toolOptions.filter((option) => option.id !== 'all')}
+              selectedIds={selectedTools}
+              onToggle={(id) => onToggleTool(id as Platform)}
             />
           </SheetSection>
 
           <SheetSection label="Language">
             <OptionList
-              options={languageOptions}
-              value={language}
-              onChange={onLanguageChange}
-              clearValue="all"
+              options={languageOptions.filter((option) => option.id !== 'all')}
+              selectedIds={selectedLanguages}
+              onToggle={(id) => onToggleLanguage(id as CommandLanguage)}
             />
           </SheetSection>
 
           <SheetSection label="Function">
             <OptionList
-              options={functionOptions}
-              value={functionValue}
-              onChange={onFunctionChange}
-              clearValue="all"
+              options={functionOptions.filter((option) => option.id !== 'all')}
+              selectedIds={selectedFunctions}
+              onToggle={(id) => onToggleFunction(id as SecondaryCategory)}
             />
           </SheetSection>
 
@@ -182,13 +227,14 @@ export function FilterBottomSheet({
                 Favorites only
               </span>
               <span className="text-xs opacity-70">
-                {favoritesOn ? 'On · tap to clear' : 'Off'}
+                {favoritesOn ? 'On' : 'Off'}
               </span>
             </button>
           </SheetSection>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }
 
@@ -211,19 +257,17 @@ function SheetSection({
 
 function OptionList({
   options,
-  value,
-  onChange,
-  clearValue,
+  selectedIds,
+  onToggle,
 }: {
   options: FilterOption<string>[]
-  value: string
-  onChange: (value: string) => void
-  clearValue: string
+  selectedIds: string[]
+  onToggle: (id: string) => void
 }) {
   return (
     <ul className="overflow-hidden rounded-xl border border-border">
       {options.map((option, index) => {
-        const active = option.id === value
+        const active = selectedIds.includes(option.id)
         return (
           <li
             key={option.id}
@@ -232,14 +276,7 @@ function OptionList({
             <button
               type="button"
               aria-pressed={active}
-              onClick={() => {
-                // Tap selects; tap the active choice again clears back to "all".
-                if (active && option.id !== clearValue) {
-                  onChange(clearValue)
-                  return
-                }
-                onChange(option.id)
-              }}
+              onClick={() => onToggle(option.id)}
               className={`flex w-full items-center gap-2.5 px-3.5 py-2.5 text-left text-sm transition focus-visible:bg-surface-muted focus-visible:outline-none active:bg-surface-muted ${
                 active
                   ? 'bg-accent/10 font-medium text-accent'
@@ -247,27 +284,31 @@ function OptionList({
               }`}
             >
               {option.icon ? (
-                <span className="shrink-0 text-current opacity-80">{option.icon}</span>
+                <span className="shrink-0 text-current opacity-80">
+                  {option.icon}
+                </span>
               ) : null}
               <span className="min-w-0 flex-1 truncate">{option.label}</span>
-              {active ? (
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  aria-hidden="true"
-                  className="shrink-0"
-                >
-                  <path
-                    d="M3.5 8.5 6.5 11.5 12.5 4.5"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              ) : null}
+              <span
+                className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border ${
+                  active
+                    ? 'border-accent bg-accent text-white'
+                    : 'border-border-strong bg-surface'
+                }`}
+                aria-hidden="true"
+              >
+                {active ? (
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path
+                      d="M2.5 6.2 4.8 8.5 9.5 3.5"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                ) : null}
+              </span>
             </button>
           </li>
         )
