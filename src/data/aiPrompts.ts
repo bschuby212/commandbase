@@ -1,7 +1,8 @@
 import type { Command } from '../types/command'
 
 /**
- * Universal natural-language AI prompts.
+ * Tool-agnostic plain-language prompts (not shell/code commands).
+ * Discover via Language → Prompt only and Function (Design, QA, …).
  * Copied in full; cards only show a short preview ending in ….
  */
 export const aiPrompts: Command[] = [

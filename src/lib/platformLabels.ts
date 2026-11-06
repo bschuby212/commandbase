@@ -14,7 +14,8 @@ export const PLATFORM_LABELS: Record<Platform, string> = {
   vscode: 'VS Code / Copilot',
   powershell: 'PowerShell (Windows)',
   macterminal: 'Mac Terminal',
-  aiprompt: 'AI Prompts',
+  /** Internal bucket for tool-agnostic prompts — not shown in the Tools filter. */
+  aiprompt: 'Prompt only',
 }
 
 export const LANGUAGE_LABELS: Record<CommandLanguage, string> = {
@@ -24,12 +25,12 @@ export const LANGUAGE_LABELS: Record<CommandLanguage, string> = {
   python: 'Python',
   docker: 'Docker',
   editor: 'Editor',
-  prompt: 'AI Prompt',
+  /** Plain-language instructions to paste into any AI tool — not shell/code. */
+  prompt: 'Prompt only',
 }
 
 export const PROGRAM_FILTERS: { id: PrimaryFilter; label: string }[] = [
   { id: 'all', label: 'All' },
-  { id: 'aiprompt', label: 'AI Prompts' },
   { id: 'github', label: 'Git & GitHub' },
   { id: 'cursor', label: 'Cursor' },
   { id: 'claude', label: 'Claude Code' },
@@ -41,7 +42,7 @@ export const PROGRAM_FILTERS: { id: PrimaryFilter; label: string }[] = [
 
 export const LANGUAGE_FILTERS: { id: LanguageFilter; label: string }[] = [
   { id: 'all', label: 'All' },
-  { id: 'prompt', label: 'AI Prompt' },
+  { id: 'prompt', label: 'Prompt only' },
   { id: 'git', label: 'Git' },
   { id: 'shell', label: 'Shell' },
   { id: 'javascript', label: 'JavaScript' },
@@ -54,5 +55,5 @@ export const TYPE_LABELS: Record<CommandType, string> = {
   terminal: 'Terminal',
   slash: 'Slash command',
   shortcut: 'Shortcut',
-  prompt: 'AI prompt',
+  prompt: 'Prompt only',
 }
