@@ -53,7 +53,9 @@ export function FilterDropdown<T extends string>({
 
   return (
     <div ref={rootRef} className={`relative min-w-0 ${className}`}>
-      <div className={`toolbar-shell ${open ? 'relative z-50' : ''}`}>
+      <div
+        className={`toolbar-shell !h-auto min-h-10 ${open ? 'relative z-50' : ''}`}
+      >
         <button
           type="button"
           aria-haspopup="listbox"
@@ -61,13 +63,15 @@ export function FilterDropdown<T extends string>({
           aria-controls={listId}
           aria-label={label}
           onClick={() => setOpen((current) => !current)}
-          className="toolbar-shell-button justify-between gap-1.5 px-2.5 text-sm font-medium text-ink focus-visible:outline-none"
+          className="toolbar-shell-button !h-auto min-h-10 justify-between gap-1.5 px-2.5 py-1.5 text-sm font-medium text-ink focus-visible:outline-none"
         >
-          <span className="inline-flex min-w-0 items-center gap-2">
-            <span className="shrink-0 text-ink-muted">{leadingIcon}</span>
+          <span className="inline-flex min-w-0 items-start gap-2 py-0.5">
+            <span className="mt-0.5 shrink-0 text-ink-muted">{leadingIcon}</span>
             <span
               className={
-                value === 'all' ? 'whitespace-nowrap' : 'truncate'
+                value === 'all'
+                  ? 'whitespace-nowrap'
+                  : 'line-clamp-2 whitespace-normal leading-snug'
               }
             >
               {selected.label}
@@ -79,7 +83,7 @@ export function FilterDropdown<T extends string>({
             viewBox="0 0 12 12"
             fill="none"
             aria-hidden="true"
-            className={`shrink-0 text-ink-subtle transition ${open ? 'rotate-180' : ''}`}
+            className={`mt-1 shrink-0 text-ink-subtle transition ${open ? 'rotate-180' : ''}`}
           >
             <path
               d="M3 4.5 6 7.5 9 4.5"
@@ -113,14 +117,18 @@ export function FilterDropdown<T extends string>({
                     onChange(option.id)
                     setOpen(false)
                   }}
-                  className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition focus-visible:bg-surface-muted focus-visible:outline-none ${
+                  className={`flex w-full items-start gap-2 px-3 py-2.5 text-left text-sm transition focus-visible:bg-surface-muted focus-visible:outline-none ${
                     active
                       ? 'bg-accent/10 font-medium text-accent'
                       : 'text-ink-muted hover:bg-surface-muted hover:text-ink'
                   }`}
                 >
-                  {option.icon}
-                  <span>{option.label}</span>
+                  {option.icon ? (
+                    <span className="mt-0.5 shrink-0">{option.icon}</span>
+                  ) : null}
+                  <span className="min-w-0 whitespace-normal leading-snug [overflow-wrap:anywhere]">
+                    {option.label}
+                  </span>
                 </button>
               </li>
             )

@@ -141,10 +141,12 @@ export function FilterBottomSheet({
                   key={chip.id}
                   type="button"
                   onClick={chip.onRemove}
-                  className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-border bg-surface-muted px-3 py-1.5 text-sm font-medium text-ink transition hover:border-ink/20 hover:bg-page focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none"
+                  className="inline-flex max-w-full items-start gap-1.5 rounded-2xl border border-border bg-surface-muted px-3 py-1.5 text-sm font-medium text-ink transition hover:border-ink/20 hover:bg-page focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none"
                   aria-label={`Remove filter ${chip.label}`}
                 >
-                  <span className="truncate">{chip.label}</span>
+                  <span className="max-w-[14rem] whitespace-normal leading-snug [overflow-wrap:anywhere] line-clamp-2 text-left">
+                    {chip.label}
+                  </span>
                   <svg
                     width="12"
                     height="12"
@@ -266,18 +268,20 @@ function OptionList({
             type="button"
             aria-pressed={active}
             onClick={() => onToggle(option.id)}
-            className={`inline-flex max-w-full items-center gap-2 rounded-full border px-3.5 py-2 text-[15px] font-medium transition focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
+            className={`inline-flex max-w-full items-start gap-2 rounded-2xl border px-3.5 py-2 text-[15px] font-medium transition focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
               active
                 ? 'border-accent bg-accent/10 text-accent'
                 : 'border-border bg-surface text-ink hover:bg-surface-muted'
             }`}
           >
             {option.icon ? (
-              <span className="shrink-0 text-current opacity-80">
+              <span className="mt-0.5 shrink-0 text-current opacity-80">
                 {option.icon}
               </span>
             ) : null}
-            <span className="truncate">{option.label}</span>
+            <span className="max-w-[14rem] whitespace-normal leading-snug [overflow-wrap:anywhere] line-clamp-2">
+              {option.label}
+            </span>
           </button>
         )
       })}
