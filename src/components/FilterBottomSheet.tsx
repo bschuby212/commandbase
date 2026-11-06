@@ -62,7 +62,7 @@ export function FilterBottomSheet({
 
   return (
     <div
-      className="fixed inset-0 z-[80] min-[1040px]:hidden"
+      className="fixed inset-0 z-[80] flex items-end min-[1040px]:hidden"
       role="presentation"
       onPointerDown={(event) => {
         // Tap/click outside the sheet closes it.
@@ -84,7 +84,7 @@ export function FilterBottomSheet({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="animate-sheet-up absolute inset-x-0 bottom-0 flex max-h-[min(88dvh,40rem)] flex-col rounded-t-2xl border border-border bg-surface shadow-[0_-16px_48px_rgba(15,23,42,0.18)]"
+        className="animate-sheet-up relative z-10 flex h-[75dvh] w-full flex-col rounded-t-2xl border border-border bg-surface shadow-[0_-16px_48px_rgba(15,23,42,0.18)] min-[640px]:h-[50dvh]"
         onPointerDown={(event) => event.stopPropagation()}
       >
         <div className="flex shrink-0 flex-col items-center pt-2.5 pb-1">
