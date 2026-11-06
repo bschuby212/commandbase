@@ -18,20 +18,7 @@ const ALL_SECONDARY: SecondaryCategory[] = [
   'Sessions',
   'Utilities',
   'AI prompts',
-  'QA',
-  'Design',
-  'Implementation',
-  'Planning',
-  'Review',
 ]
-
-function matchesSecondary(
-  command: Command,
-  secondary: SecondaryCategory,
-): boolean {
-  if (secondary === 'AI prompts') return command.type === 'prompt'
-  return command.category === secondary
-}
 
 function matchesSearch(command: Command, query: string): boolean {
   if (!query) return true
@@ -83,7 +70,7 @@ export function useCommandFilter(favoriteIds: Set<string>) {
     return commands.filter((command) => {
       if (language !== 'all' && command.language !== language) return false
       if (tool !== 'all' && command.platform !== tool) return false
-      if (secondary && !matchesSecondary(command, secondary)) return false
+      if (secondary && command.category !== secondary) return false
       if (favoriteFilter === 'favorites' && !favoriteIds.has(command.id)) {
         return false
       }
@@ -102,11 +89,7 @@ export function useCommandFilter(favoriteIds: Set<string>) {
     })
 
     const present = new Set(pool.map((command) => command.category))
-    const hasPrompts = pool.some((command) => command.type === 'prompt')
-    return ALL_SECONDARY.filter((category) => {
-      if (category === 'AI prompts') return hasPrompts
-      return present.has(category)
-    })
+    return ALL_SECONDARY.filter((category) => present.has(category))
   }, [language, tool, favoriteFilter, favoriteIds])
 
   const resetFilters = () => {
