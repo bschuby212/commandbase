@@ -1,4 +1,5 @@
 import type { Command } from '../types/command'
+import { aiPrompts } from './aiPrompts'
 import { designerCommands } from './designerCommands'
 
 export const commands: Command[] = [
@@ -3056,4 +3057,5 @@ export const commands: Command[] = [
   },
 
   ...designerCommands,
+  ...aiPrompts,
 ]
