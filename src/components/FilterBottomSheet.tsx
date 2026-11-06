@@ -7,12 +7,6 @@ import type {
   SecondaryCategory,
 } from '../types/command'
 
-export type FilterChip = {
-  id: string
-  label: string
-  onRemove: () => void
-}
-
 type FilterBottomSheetProps = {
   open: boolean
   onClose: () => void
@@ -27,7 +21,7 @@ type FilterBottomSheetProps = {
   onToggleFunction: (value: SecondaryCategory) => void
   favoritesOn: boolean
   onFavoritesToggle: () => void
-  chips: FilterChip[]
+  hasActiveFilters: boolean
   onClear: () => void
 }
 
@@ -45,7 +39,7 @@ export function FilterBottomSheet({
   onToggleFunction,
   favoritesOn,
   onFavoritesToggle,
-  chips,
+  hasActiveFilters,
   onClear,
 }: FilterBottomSheetProps) {
   const titleId = useId()
@@ -113,7 +107,7 @@ export function FilterBottomSheet({
             Filters
           </h2>
           <div className="flex shrink-0 items-center gap-2">
-            {chips.length > 0 ? (
+            {hasActiveFilters ? (
               <button
                 type="button"
                 onClick={onClear}
@@ -132,41 +126,6 @@ export function FilterBottomSheet({
             </button>
           </div>
         </div>
-
-        {chips.length > 0 ? (
-          <div className="shrink-0 border-b border-border px-4 py-3">
-            <div className="flex flex-wrap gap-2">
-              {chips.map((chip) => (
-                <button
-                  key={chip.id}
-                  type="button"
-                  onClick={chip.onRemove}
-                  className="inline-flex max-w-full items-start gap-1.5 rounded-2xl border border-border bg-surface-muted px-3 py-1.5 text-sm font-medium text-ink transition hover:border-ink/20 hover:bg-page focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none"
-                  aria-label={`Remove filter ${chip.label}`}
-                >
-                  <span className="max-w-[14rem] whitespace-normal leading-snug [overflow-wrap:anywhere] line-clamp-2 text-left">
-                    {chip.label}
-                  </span>
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    aria-hidden="true"
-                    className="shrink-0 text-ink-muted"
-                  >
-                    <path
-                      d="M3 3l6 6M9 3 3 9"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </button>
-              ))}
-            </div>
-          </div>
-        ) : null}
 
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
           <SheetSection label="Tool">

@@ -32,9 +32,6 @@ function App() {
     toggleTool,
     toggleLanguage,
     toggleFunction,
-    removeTool,
-    removeLanguage,
-    removeFunction,
     clearSheetFilters,
     filtered,
     resetFilters,
@@ -68,9 +65,6 @@ function App() {
     onToggleTool: toggleTool,
     onToggleLanguage: toggleLanguage,
     onToggleFunction: toggleFunction,
-    onRemoveTool: removeTool,
-    onRemoveLanguage: removeLanguage,
-    onRemoveFunction: removeFunction,
     onClearSheetFilters: clearSheetFilters,
   }
 

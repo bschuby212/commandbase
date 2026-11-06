@@ -94,18 +94,6 @@ export function useCommandFilter(favoriteIds: Set<string>) {
     setFunctions((current) => toggleInList(current, value))
   }
 
-  const removeTool = (value: Platform) => {
-    setTools((current) => current.filter((item) => item !== value))
-  }
-
-  const removeLanguage = (value: CommandLanguage) => {
-    setLanguages((current) => current.filter((item) => item !== value))
-  }
-
-  const removeFunction = (value: SecondaryCategory) => {
-    setFunctions((current) => current.filter((item) => item !== value))
-  }
-
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase()
 
@@ -164,9 +152,6 @@ export function useCommandFilter(favoriteIds: Set<string>) {
     toggleTool,
     toggleLanguage,
     toggleFunction,
-    removeTool,
-    removeLanguage,
-    removeFunction,
     language,
     setLanguage,
     tool,

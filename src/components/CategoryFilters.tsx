@@ -6,14 +6,9 @@ import {
   ProgramIcon,
   ToolFieldIcon,
 } from './FilterIcons'
-import { FilterBottomSheet, type FilterChip } from './FilterBottomSheet'
+import { FilterBottomSheet } from './FilterBottomSheet'
 import { FilterDropdown } from './FilterDropdown'
-import {
-  LANGUAGE_FILTERS,
-  LANGUAGE_LABELS,
-  PLATFORM_LABELS,
-  PROGRAM_FILTERS,
-} from '../lib/platformLabels'
+import { LANGUAGE_FILTERS, PROGRAM_FILTERS } from '../lib/platformLabels'
 import type {
   CommandLanguage,
   FavoriteFilter,
@@ -39,9 +34,6 @@ type CategoryFiltersProps = {
   onToggleTool: (value: Platform) => void
   onToggleLanguage: (value: CommandLanguage) => void
   onToggleFunction: (value: SecondaryCategory) => void
-  onRemoveTool: (value: Platform) => void
-  onRemoveLanguage: (value: CommandLanguage) => void
-  onRemoveFunction: (value: SecondaryCategory) => void
   onClearSheetFilters: () => void
   className?: string
   mobileOnly?: boolean
@@ -66,9 +58,6 @@ export function CategoryFilters({
   onToggleTool,
   onToggleLanguage,
   onToggleFunction,
-  onRemoveTool,
-  onRemoveLanguage,
-  onRemoveFunction,
   onClearSheetFilters,
   className = '',
   mobileOnly = false,
@@ -108,33 +97,6 @@ export function CategoryFilters({
     languages.length +
     functions.length +
     (favoritesOn ? 1 : 0)
-
-  const chips: FilterChip[] = [
-    ...tools.map((id) => ({
-      id: `tool-${id}`,
-      label: PLATFORM_LABELS[id],
-      onRemove: () => onRemoveTool(id),
-    })),
-    ...languages.map((id) => ({
-      id: `lang-${id}`,
-      label: LANGUAGE_LABELS[id],
-      onRemove: () => onRemoveLanguage(id),
-    })),
-    ...functions.map((id) => ({
-      id: `fn-${id}`,
-      label: id,
-      onRemove: () => onRemoveFunction(id),
-    })),
-    ...(favoritesOn
-      ? [
-          {
-            id: 'favorites',
-            label: 'Favorites',
-            onRemove: () => onFavoriteFilterChange('all'),
-          },
-        ]
-      : []),
-  ]
 
   const showMobile = !desktopOnly
   const showDesktop = !mobileOnly
@@ -264,7 +226,7 @@ export function CategoryFilters({
           onFavoritesToggle={() =>
             onFavoriteFilterChange(favoritesOn ? 'all' : 'favorites')
           }
-          chips={chips}
+          hasActiveFilters={activeCount > 0}
           onClear={onClearSheetFilters}
         />
       ) : null}
