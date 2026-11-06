@@ -95,7 +95,7 @@ Follow documented tokens, type, space/grid, components/variants, elevation/radiu
 Reuse existing components/tokens. Do not invent parallel conventions.
 
 Implement the ask, then audit the touched UI against Design.md and fix drift.
-If Design.md is missing/inaccessible, stop inventing and tell me what’s blocking.`)
+If Design.md is missing/inaccessible, stop inventing and tell me what’s blocking.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Design',
@@ -121,7 +121,7 @@ Reuse existing project components when they match. Do not redesign.
 
 Loop: implement → compare at matching viewport → fix deltas → compare again.
 Never claim pixel accuracy without an actual visual comparison.
-List unresolved gaps explicitly (missing assets, ambiguous variants, etc.).`
+List unresolved gaps explicitly (missing assets, ambiguous variants, etc.).`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Design',
@@ -147,7 +147,7 @@ Where the screenshot is ambiguous, follow the project’s existing design system
 Reuse project assets/components when they fit.
 
 Implement → compare at the closest viewport → fix noticeable deltas.
-End with: matched well · imperfect guesses · could not verify.`)
+End with: matched well · imperfect guesses · could not verify.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Design',
@@ -181,7 +181,7 @@ For each issue cover:
 Look across hierarchy, clarity, type/spacing, interaction, consistency, a11y basics, and cognitive load — but only report what matters.
 
 Protect the product’s intent and visual direction. Do not propose a rebrand or full redesign.
-If context is missing (goal, audience, constraints), state assumptions in one line and continue.`)
+If context is missing (goal, audience, constraints), state assumptions in one line and continue.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Review',
@@ -205,7 +205,7 @@ Fix only: spacing/alignment · type inconsistencies · wrapping · radius/shadow
 
 Rules: subtle > dramatic; remove noise before adding decoration; preserve design language and behavior.
 Apply the refinements, then list what you changed in a short bullet list.
-Skip redesign ideas — park those as separate notes if needed.`)
+Skip redesign ideas — park those as separate notes if needed.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Review',
@@ -235,7 +235,7 @@ Order of attack:
 Do not spray effort across every possible control before the happy path works.
 
 Report in four buckets only: Passed · Fixed & retested · Failed · Not tested.
-Never mark something Passed without evidence from this session.`)
+Never mark something Passed without evidence from this session.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'QA',
@@ -271,7 +271,7 @@ Preserve hierarchy; do not invent a separate mobile product.
 After fixes, re-check the other breakpoints for regressions.
 Summarize: broken → fixed → still risky / untested.
 
-For intentionally rebuilding layout across breakpoints, use Make This Layout Responsive.`)
+For intentionally rebuilding layout across breakpoints, use Make This Layout Responsive.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'QA',
@@ -303,7 +303,7 @@ For each finding: severity · user impact · fix applied or not · how verified.
 Do not gut visual design to “pass.” Keep brand direction while removing exclusionary barriers.
 List what still needs a human + assistive-tech check.
 
-For design-led inclusive principles (less checklist, more craft), use Accessibility Best Practices Pass.`)
+For design-led inclusive principles (less checklist, more craft), use Accessibility Best Practices Pass.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'QA',
@@ -365,7 +365,7 @@ Probe: core journeys, error/empty/loading, reliability, obvious performance pain
 
 Fix blockers/majors when authorized; verify after.
 End with an explicit verdict: Ship / Ship with conditions / Do not ship — plus evidence, remaining risks, and untested areas.
-Keep the write-up short. Depth on blockers beats a tour of every category.`)
+Keep the write-up short. Depth on blockers beats a tour of every category.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'QA',
@@ -391,7 +391,7 @@ Newer explicit instructions win when they replace older ones. Do not implement b
 For each conflict: old ask · newer ask · what changed · what applies now · leftover ambiguity.
 Preserve older requirements that were never superseded.
 If you still can’t tell, ask — don’t guess.
-End with a concise active-requirements list, then implement only from that list (if implementation was requested).`)
+End with a concise active-requirements list, then implement only from that list (if implementation was requested).`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Planning',
@@ -419,7 +419,7 @@ End with a concise active-requirements list, then implement only from that list 
 
 Output a numbered completion report: item · verified how · pass/fail/not tested · fix if any.
 You may say the task is complete only if every applicable checklist item is Pass or explicitly waived by me.
-If something is Not tested, say so and do not bury it.`)
+If something is Not tested, say so and do not bury it.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'QA',
@@ -454,7 +454,7 @@ Focus only where it pays off:
 
 Cap work to the highest-impact visual issues (roughly top 5). Prefer removal and alignment over decoration.
 If Design.md / tokens exist, follow them.
-If a reference file is missing, say so and use the live UI + project conventions.`)
+If a reference file is missing, say so and use the live UI + project conventions.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Design',
@@ -486,7 +486,7 @@ For each issue (max ~5, ranked):
 Scan: primary action clarity, cognitive load, competing CTAs, error prevention, empty/loading/error/success as a journey, progressive disclosure, and trust on irreversible actions.
 
 Stay inside current product intent. No feature invention.
-If you cannot interact with the UI, reason from structure and mark what is unvalidated.`)
+If you cannot interact with the UI, reason from structure and mark what is unvalidated.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Review',
@@ -519,7 +519,7 @@ Make design decisions that help:
 
 Default: apply the smallest inclusive fixes that keep the brand intact.
 Explain each change by user impact in one line.
-Skip theoretical issues that do not affect this UI.`)
+Skip theoretical issues that do not affect this UI.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'QA',
@@ -555,7 +555,7 @@ Prefer the project’s existing breakpoints/tokens over one-off magic numbers.
 Verify when tools allow (~375, ~768, ~1024, ~1440), then fix regressions you cause.
 Summarize by breakpoint: what changed · what still needs a human look.
 
-For finding breaks without a rebuild, use Responsive Design Audit.`)
+For finding breaks without a rebuild, use Responsive Design Audit.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Implementation',
@@ -582,7 +582,7 @@ Read Design.md first (source of truth unless I override it). Diff the screen aga
 No greenfield rebuild if alignment works. No inventing rules Design.md already covers.
 If Design.md is missing, stop and say what’s needed.
 
-Deliver: out of date · aligned · still different/blocked.`)
+Deliver: out of date · aligned · still different/blocked.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Design',
@@ -607,7 +607,7 @@ Tighten: CTA labels · task-matching headings · empty/loading/success/error · 
 
 Rules: short verbs · errors say what happened + next step · keep existing brand voice · consistent product terms.
 Default: apply the copy changes; touch layout only if line length forces it.
-End with a before → after list of meaningful edits only.`)
+End with a before → after list of meaningful edits only.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Review',
@@ -633,7 +633,7 @@ Hunt user-visible pain: oversized media · layout shift · costly blur/shadow de
 
 For each issue: symptom · likely cause · smallest fix (apply if in scope) · what you couldn’t measure.
 Skip micro-optimizations that users won’t feel.
-No performance bragging without a clear before/after rationale.`)
+No performance bragging without a clear before/after rationale.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'QA',
@@ -665,7 +665,7 @@ Include only:
 * Not tested / needs human check
 
 Scannable. No process theater. Never mark untested as verified.
-If a screenshot/recording would help, note what to capture.`)
+If a screenshot/recording would help, note what to capture.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Planning',
@@ -690,7 +690,7 @@ Hunt for: broken/missing states · nearby visual/interaction regressions · copy
 
 For each finding (severity first): point to the change · risk in plain language · smallest fix (apply if safe/clear).
 Ignore style nits unrelated to the ask.
-If the diff is unavailable, say so and stop — do not invent a review.`)
+If the diff is unavailable, say so and stop — do not invent a review.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Review',
@@ -718,7 +718,7 @@ If the diff is unavailable, say so and stop — do not invent a review.`)
 5. Retest the failure path + nearby regressions
 6. Report: confirmed · fixed · still uncertain
 
-No fix claims without retest. If you can’t reproduce, say what blocked you and stop guessing.`)
+No fix claims without retest. If you can’t reproduce, say what blocked you and stop guessing.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'QA',
@@ -751,7 +751,7 @@ Rules that matter:
 
 Default mode: implement missing states using existing design language/tokens; don’t invent decorative flourishes.
 Skip controls that already have a coherent full set.
-Call out anything you could not verify.`)
+Call out anything you could not verify.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Design',
@@ -784,7 +784,7 @@ Answer directly:
 
 Rules: separate taste from usability/business/risk; smallest meaningful changes only; if audience/success metric/constraints are missing, list gaps and proceed with explicit assumptions.
 End with verdict: Ship as-is / Ship with changes / Rethink / Kill — plus top 3 reasons.
-No fluff. This is concept-level — not a UI polish pass.`)
+No fluff. This is concept-level — not a UI polish pass.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Review',
@@ -822,7 +822,7 @@ Answer in this exact shape (keep it tight):
 8. One short “do this today” recommendation
 
 Principle over taste. If the brief itself is wrong, say that first.
-This is opinion/critique — not Senior Product Designer Review’s UI issue list, and not Concept Critique’s ship/kill verdict.`)
+This is opinion/critique — not Senior Product Designer Review’s UI issue list, and not Concept Critique’s ship/kill verdict.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Review',
@@ -846,7 +846,7 @@ This is opinion/critique — not Senior Product Designer Review’s UI issue lis
 
 Per step: goal · notice first · next action · hesitation/mis-click risk · success/fail feedback · abandon trigger.
 Then: happy path in plain language · top frictions by severity · missing wayfinding/reassurance · smallest UX fixes.
-Don’t invent features unless a missing step truly blocks completion.`)
+Don’t invent features unless a missing step truly blocks completion.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Review',
@@ -872,7 +872,7 @@ Per direction (short): name · interaction model · best for whom · tradeoffs �
 Directions must differ in structure/interaction — not just color/spacing.
 Then pick one primary recommendation + assumptions.
 Do not implement unless I explicitly ask.
-If the brief is thin, state assumptions first.`)
+If the brief is thin, state assumptions first.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Planning',
@@ -909,7 +909,7 @@ Do not:
 * Touch unrelated files
 
 Process: say what’s messy → smallest cleanup → how you verified UX unchanged → what a dev should know next.
-Prefer clarity over cleverness.`)
+Prefer clarity over cleverness.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Implementation',
@@ -946,7 +946,7 @@ Use this micro-format per item:
 
 Plain language. Put notes next to the relevant UI/code or in the existing handoff — don’t invent a new docs system.
 If implementation conflicts with good UX defaults, flag it and ask before changing behavior.
-If I paste a screen/flow, derive notes from that — no generic textbook advice.`)
+If I paste a screen/flow, derive notes from that — no generic textbook advice.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Planning',
