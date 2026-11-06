@@ -218,7 +218,7 @@ function FilterTooltip({
     <div
       ref={ref}
       role="tooltip"
-      className="pointer-events-none fixed z-[300] max-w-[16rem] rounded-lg border border-border bg-ink px-2.5 py-1.5 text-xs leading-snug text-page shadow-lg"
+      className="pointer-events-none fixed z-[300] max-w-[16rem] rounded-lg bg-ink px-2.5 py-1.5 text-xs leading-snug text-page shadow-[0_1px_2px_rgba(15,23,42,0.08),0_4px_12px_rgba(15,23,42,0.06)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.35),0_4px_12px_rgba(0,0,0,0.25)]"
       style={{
         top,
         left,
