@@ -584,4 +584,439 @@ Do not say “everything is complete” unless every applicable requirement has 
     ],
     tags: ['QA', 'Review'],
   },
+
+  {
+    id: 'ai-prompt-ui-design-principles',
+    title: 'UI Design Principles Pass',
+    description:
+      'Strengthen visual hierarchy, composition, and surface treatment without a redesign.',
+    command: `Act as a senior UI designer reviewing and refining this interface.
+
+Focus on visual design quality, not engineering architecture.
+
+Evaluate and improve:
+
+* Visual hierarchy: what the eye should notice first, second, and third
+* Composition and balance across the viewport
+* Surface treatment: backgrounds, cards, dividers, and when flat space is better than containers
+* Type scale clarity and contrast between headings, body, and meta text
+* Spacing rhythm and alignment to a consistent grid
+* Color roles: primary, secondary, muted, danger, success — used with intent
+* Icon weight, size, and alignment with adjacent text
+* Density: remove visual noise without removing meaning
+
+Do not invent a new brand language. Work inside the existing visual direction.
+
+Prefer restraint. If removing a border, shadow, or card wrapper improves clarity, remove it.
+
+When you recommend or apply changes, explain the design reason in plain language, not implementation jargon.
+
+If a referenced design file or screenshot is unavailable, say so and proceed using the live interface and any project design documentation.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Design',
+    type: 'prompt',
+    keywords: [
+      'ui',
+      'visual hierarchy',
+      'composition',
+      'design principles',
+      'ai prompt',
+    ],
+    tags: ['Design', 'UI'],
+  },
+  {
+    id: 'ai-prompt-ux-best-practices',
+    title: 'UX Best Practices Pass',
+    description:
+      'Improve flows, clarity, and decision-making from the user’s point of view.',
+    command: `Act as a senior UX designer. Improve this experience using established UX best practices.
+
+Think in flows and decisions, not pixels alone.
+
+Review:
+
+* User goals for this screen or flow
+* Entry points and next actions
+* Clarity of labels, instructions, and feedback
+* Cognitive load: too many choices, unclear priority, or competing CTAs
+* Error prevention before error recovery
+* Empty, loading, success, and failure states as part of the journey
+* Progressive disclosure: what should be immediate vs secondary
+* Consistency of patterns across similar tasks
+* Trust: confirmations, undo, and irreversible actions
+
+For each issue, explain:
+1. What the user is trying to do
+2. Where the experience creates friction or confusion
+3. The smallest UX change that would help
+
+Do not propose a full product rethink. Stay within the current product intent.
+
+If you cannot observe real interaction behavior with available tools, reason from the interface structure and call out what remains unvalidated.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Review',
+    type: 'prompt',
+    keywords: [
+      'ux',
+      'best practices',
+      'flows',
+      'usability',
+      'ai prompt',
+    ],
+    tags: ['UX', 'Review'],
+  },
+  {
+    id: 'ai-prompt-a11y-best-practices',
+    title: 'Accessibility Best Practices Pass',
+    description:
+      'Apply practical accessibility principles as design decisions, not only checklist items.',
+    command: `Apply accessibility best practices to this interface as a design responsibility, not a late engineering patch.
+
+Ground recommendations in WCAG 2.2 AA intent, but speak in product and design terms.
+
+Prioritize:
+
+* Perceivable hierarchy: text contrast, non-text contrast, and readable type
+* Operable interaction: keyboard paths, visible focus, adequate target size
+* Understandable content: clear labels, errors tied to fields, predictable behavior
+* Robust structure: headings, names, roles, and states that assistive tech can interpret
+* Inclusive motion: respect reduced-motion preferences; avoid essential info only in hover
+* Forms: required indicators, helpful errors, and recoverable mistakes
+* Modals/drawers: focus entry, escape, and return
+
+For each change, explain the user impact in plain language.
+
+Do not “fix” accessibility by gutting the visual design. Keep the brand direction while removing exclusionary barriers.
+
+If automated checks are available, use them as signals only. Confirm important issues with manual reasoning about interaction.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'QA',
+    type: 'prompt',
+    keywords: [
+      'accessibility',
+      'a11y',
+      'best practices',
+      'inclusive',
+      'ai prompt',
+    ],
+    tags: ['Accessibility', 'Design', 'QA'],
+  },
+  {
+    id: 'ai-prompt-make-responsive',
+    title: 'Make This Layout Responsive',
+    description:
+      'Adapt the layout for mobile, tablet, and desktop — implement, don’t only audit.',
+    command: `Make this layout genuinely responsive across mobile, tablet, and desktop.
+
+This is an implementation task, not a checklist audit. Adapt the interface so it works well at each major breakpoint.
+
+Goals:
+
+* Preserve the intended visual hierarchy at every width
+* Stack or reflow sections cleanly on small screens
+* Keep primary actions reachable without awkward scrolling games
+* Prevent horizontal overflow and clipped text
+* Size tap targets comfortably on touch viewports
+* Adapt navigation, grids, cards, and media thoughtfully
+* Maintain spacing rhythm instead of crushing everything equally
+
+Do not create an unrelated “mobile redesign” that abandons the desktop intent.
+Do not claim responsiveness without adjusting layout behavior.
+
+Work from largest meaningful content constraints first, then refine smaller widths.
+
+When tools allow, verify at representative widths (for example ~375, ~768, ~1024, ~1440) and fix regressions you introduce.
+
+Summarize what changed at each breakpoint and what could not be verified.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Implementation',
+    type: 'prompt',
+    keywords: [
+      'responsive',
+      'mobile',
+      'layout',
+      'breakpoints',
+      'implement',
+      'ai prompt',
+    ],
+    tags: ['Design', 'Responsive'],
+  },
+  {
+    id: 'ai-prompt-design-md-legacy',
+    title: 'Apply Design.md to a Legacy Screen',
+    description:
+      'Bring an older screen in line with current Design.md without a full rewrite.',
+    command: `Bring this older screen into alignment with the project’s current Design.md (or equivalent design documentation).
+
+Read Design.md first. Treat it as the source of truth for tokens, type, spacing, components, states, and interaction patterns unless my newer instructions override it.
+
+Then compare the legacy screen against that documentation.
+
+Migrate the screen toward the current system by:
+
+* Replacing one-off colors, type sizes, and radii with documented tokens/patterns
+* Swapping custom controls for existing system components where they fit
+* Aligning spacing and layout to the documented rhythm
+* Updating hover, focus, active, disabled, and error states to match
+* Removing obsolete visual conventions that fight the current language
+
+Do not rebuild the screen from scratch if incremental alignment is enough.
+Do not invent new design rules when Design.md already covers the case.
+
+If Design.md is missing or inaccessible, stop inventing and tell me what you need.
+
+Deliver:
+1. What was out of date
+2. What you aligned
+3. What remains intentionally different or blocked`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Design',
+    type: 'prompt',
+    keywords: [
+      'design.md',
+      'legacy',
+      'migration',
+      'design system',
+      'ai prompt',
+    ],
+    tags: ['Design System', 'Design'],
+  },
+  {
+    id: 'ai-prompt-copy-naming',
+    title: 'Copy and Naming Pass',
+    description:
+      'Tighten UI copy and make labels, names, and messages consistent.',
+    command: `Perform a copy and naming pass across the requested interface or flow.
+
+Focus on language clarity and consistency, not visual restyling.
+
+Improve:
+
+* Button and link labels that describe the outcome
+* Headings that match the user’s task language
+* Empty, loading, success, and error messages
+* Helper text that reduces confusion instead of adding noise
+* Inconsistent terms for the same concept
+* Component, section, and field naming that should match user-facing language
+* Tone: calm, specific, and human — no filler, no emoji decoration
+
+Rules:
+
+* Prefer short verbs and concrete nouns
+* Say what happened and what to do next in errors
+* Keep product terms consistent once chosen
+* Do not rewrite brand voice into a generic SaaS tone if a voice already exists
+
+Provide a before/after list of the meaningful copy changes.
+If implementation is in scope, apply the copy updates and leave layout alone unless a line length issue forces a tiny adjustment.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Review',
+    type: 'prompt',
+    keywords: [
+      'copy',
+      'microcopy',
+      'naming',
+      'labels',
+      'content design',
+      'ai prompt',
+    ],
+    tags: ['Copy', 'UX', 'Review'],
+  },
+  {
+    id: 'ai-prompt-perf-smoke',
+    title: 'Performance Smoke Pass',
+    description:
+      'Hunt obvious jank: heavy media, layout shift, and first-paint drag.',
+    command: `Run a practical performance smoke pass focused on what users feel.
+
+This is not a deep profiling engagement. Find obvious issues that hurt first impression and interaction smoothness.
+
+Look for:
+
+* Oversized images or uncropped media
+* Layout shift from images, fonts, or late-loading content
+* Unnecessary large shadows, blur, or decorative effects that cost more than they give
+* Blocking work or heavy rendering on first paint where evident
+* Lists/grids that do too much work for what’s on screen
+* Interaction delays from avoidable re-rendering or expensive UI patterns
+
+For each issue:
+1. Describe the user-visible symptom
+2. Explain the likely cause in plain language
+3. Apply the smallest sensible fix when in scope
+4. Note what you could not measure
+
+Do not chase micro-optimizations that don’t change the experience.
+Do not claim performance wins without a clear before/after rationale.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'QA',
+    type: 'prompt',
+    keywords: [
+      'performance',
+      'smoke',
+      'cls',
+      'images',
+      'jank',
+      'ai prompt',
+    ],
+    tags: ['QA', 'Performance'],
+  },
+  {
+    id: 'ai-prompt-handoff-notes',
+    title: 'Handoff Notes',
+    description:
+      'Write a crisp ship note: what changed, how to verify, risks, and gaps.',
+    command: `Write clear handoff notes for the work just completed.
+
+Assume the reader is a teammate or stakeholder who was not in the session.
+
+Include:
+
+* What changed, in user-facing language first
+* Where to look (screens, flows, or key files) without dumping noise
+* How to verify: numbered steps, including responsive or state checks when relevant
+* Known risks or edge cases
+* What was intentionally not changed
+* What could not be tested and still needs human verification
+
+Keep it concise and scannable.
+Do not pad with process theater.
+Do not claim untested items as verified.
+
+If screenshots or recordings would help and tools allow, note what should be captured.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Planning',
+    type: 'prompt',
+    keywords: [
+      'handoff',
+      'ship notes',
+      'verification',
+      'documentation',
+      'ai prompt',
+    ],
+    tags: ['Planning', 'Review'],
+  },
+  {
+    id: 'ai-prompt-diff-only-review',
+    title: 'Diff-Only Review',
+    description:
+      'Review only the current change set for risk, regressions, and gaps.',
+    command: `Review only the current diff / change set.
+
+Do not re-audit the entire product. Stay inside what changed.
+
+Inspect the diff for:
+
+* Broken or incomplete UI states introduced by the change
+* Visual or interaction regressions adjacent to touched areas
+* Copy inconsistencies introduced by the edit
+* Missing empty/error/loading handling related to the change
+* Accessibility regressions tied to the touched controls
+* Scope creep: changes that do not serve the request
+
+For each finding:
+1. Point to the specific change
+2. Explain the risk in plain language
+3. Recommend or apply the smallest fix
+
+Do not rewrite unrelated code for style preference.
+If the diff is unavailable, say so and stop rather than inventing a review.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Review',
+    type: 'prompt',
+    keywords: [
+      'diff',
+      'review',
+      'regression',
+      'pr',
+      'ai prompt',
+    ],
+    tags: ['Review', 'QA'],
+  },
+  {
+    id: 'ai-prompt-root-cause-debug',
+    title: 'Root-Cause Debug',
+    description:
+      'Reproduce the issue, find the real cause, fix it, and retest.',
+    command: `Debug this issue with root-cause discipline.
+
+Process:
+
+1. Restate the observed problem and the expected behavior.
+2. Reproduce it with the smallest clear steps available.
+3. Isolate likely causes without shotgun changes.
+4. Identify the underlying cause, not only a surface symptom.
+5. Apply the smallest fix that addresses the cause.
+6. Retest the original failing path and nearby regressions.
+7. Report what was confirmed, fixed, and still uncertain.
+
+Do not claim a fix without retesting.
+Do not spray speculative changes across unrelated areas.
+If you cannot reproduce the issue with available tools, say exactly what blocked reproduction.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'QA',
+    type: 'prompt',
+    keywords: [
+      'debug',
+      'root cause',
+      'reproduce',
+      'fix',
+      'ai prompt',
+    ],
+    tags: ['QA'],
+  },
+  {
+    id: 'ai-prompt-interaction-states',
+    title: 'Interaction States Completeness',
+    description:
+      'Design default, hover, focus, active, disabled, loading, and error as one system.',
+    command: `Complete the interaction states for the requested UI as a coherent system.
+
+For each important interactive element (buttons, inputs, selects, tabs, cards-as-controls, icon buttons):
+
+Define and align:
+
+* Default
+* Hover
+* Focus-visible
+* Active / pressed
+* Disabled
+* Loading (if applicable)
+* Error / invalid (if applicable)
+* Selected / current (if applicable)
+
+Design principles:
+
+* Focus must be obvious for keyboard users
+* Disabled must look unavailable without relying on color alone when possible
+* Loading should preserve layout where practical
+* Error messages should be specific and adjacent to the problem
+* States should feel related, not like five different components
+
+Do not invent decorative state flourishes that fight the existing design language.
+Call out any state that cannot be verified with available tools.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Design',
+    type: 'prompt',
+    keywords: [
+      'states',
+      'hover',
+      'focus',
+      'disabled',
+      'interaction',
+      'ai prompt',
+    ],
+    tags: ['Design', 'UX', 'Accessibility'],
+  },
 ]
