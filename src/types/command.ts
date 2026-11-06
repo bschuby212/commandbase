@@ -6,6 +6,7 @@ export type Platform =
   | 'vscode'
   | 'powershell'
   | 'macterminal'
+  | 'aiprompt'
 
 export type CommandLanguage =
   | 'git'
@@ -14,8 +15,9 @@ export type CommandLanguage =
   | 'python'
   | 'docker'
   | 'editor'
+  | 'prompt'
 
-export type CommandType = 'terminal' | 'slash' | 'shortcut'
+export type CommandType = 'terminal' | 'slash' | 'shortcut' | 'prompt'
 
 export type SecondaryCategory =
   | 'Repositories'
@@ -25,6 +27,11 @@ export type SecondaryCategory =
   | 'Navigation'
   | 'Sessions'
   | 'Utilities'
+  | 'QA'
+  | 'Design'
+  | 'Implementation'
+  | 'Planning'
+  | 'Review'
 
 export type ShortcutKeys = {
   mac: string
@@ -35,7 +42,7 @@ export type Command = {
   id: string
   title: string
   description: string
-  /** Terminal or slash command text. Unused for pure shortcuts. */
+  /** Terminal, slash, or full AI prompt text. Unused for pure shortcuts. */
   command: string
   platform: Platform
   language: CommandLanguage
@@ -46,6 +53,8 @@ export type Command = {
   destructive?: boolean
   /** Platform-specific key combinations for shortcut-type commands. */
   shortcut?: ShortcutKeys
+  /** Optional discovery tags for AI prompts (Figma, QA, Accessibility, etc.). */
+  tags?: string[]
 }
 
 export type PrimaryFilter = 'all' | Platform

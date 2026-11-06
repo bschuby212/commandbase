@@ -17,6 +17,11 @@ const ALL_SECONDARY: SecondaryCategory[] = [
   'Navigation',
   'Sessions',
   'Utilities',
+  'QA',
+  'Design',
+  'Implementation',
+  'Planning',
+  'Review',
 ]
 
 function matchesSearch(command: Command, query: string): boolean {
@@ -33,6 +38,7 @@ function matchesSearch(command: Command, query: string): boolean {
     command.notes ?? '',
     command.shortcut?.mac ?? '',
     command.shortcut?.windows ?? '',
+    ...(command.tags ?? []),
     ...command.keywords,
   ]
     .join(' ')

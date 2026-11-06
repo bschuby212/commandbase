@@ -78,19 +78,29 @@ export function CommandCard({
         </div>
       </div>
 
-      <pre className="pointer-events-none flex min-h-[3rem] max-w-full items-center overflow-x-auto rounded-lg bg-code-bg px-2.5 py-2 font-mono text-[12px] leading-snug text-code-text whitespace-pre-wrap break-words [overflow-wrap:anywhere]">
-        <code>{displayCommand}</code>
+      <pre
+        className={`pointer-events-none flex min-h-[3rem] max-w-full items-center overflow-hidden rounded-lg bg-code-bg px-2.5 py-2 text-[12px] leading-snug text-code-text whitespace-pre-wrap break-words [overflow-wrap:anywhere] ${
+          command.type === 'prompt' ? 'font-sans' : 'font-mono'
+        }`}
+      >
+        <code className="line-clamp-2">{displayCommand}</code>
       </pre>
 
       <div className="pointer-events-none mt-auto flex min-w-0 flex-wrap gap-1.5 pt-2.5">
-        {[LANGUAGE_LABELS[command.language], command.category].map((label) => (
-          <span
-            key={label}
-            className="inline-flex items-center rounded-full bg-surface-muted px-2 py-0.5 text-[10px] font-medium tracking-wide text-ink-muted"
-          >
-            {label}
-          </span>
-        ))}
+        {[
+          LANGUAGE_LABELS[command.language],
+          command.category,
+          ...(command.tags ?? []).slice(0, 2),
+        ]
+          .filter((label, index, list) => list.indexOf(label) === index)
+          .map((label) => (
+            <span
+              key={label}
+              className="inline-flex items-center rounded-full bg-surface-muted px-2 py-0.5 text-[10px] font-medium tracking-wide text-ink-muted"
+            >
+              {label}
+            </span>
+          ))}
       </div>
 
       <span className="sr-only" aria-live="polite">

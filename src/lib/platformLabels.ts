@@ -14,6 +14,7 @@ export const PLATFORM_LABELS: Record<Platform, string> = {
   vscode: 'VS Code / Copilot',
   powershell: 'PowerShell (Windows)',
   macterminal: 'Mac Terminal',
+  aiprompt: 'AI Prompts',
 }
 
 export const LANGUAGE_LABELS: Record<CommandLanguage, string> = {
@@ -23,10 +24,12 @@ export const LANGUAGE_LABELS: Record<CommandLanguage, string> = {
   python: 'Python',
   docker: 'Docker',
   editor: 'Editor',
+  prompt: 'AI Prompt',
 }
 
 export const PROGRAM_FILTERS: { id: PrimaryFilter; label: string }[] = [
   { id: 'all', label: 'All' },
+  { id: 'aiprompt', label: 'AI Prompts' },
   { id: 'github', label: 'Git & GitHub' },
   { id: 'cursor', label: 'Cursor' },
   { id: 'claude', label: 'Claude Code' },
@@ -38,6 +41,7 @@ export const PROGRAM_FILTERS: { id: PrimaryFilter; label: string }[] = [
 
 export const LANGUAGE_FILTERS: { id: LanguageFilter; label: string }[] = [
   { id: 'all', label: 'All' },
+  { id: 'prompt', label: 'AI Prompt' },
   { id: 'git', label: 'Git' },
   { id: 'shell', label: 'Shell' },
   { id: 'javascript', label: 'JavaScript' },
@@ -50,4 +54,5 @@ export const TYPE_LABELS: Record<CommandType, string> = {
   terminal: 'Terminal',
   slash: 'Slash command',
   shortcut: 'Shortcut',
+  prompt: 'AI prompt',
 }

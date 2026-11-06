@@ -155,8 +155,28 @@ function EditorIcon({ className }: IconProps) {
   )
 }
 
+function PromptIcon({ className }: IconProps) {
+  return (
+    <svg className={className} width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path
+        d="M3.2 3.4h7.6v5.2H6.1L4 10.4V8.6H3.2V3.4Z"
+        stroke="currentColor"
+        strokeWidth="1.3"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.1 5.3h3.8M5.1 7h2.6"
+        stroke="currentColor"
+        strokeWidth="1.25"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}
+
 const PROGRAM_ICONS: Record<PrimaryFilter, (props: IconProps) => ReactNode> = {
   all: LinesIcon,
+  aiprompt: PromptIcon,
   github: GitIcon,
   cursor: CursorIcon,
   claude: ClaudeIcon,
@@ -168,6 +188,7 @@ const PROGRAM_ICONS: Record<PrimaryFilter, (props: IconProps) => ReactNode> = {
 
 const LANGUAGE_ICONS: Record<'all' | CommandLanguage, (props: IconProps) => ReactNode> = {
   all: LinesIcon,
+  prompt: PromptIcon,
   git: GitIcon,
   shell: ShellIcon,
   javascript: JsIcon,
