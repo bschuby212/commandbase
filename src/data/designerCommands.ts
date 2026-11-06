@@ -128,7 +128,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'cursor-agent-design-system',
-    title: 'Ask Agent: Match Design System',
+    title: 'Match Design System',
     description: 'Prompt the agent to reuse tokens/components instead of inventing UI.',
     command:
       'Use existing design tokens and components. Do not invent new colors, radii, or type styles unless missing.',
@@ -140,7 +140,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'cursor-agent-responsive',
-    title: 'Ask Agent: Mobile First Pass',
+    title: 'Mobile First Pass',
     description: 'Have the agent audit layout for phone widths.',
     command:
       'Make this layout mobile-first. Fix overflow, tap targets, and stacked spacing under 640px.',
@@ -152,7 +152,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'cursor-agent-a11y',
-    title: 'Ask Agent: Accessibility Pass',
+    title: 'Accessibility Pass',
     description: 'Request labels, contrast, and keyboard focus fixes.',
     command:
       'Do an accessibility pass: labels, contrast, focus rings, and keyboard reachability. No visual redesign.',
@@ -164,7 +164,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'cursor-agent-no-cards',
-    title: 'Ask Agent: Avoid Card Spam',
+    title: 'Avoid Card Spam',
     description: 'Stop the model from wrapping everything in cards.',
     command:
       'Avoid card layouts unless the block is interactive. Prefer open sections with clear hierarchy.',

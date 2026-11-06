@@ -487,7 +487,7 @@ export const vibeCommands: Command[] = [
   // --- Cursor / Claude / Codex everyday for designers ---
   {
     id: 'vibe-cursor-doctor',
-    title: 'Ask Cursor: Why Is This Broken?',
+    title: 'Why Is This Broken?',
     description: 'Paste-ready prompt when the UI is wrong and you need a root cause.',
     command:
       'Something in this screen is wrong. Do not redesign it. 1) Restate what looks broken, 2) inspect the relevant components/styles, 3) name the most likely root cause, 4) apply the smallest fix, 5) tell me how to verify visually.',
@@ -500,7 +500,7 @@ export const vibeCommands: Command[] = [
   },
   {
     id: 'vibe-prompt-match-figma',
-    title: 'Ask: Match This Figma Frame',
+    title: 'Match This Figma Frame',
     description: 'Push the agent to treat Figma as source of truth for spacing/type/color.',
     command:
       'Implement this to match the provided Figma frame. Prefer Figma over your taste. Call out every intentional deviation. Focus on spacing, type scale, color tokens, and component states — not a rewrite.',
@@ -513,7 +513,7 @@ export const vibeCommands: Command[] = [
   },
   {
     id: 'vibe-prompt-mobile-pass',
-    title: 'Ask: Mobile-First Pass',
+    title: 'Mobile-First Pass',
     description: 'Force a mobile layout pass before desktop polish.',
     command:
       'Do a mobile-first pass for this screen at ~390px width. Fix overflow, tap targets, stacking, and typography. Do not invent new features. Show before/after notes for the worst issues.',
@@ -526,7 +526,7 @@ export const vibeCommands: Command[] = [
   },
   {
     id: 'vibe-prompt-empty-states',
-    title: 'Ask: Empty / Loading / Error States',
+    title: 'Empty / Loading / Error States',
     description: 'Make the agent finish the non-happy-path UI every PM forgets.',
     command:
       'Add or improve empty, loading, and error states for this flow. Keep copy human and short. Match existing components/tokens. List each state you touched.',
@@ -539,7 +539,7 @@ export const vibeCommands: Command[] = [
   },
   {
     id: 'vibe-prompt-copy-pass',
-    title: 'Ask: Product Copy Pass',
+    title: 'Product Copy Pass',
     description: 'Tighten labels, CTAs, and error text without restyling.',
     command:
       'Do a copy-only pass on this screen: labels, buttons, helper text, empties, errors. No visual redesign. Prefer plain language. Return a short before→after list.',
@@ -552,7 +552,7 @@ export const vibeCommands: Command[] = [
   },
   {
     id: 'vibe-prompt-stakeholder-summary',
-    title: 'Ask: Stakeholder Summary',
+    title: 'Stakeholder Summary',
     description: 'Turn a messy coding session into a PM-friendly update.',
     command:
       'Write a stakeholder update for this change in plain language: what users will notice, what is still rough, risks, and how to try it. No implementation dump.',
@@ -565,7 +565,7 @@ export const vibeCommands: Command[] = [
   },
   {
     id: 'vibe-prompt-acceptance-criteria',
-    title: 'Ask: Write Acceptance Criteria',
+    title: 'Write Acceptance Criteria',
     description: 'Generate testable acceptance criteria from the current screen/ask.',
     command:
       'From my request and this UI, write crisp acceptance criteria (Given/When/Then or checklist). Include responsive and accessibility must-haves. Do not implement yet.',
@@ -578,7 +578,7 @@ export const vibeCommands: Command[] = [
   },
   {
     id: 'vibe-prompt-scope-cut',
-    title: 'Ask: Cut Scope to Ship Today',
+    title: 'Cut Scope to Ship Today',
     description: 'Get a ruthless MVP cut when the AI overbuilt the design.',
     command:
       'Propose the smallest shippable slice of this UI for today. Separate must-have vs later. If you already built extras, identify what to revert. Optimize for a reviewable demo.',
@@ -591,7 +591,7 @@ export const vibeCommands: Command[] = [
   },
   {
     id: 'vibe-prompt-revert-ai-mess',
-    title: 'Ask: Revert the Overbuild',
+    title: 'Revert the Overbuild',
     description: 'When the agent “helped” too much — walk back unrelated changes.',
     command:
       'Review the current diff vs my original ask. Revert unrelated changes. Keep only what was required. Summarize what you removed and why.',
@@ -686,7 +686,7 @@ export const vibeCommands: Command[] = [
   },
   {
     id: 'vibe-tailwind-conflict-hint',
-    title: 'Ask: Resolve Conflicting Tailwind Classes',
+    title: 'Resolve Conflicting Tailwind Classes',
     description: 'Prompt for cleaning contradictory utility classes on one node.',
     command:
       'Audit this component for conflicting Tailwind classes (padding, display, position, text size/color). Keep the intended visual. Remove dead utilities. Explain each removal in one line.',
