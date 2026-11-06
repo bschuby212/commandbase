@@ -27,7 +27,7 @@ export type SecondaryCategory =
   | 'Navigation'
   | 'Sessions'
   | 'Utilities'
-  | 'Prompts'
+  | 'Prompts (QA, functions etc)'
 
 export type ShortcutKeys = {
   mac: string

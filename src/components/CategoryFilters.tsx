@@ -87,7 +87,7 @@ export function CategoryFilters({
         options={functionOptions}
         onChange={(next) => onSecondaryChange(next === 'all' ? null : next)}
         leadingIcon={<FunctionFieldIcon />}
-        className="min-w-0 flex-1 basis-0 min-[1100px]:w-[11.5rem] min-[1100px]:flex-none min-[1100px]:shrink-0"
+        className="min-w-0 flex-1 basis-0 min-[1100px]:w-[15.5rem] min-[1100px]:flex-none min-[1100px]:shrink-0"
       />
       <div
         className="toolbar-shell shrink-0"

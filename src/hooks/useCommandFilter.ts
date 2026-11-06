@@ -17,7 +17,7 @@ const ALL_SECONDARY: SecondaryCategory[] = [
   'Navigation',
   'Sessions',
   'Utilities',
-  'Prompts',
+  'Prompts (QA, functions etc)',
 ]
 
 function matchesSearch(command: Command, query: string): boolean {
