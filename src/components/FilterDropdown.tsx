@@ -1,4 +1,12 @@
-import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
+import {
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react'
+import { createPortal } from 'react-dom'
 
 export type FilterOption<T extends string> = {
   id: T
@@ -17,6 +25,13 @@ type FilterDropdownProps<T extends string> = {
   className?: string
 }
 
+type TooltipState = {
+  text: string
+  top: number
+  left: number
+  place: 'left' | 'right'
+}
+
 export function FilterDropdown<T extends string>({
   label,
   value,
@@ -27,12 +42,16 @@ export function FilterDropdown<T extends string>({
   className = '',
 }: FilterDropdownProps<T>) {
   const [open, setOpen] = useState(false)
+  const [tooltip, setTooltip] = useState<TooltipState | null>(null)
   const rootRef = useRef<HTMLDivElement>(null)
   const listId = useId()
   const selected = options.find((option) => option.id === value) ?? options[0]
 
   useEffect(() => {
-    if (!open) return
+    if (!open) {
+      setTooltip(null)
+      return
+    }
 
     const onPointerDown = (event: MouseEvent) => {
       if (!rootRef.current?.contains(event.target as Node)) {
@@ -51,6 +70,17 @@ export function FilterDropdown<T extends string>({
       document.removeEventListener('keydown', onKeyDown)
     }
   }, [open])
+
+  const showTooltipFor = (element: HTMLElement, text: string) => {
+    const rect = element.getBoundingClientRect()
+    const placeRight = rect.left < window.innerWidth / 2
+    setTooltip({
+      text,
+      top: rect.top + rect.height / 2,
+      left: placeRight ? rect.right + 10 : rect.left - 10,
+      place: placeRight ? 'right' : 'left',
+    })
+  }
 
   return (
     <div ref={rootRef} className={`relative min-w-0 ${className}`}>
@@ -96,22 +126,39 @@ export function FilterDropdown<T extends string>({
           className={`absolute top-[calc(100%+0.35rem)] z-50 max-h-72 min-w-full overflow-y-auto rounded-xl border border-border bg-surface py-1 shadow-[0_12px_32px_rgba(15,23,42,0.12)] sm:min-w-[12.5rem] ${
             align === 'right' ? 'right-0' : 'left-0'
           }`}
+          onMouseLeave={() => setTooltip(null)}
         >
           {options.map((option) => {
             const active = option.id === value
             return (
-              <li key={option.id} className="relative">
+              <li key={option.id}>
                 <button
                   type="button"
                   role="option"
                   aria-selected={active}
                   aria-description={option.description}
-                  title={option.description}
+                  onMouseEnter={(event) => {
+                    if (!option.description) {
+                      setTooltip(null)
+                      return
+                    }
+                    showTooltipFor(event.currentTarget, option.description)
+                  }}
+                  onFocus={(event) => {
+                    if (!option.description) {
+                      setTooltip(null)
+                      return
+                    }
+                    showTooltipFor(event.currentTarget, option.description)
+                  }}
+                  onMouseLeave={() => setTooltip(null)}
+                  onBlur={() => setTooltip(null)}
                   onClick={() => {
                     onChange(option.id)
                     setOpen(false)
+                    setTooltip(null)
                   }}
-                  className={`group/option flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition focus-visible:bg-surface-muted focus-visible:outline-none ${
+                  className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition focus-visible:bg-surface-muted focus-visible:outline-none ${
                     active
                       ? 'bg-accent/10 font-medium text-accent'
                       : 'text-ink-muted hover:bg-surface-muted hover:text-ink'
@@ -119,20 +166,69 @@ export function FilterDropdown<T extends string>({
                 >
                   {option.icon}
                   <span className="truncate">{option.label}</span>
-                  {option.description ? (
-                    <span
-                      role="tooltip"
-                      className="pointer-events-none absolute bottom-[calc(100%+0.35rem)] left-3 z-[60] hidden w-max max-w-[16rem] rounded-lg border border-border bg-ink px-2.5 py-1.5 text-xs leading-snug font-normal whitespace-normal text-page shadow-lg group-hover/option:block group-focus-visible/option:block"
-                    >
-                      {option.description}
-                    </span>
-                  ) : null}
                 </button>
               </li>
             )
           })}
         </ul>
       ) : null}
+
+      {tooltip && typeof document !== 'undefined'
+        ? createPortal(
+            <FilterTooltip
+              text={tooltip.text}
+              top={tooltip.top}
+              left={tooltip.left}
+              place={tooltip.place}
+            />,
+            document.body,
+          )
+        : null}
+    </div>
+  )
+}
+
+function FilterTooltip({
+  text,
+  top,
+  left,
+  place,
+}: {
+  text: string
+  top: number
+  left: number
+  place: 'left' | 'right'
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [offsetY, setOffsetY] = useState(0)
+
+  useLayoutEffect(() => {
+    const node = ref.current
+    if (!node) return
+    const rect = node.getBoundingClientRect()
+    let next = 0
+    if (rect.top < 8) next = 8 - rect.top
+    if (rect.bottom > window.innerHeight - 8) {
+      next = window.innerHeight - 8 - rect.bottom
+    }
+    setOffsetY(next)
+  }, [text, top, left])
+
+  return (
+    <div
+      ref={ref}
+      role="tooltip"
+      className="pointer-events-none fixed z-[300] max-w-[16rem] rounded-lg border border-border bg-ink px-2.5 py-1.5 text-xs leading-snug text-page shadow-lg"
+      style={{
+        top,
+        left,
+        transform:
+          place === 'right'
+            ? `translateY(calc(-50% + ${offsetY}px))`
+            : `translate(-100%, calc(-50% + ${offsetY}px))`,
+      }}
+    >
+      {text}
     </div>
   )
 }
