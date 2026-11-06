@@ -1019,4 +1019,254 @@ Call out any state that cannot be verified with available tools.`,
     ],
     tags: ['Design', 'UX', 'Accessibility'],
   },
+  {
+    id: 'ai-prompt-concept-critique',
+    title: 'Concept Critique: Good Idea or Bad Idea?',
+    description:
+      'Honest product judgment on the concept: keep, change, or kill — with reasons.',
+    command: `Act as a sharp, honest product collaborator. Critique the concept I describe (or the concept embodied by the current screen / flow / feature).
+
+I want judgment, not cheerleading. Answer these questions directly:
+
+1. Is this a good idea, a mixed idea, or a bad idea for the stated user and context?
+2. What problem does it actually solve — and is that problem real and worth solving now?
+3. What is the strongest version of this idea?
+4. What is the weakest or most dangerous assumption baked into it?
+5. What would you change if you owned the product?
+6. What would you cut, postpone, or refuse to ship?
+7. What simpler alternative might get 80% of the value with half the complexity?
+
+Rules:
+
+* Be specific. Reference the concept’s goals, users, constraints, and tradeoffs.
+* Separate taste opinions from usability, business, and risk arguments.
+* Do not rewrite the whole product unprompted. Recommend the smallest set of meaningful changes.
+* If information is missing (audience, success metric, platform, constraints), list the gaps and critique with explicit assumptions.
+* End with a clear verdict: Ship as-is / Ship with changes / Rethink / Kill — plus the top 3 reasons.
+
+Tone: candid, constructive, senior. No fluff, no empty praise.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Review',
+    type: 'prompt',
+    keywords: [
+      'concept',
+      'critique',
+      'good idea',
+      'bad idea',
+      'product',
+      'judgment',
+      'ai prompt',
+    ],
+    tags: ['Review', 'Planning', 'Product'],
+  },
+  {
+    id: 'ai-prompt-product-designer-opinion',
+    title: 'Product Designer Second Opinion',
+    description:
+      'What a senior product designer would push back on, rethink, or protect.',
+    command: `Respond as a senior product designer reviewing this work (concept, flow, screen, or feature). Give a second opinion I can use in a design critique.
+
+Cover:
+
+* First impression in one sentence (clarity of job-to-be-done)
+* What is working and should be protected
+* What feels off: hierarchy, flow, density, affordances, copy, trust, or coherence
+* Where users will hesitate, mis-click, abandon, or misunderstand
+* Whether the design matches the product’s actual priority (primary action vs decorative noise)
+* Alternatives a strong designer would explore before shipping
+* What you would present differently to stakeholders — framing, risk, and the ask
+
+Then answer explicitly:
+
+* “If this were my product, I would change …”
+* “If this were my product, I would not change …”
+* “The one decision I most disagree with is …”
+
+Constraints:
+
+* Stay conceptual and product-minded unless I ask for implementation detail.
+* Prefer principle-backed critique over personal taste.
+* Offer at most a few concrete redesign directions, ranked, not a sprawling redesign dump.
+* Call out when the brief itself is the problem (wrong goal, wrong audience, conflicting asks).
+
+Close with a short “designer recommendation” paragraph a teammate could act on today.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Review',
+    type: 'prompt',
+    keywords: [
+      'product designer',
+      'second opinion',
+      'critique',
+      'ux',
+      'design review',
+      'ai prompt',
+    ],
+    tags: ['Review', 'Design', 'Product'],
+  },
+  {
+    id: 'ai-prompt-user-flow-walkthrough',
+    title: 'First-Time User Flow Walkthrough',
+    description:
+      'Walk the flow as a new user and flag hesitation, confusion, and drop-off.',
+    command: `Walk through this experience as a first-time user with no prior product knowledge.
+
+Go screen by screen / step by step:
+
+1. What am I trying to accomplish here?
+2. What do I notice first?
+3. What do I think I should do next?
+4. Where might I hesitate, mis-click, or feel lost?
+5. What feedback tells me I succeeded or failed?
+6. What would make me abandon at this step?
+
+Then summarize:
+
+* The happy path in plain language
+* The top friction points ranked by severity
+* Missing reassurance, progress, or wayfinding
+* The smallest UX changes that would make the flow feel obvious
+
+Stay conceptual unless I ask for implementation. Do not invent features outside the current flow unless a missing step is truly blocking.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Review',
+    type: 'prompt',
+    keywords: [
+      'user flow',
+      'walkthrough',
+      'first time',
+      'friction',
+      'ux',
+      'ai prompt',
+    ],
+    tags: ['Review', 'UX'],
+  },
+  {
+    id: 'ai-prompt-design-alternatives',
+    title: 'Explore Design Alternatives',
+    description:
+      'Propose 2–3 distinct directions before committing to one solution.',
+    command: `Before implementing or polishing a single solution, explore alternatives.
+
+Propose 2–3 meaningfully different design directions for the request. For each direction:
+
+* Name it in a few words
+* Describe the core interaction model
+* Say who it serves best
+* List tradeoffs (clarity, speed, flexibility, implementation cost, risk)
+* Note when you would choose it
+
+Then recommend one primary direction and why — with the assumptions behind that choice.
+
+Rules:
+
+* Alternatives must differ in structure or interaction, not just color or spacing
+* Keep each option concise; no full redesign essays
+* If the brief is underspecified, state assumptions before recommending
+* Do not implement yet unless I explicitly ask to build the recommended option`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Planning',
+    type: 'prompt',
+    keywords: [
+      'alternatives',
+      'explore',
+      'directions',
+      'options',
+      'ux',
+      'ai prompt',
+    ],
+    tags: ['Planning', 'Design', 'UX'],
+  },
+  {
+    id: 'ai-prompt-cleanup-not-spaghetti',
+    title: 'Clean Up Code Without Changing UX',
+    description:
+      'Untangle spaghetti, remove redundancy, keep behavior and UI identical.',
+    command: `Clean up this code for a designer → developer handoff. Make it readable and maintainable without changing the user-facing experience.
+
+Goals:
+
+* Untangle spaghetti structure (deep nesting, unclear ownership, mixed concerns)
+* Remove redundant sections, duplicated UI logic, and dead code
+* Clarify naming so a developer can see what each piece is for
+* Keep components/files focused; extract only when it reduces confusion
+* Preserve visual design, interaction behavior, copy, and accessibility
+
+Do not:
+
+* Redesign the UI
+* “Improve” UX unless there is a clear bug
+* Change public behavior, routes, or API contracts
+* Drive-by refactor unrelated files
+* Rewrite from scratch when a surgical cleanup will do
+
+Process:
+
+1. Briefly state what is messy and why it is hard to hand off
+2. Apply the smallest cleanup that makes the code reviewable
+3. Call out any place where cleanup risked behavior change and how you verified it did not
+4. Summarize what a developer should know next
+
+If something looks wrong in the UX while cleaning, note it as a finding — do not silently change it.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Implementation',
+    type: 'prompt',
+    keywords: [
+      'cleanup',
+      'refactor',
+      'spaghetti',
+      'redundant',
+      'handoff',
+      'codex',
+      'ai prompt',
+    ],
+    tags: ['Implementation', 'Handoff'],
+  },
+  {
+    id: 'ai-prompt-ux-interaction-notes',
+    title: 'Add UX/UI Interaction Notes for Devs',
+    description:
+      'Document confusing interactions, expected behavior, and edge cases for handoff.',
+    command: `Add clear UX/UI interaction notes so a developer (or Codex / Cursor / similar) can implement without guessing.
+
+Focus on places that are easy to misunderstand:
+
+* Hover / focus / pressed / disabled / loading behavior
+* What happens on click, double-click, keyboard, and touch
+* Validation timing (on blur vs on submit) and error placement
+* Empty, zero-data, permission-denied, and error states
+* Transitions, delays, optimistic UI, and undo
+* Scroll locking, overlays, dismiss rules, and focus return
+* Responsive differences that change the interaction model
+
+For each non-obvious interaction, write a short note in this shape:
+
+* Element / area:
+* Expected behavior:
+* Why it matters / what people get wrong:
+* Edge cases:
+* Do not:
+
+Prefer plain language over jargon. Attach notes next to the relevant code or handoff doc — do not invent a new documentation system unless asked.
+
+If the current implementation conflicts with good UX defaults, flag the conflict and ask before changing behavior.
+If I paste a screen or flow, derive the notes from that instead of generic advice.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Planning',
+    type: 'prompt',
+    keywords: [
+      'interaction notes',
+      'handoff',
+      'ux notes',
+      'edge cases',
+      'developer',
+      'ai prompt',
+    ],
+    tags: ['Planning', 'Handoff', 'UX'],
+  },
 ]
