@@ -2,7 +2,7 @@ import type { Command } from '../types/command'
 
 /**
  * Tool-agnostic plain-language prompts (not shell/code commands).
- * Discover via Function → AI prompts.
+ * Discover via Function → Prompts.
  * Copied in full; cards only show a short preview ending in ….
  */
 export const aiPrompts: Command[] = [
@@ -35,7 +35,7 @@ Do not hide untested items inside “looks good.” List Not Tested separately.
 Prefer fixing clear misses over writing long analysis.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'qa',
@@ -74,7 +74,7 @@ When finished, diff your work against the checklist and fix misses before you sa
 This prompt is about instruction fidelity. For “keep the diff tiny,” use No Unnecessary Changes.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'strict',
@@ -98,7 +98,7 @@ Implement the ask, then audit the touched UI against Design.md and fix drift.
 If Design.md is missing/inaccessible, stop inventing and tell me what’s blocking.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'design.md',
@@ -124,7 +124,7 @@ Never claim pixel accuracy without an actual visual comparison.
 List unresolved gaps explicitly (missing assets, ambiguous variants, etc.).`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'figma',
@@ -150,7 +150,7 @@ Implement → compare at the closest viewport → fix noticeable deltas.
 End with: matched well · imperfect guesses · could not verify.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'screenshot',
@@ -184,7 +184,7 @@ Protect the product’s intent and visual direction. Do not propose a rebrand or
 If context is missing (goal, audience, constraints), state assumptions in one line and continue.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'design review',
@@ -208,7 +208,7 @@ Apply the refinements, then list what you changed in a short bullet list.
 Skip redesign ideas — park those as separate notes if needed.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'polish',
@@ -238,7 +238,7 @@ Report in four buckets only: Passed · Fixed & retested · Failed · Not tested.
 Never mark something Passed without evidence from this session.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'e2e',
@@ -274,7 +274,7 @@ Summarize: broken → fixed → still risky / untested.
 For intentionally rebuilding layout across breakpoints, use Make This Layout Responsive.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'responsive',
@@ -306,7 +306,7 @@ List what still needs a human + assistive-tech check.
 For design-led inclusive principles (less checklist, more craft), use Accessibility Best Practices Pass.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'accessibility',
@@ -338,7 +338,7 @@ Afterward, read your own diff. Delete any change you cannot justify in one sente
 This prompt is about scope control. For “do exactly what I said,” use Strict Instruction Following.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'minimal',
@@ -368,7 +368,7 @@ End with an explicit verdict: Ship / Ship with conditions / Do not ship — plus
 Keep the write-up short. Depth on blockers beats a tour of every category.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'production',
@@ -394,7 +394,7 @@ If you still can’t tell, ask — don’t guess.
 End with a concise active-requirements list, then implement only from that list (if implementation was requested).`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'conflict',
@@ -422,7 +422,7 @@ You may say the task is complete only if every applicable checklist item is Pass
 If something is Not tested, say so and do not bury it.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'verification',
@@ -457,7 +457,7 @@ If Design.md / tokens exist, follow them.
 If a reference file is missing, say so and use the live UI + project conventions.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'ui',
@@ -489,7 +489,7 @@ Stay inside current product intent. No feature invention.
 If you cannot interact with the UI, reason from structure and mark what is unvalidated.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'ux',
@@ -522,7 +522,7 @@ Explain each change by user impact in one line.
 Skip theoretical issues that do not affect this UI.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'accessibility',
@@ -558,7 +558,7 @@ Summarize by breakpoint: what changed · what still needs a human look.
 For finding breaks without a rebuild, use Responsive Design Audit.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'responsive',
@@ -585,7 +585,7 @@ If Design.md is missing, stop and say what’s needed.
 Deliver: out of date · aligned · still different/blocked.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'design.md',
@@ -610,7 +610,7 @@ Default: apply the copy changes; touch layout only if line length forces it.
 End with a before → after list of meaningful edits only.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'copy',
@@ -636,7 +636,7 @@ Skip micro-optimizations that users won’t feel.
 No performance bragging without a clear before/after rationale.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'performance',
@@ -668,7 +668,7 @@ Scannable. No process theater. Never mark untested as verified.
 If a screenshot/recording would help, note what to capture.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'handoff',
@@ -693,7 +693,7 @@ Ignore style nits unrelated to the ask.
 If the diff is unavailable, say so and stop — do not invent a review.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'diff',
@@ -721,7 +721,7 @@ If the diff is unavailable, say so and stop — do not invent a review.`,
 No fix claims without retest. If you can’t reproduce, say what blocked you and stop guessing.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'debug',
@@ -754,7 +754,7 @@ Skip controls that already have a coherent full set.
 Call out anything you could not verify.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'states',
@@ -787,7 +787,7 @@ End with verdict: Ship as-is / Ship with changes / Rethink / Kill — plus top 3
 No fluff. This is concept-level — not a UI polish pass.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'concept',
@@ -825,7 +825,7 @@ Principle over taste. If the brief itself is wrong, say that first.
 This is opinion/critique — not Senior Product Designer Review’s UI issue list, and not Concept Critique’s ship/kill verdict.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'product designer',
@@ -849,7 +849,7 @@ Then: happy path in plain language · top frictions by severity · missing wayfi
 Don’t invent features unless a missing step truly blocks completion.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'user flow',
@@ -875,7 +875,7 @@ Do not implement unless I explicitly ask.
 If the brief is thin, state assumptions first.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'alternatives',
@@ -912,7 +912,7 @@ Process: say what’s messy → smallest cleanup → how you verified UX unchang
 Prefer clarity over cleverness.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'cleanup',
@@ -949,7 +949,7 @@ If implementation conflicts with good UX defaults, flag it and ask before changi
 If I paste a screen/flow, derive notes from that — no generic textbook advice.`,
     platform: 'aiprompt',
     language: 'prompt',
-    category: 'AI prompts',
+    category: 'Prompts',
     type: 'prompt',
     keywords: [
       'interaction notes',
