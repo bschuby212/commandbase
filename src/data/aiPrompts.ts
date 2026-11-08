@@ -400,7 +400,15 @@ FINAL GATE
     title: 'Pixel-Accurate Figma Implementation',
     description:
       'Translate an existing Figma design into a faithful implementation.',
-    command: `Implement the provided Figma as faithfully as possible. Figma is the visual source of truth — inspect it with available tools/MCP or exports; do not guess from memory. Measurement beats taste.
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Figma link / file: 
+Frame / node name (or paste the frame): 
+Notes / must-match details (optional): 
+══════════════════════════════════════
+
+Implement the provided Figma as faithfully as possible. Figma is the visual source of truth — inspect it with available tools/MCP or exports; do not guess from memory. Measurement beats taste.
 
 MISSION
 Ship a faithful implementation, not an interpretation. Match structure, rhythm, type, color, and states. Call out every intentional deviation with why.
@@ -534,7 +542,16 @@ FINAL GATE
     title: 'Screenshot-to-UI Fidelity',
     description:
       'Recreate an interface from a screenshot without improvisation.',
-    command: `Recreate or correct the UI to match the provided screenshot(s) with high fidelity. The screenshot is the visual target for layout, hierarchy, spacing, type, and color — not a vague mood board.
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Screenshot(s) attached: yes/no
+Which screen / state this is: 
+Must-match notes (optional): 
+Known differences to ignore (optional): 
+══════════════════════════════════════
+
+Recreate or correct the UI to match the provided screenshot(s) with high fidelity. The screenshot is the visual target for layout, hierarchy, spacing, type, and color — not a vague mood board.
 
 Do not redesign. Do not modernize. Do not reinterpret brand.
 
@@ -2522,7 +2539,15 @@ FINAL GATE
     title: 'Diff-Only Review',
     description:
       'Review only the current change set for risk, regressions, and gaps.',
-    command: `Review only the current diff (or specified PR/patch). Do not wander into unrelated code unless the diff clearly breaks it. Catch correctness, UX regressions, and scope creep in what changed.
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+PR / branch / diff scope (optional): 
+What you want reviewed hardest: 
+Known risk areas (optional): 
+══════════════════════════════════════
+
+Review only the current diff (or specified PR/patch). Do not wander into unrelated code unless the diff clearly breaks it. Catch correctness, UX regressions, and scope creep in what changed.
 
 MISSION
 Actionable review comments with severity. Verdict with spine.
@@ -2635,8 +2660,22 @@ FINAL GATE
     id: 'ai-prompt-root-cause-debug',
     title: 'Root-Cause Debug',
     description:
-      'Reproduce the issue, find the real cause, fix it, and retest.',
-    command: `Something is wrong. Find the root cause before changing lots of code. Do not redesign. Do not spray speculative fixes. Do not “clean up” while investigating.
+      'Fill in what’s broken first, then reproduce, find the real cause, fix, and retest.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+What’s broken: 
+Where (screen / component / control): 
+Steps to reproduce / viewport: 
+Expected: 
+Actual: 
+
+(If you only know “it looks wrong,” still name the region and what feels off — layout, type, color, clipping, interaction, or data.)
+══════════════════════════════════════
+
+Use the “What’s broken / Where / Steps / Expected / Actual” fields above as the starting bug report. Treat blank fields as unknown — ask or state assumptions rather than inventing symptoms.
+
+Find the root cause before changing lots of code. Do not redesign. Do not spray speculative fixes. Do not “clean up” while investigating.
 
 MISSION
 Confirm cause with evidence, apply the smallest fix, verify the repro is gone.

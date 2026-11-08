@@ -488,9 +488,23 @@ export const vibeCommands: Command[] = [
   {
     id: 'vibe-cursor-doctor',
     title: 'Why Is This Broken?',
-    description: 'Paste-ready prompt when the UI is wrong and you need a root cause.',
+    description: 'Fill in what’s broken at the top, then get a root-cause triage.',
     command:
-      `Something in this screen is wrong. Do not redesign it. Do not refactor unrelated code. Do not “improve” visuals while debugging.
+      `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+What’s broken: 
+Where (screen / component / control): 
+Steps to reproduce / viewport: 
+Expected: 
+Actual: 
+
+(If you only know “it looks wrong,” still name the region and what feels off — layout, type, color, clipping, interaction, or data.)
+══════════════════════════════════════
+
+Use the “What’s broken / Where / Steps / Expected / Actual” fields above as the bug report. If any field is blank, infer carefully and state assumptions — but prefer the user’s filled-in details over guesswork.
+
+Do not redesign it. Do not refactor unrelated code. Do not “improve” visuals while debugging.
 
 MISSION
 Confirm root cause with evidence, apply the smallest fix, verify the repro is gone, and tell me how to check.
@@ -595,7 +609,15 @@ FINAL GATE
     title: 'Match This Figma Frame',
     description: 'Push the agent to treat Figma as source of truth for spacing/type/color.',
     command:
-      `Implement this to match the provided Figma frame as source of truth. Prefer Figma over your taste. Fidelity work — not a redesign.
+      `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Figma link / file: 
+Frame / node name (or paste the frame): 
+Notes / must-match details (optional): 
+══════════════════════════════════════
+
+Implement this to match the provided Figma frame as source of truth. Prefer Figma over your taste. Fidelity work — not a redesign.
 
 MISSION
 Matched spacing/type/color/states with deviations logged. Region compare required.
@@ -695,7 +717,15 @@ FINAL GATE
     title: 'Mobile-First Pass',
     description: 'Force a mobile layout pass before desktop polish.',
     command:
-      `Do a mobile-first pass for this screen at ~390px (spot-check ~768 if nav/filters change). Fix real mobile failures inside the existing brand — no new features, no desktop redesign, no decorative invention.
+      `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Screen / route: 
+What’s broken on mobile (overflow, stacking, taps, type, etc.): 
+Viewport(s) to prioritize (default ~390): 
+══════════════════════════════════════
+
+Do a mobile-first pass for this screen at ~390px (spot-check ~768 if nav/filters change). Fix real mobile failures inside the existing brand — no new features, no desktop redesign, no decorative invention.
 
 MISSION
 Primary job works on a phone without overflow or unreachable actions.
@@ -790,7 +820,15 @@ FINAL GATE
     title: 'Empty / Loading / Error States',
     description: 'Make the agent finish the non-happy-path UI every PM forgets.',
     command:
-      `Add or improve empty, loading, and error states for this flow so non-happy paths feel intentional and finished.
+      `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Flow / screen: 
+Which states need work (empty / loading / error / all): 
+Notes: 
+══════════════════════════════════════
+
+Add or improve empty, loading, and error states for this flow so non-happy paths feel intentional and finished.
 
 MISSION
 Complete the state set with existing patterns and short actionable copy.
@@ -895,7 +933,15 @@ FINAL GATE
     title: 'Product Copy Pass',
     description: 'Tighten labels, CTAs, and error text without restyling.',
     command:
-      `Do a copy-only pass on this screen: labels, buttons, helper text, empty states, errors, short headings.
+      `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Screen / flow: 
+Copy problems to prioritize (optional): 
+Terms that must stay consistent (optional): 
+══════════════════════════════════════
+
+Do a copy-only pass on this screen: labels, buttons, helper text, empty states, errors, short headings.
 
 MISSION
 Clarity and consistency only — no visual redesign.
@@ -1420,7 +1466,14 @@ FINAL GATE
     title: 'Resolve Conflicting Tailwind Classes',
     description: 'Prompt for cleaning contradictory utility classes on one node.',
     command:
-      `Audit this component for conflicting utility classes (padding, margin, display, position, text size/color, flex/grid, gaps). Keep the intended visual. Remove dead or fighting utilities.
+      `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Component / file path: 
+What looks wrong (or “classes fighting — clean without restyle”): 
+══════════════════════════════════════
+
+Audit this component for conflicting utility classes (padding, margin, display, position, text size/color, flex/grid, gaps). Keep the intended visual. Remove dead or fighting utilities.
 
 MISSION
 Clean class conflicts without restyling. Preserve intended look unless the conflict IS the bug.
