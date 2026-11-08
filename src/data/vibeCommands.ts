@@ -492,17 +492,97 @@ export const vibeCommands: Command[] = [
     command:
       `Something in this screen is wrong. Do not redesign it. Do not refactor unrelated code. Do not “improve” visuals while debugging.
 
-1. Restate what looks broken in concrete, observable terms (layout, type, color, clipping, interaction, data).
-2. Reproduce with available tools; note viewport and steps.
-3. Inspect the relevant components, styles, and data flowing into them.
-4. Rank the most likely root causes; pick the best-supported one and explain why alternatives were rejected.
-5. Apply the smallest fix that addresses that root cause.
-6. Verify the original repro is gone; spot-check one nearby regression risk.
-7. Tell me how to verify visually in a short checklist.
+MISSION
+Confirm root cause with evidence, apply the smallest fix, verify the repro is gone, and tell me how to check.
 
-If you can’t reproduce, say what’s missing. If the cause is upstream (API, content, design inconsistency), stop at the boundary and document it instead of hiding it with a cosmetic patch.
+PHASE 1 — CONCRETE OBSERVATION
+Restate what looks broken in observable terms (layout, type, color, clipping, interaction, data).
 
-Hypothesis mindset: Cause · Why plausible · Evidence · Result. Fix only after confirm/strong evidence, then the smallest patch.`,
+PHASE 2 — REPRODUCE
+Reproduce with available tools; note viewport and steps. If you can’t, say what’s missing.
+
+PHASE 3 — INSPECT & RANK CAUSES
+Inspect relevant components/styles/data. Rank likely causes; pick best-supported; explain why alternatives were rejected.
+
+PHASE 4 — FIX & VERIFY
+Apply smallest root-cause fix. Verify repro gone; spot-check one nearby risk. Provide a short visual verify checklist.
+
+HYPOTHESIS TABLE
+Cause | Why plausible | Evidence to confirm | Result
+
+UPSTREAM
+If API/content/design inconsistency is the cause, stop at the boundary — don’t hide with a cosmetic patch unless I ask for a workaround.
+
+ANTI-PATTERNS
+No redesign-as-debug. No speculative triple CSS tweaks. No unrelated cleanup.
+
+OUTPUT
+Repro · table · cause · fix · verify checklist.
+
+DIFF HYGIENE DEFAULTS
+Touch the fewest files that can satisfy the ask.
+No drive-by renames, import resorts, or format-only hunks outside edited lines.
+No new abstractions unless duplication already blocks a correct fix.
+No dependency bumps, token migrations, or “while I was here” refactors.
+If you find a nearby bug that doesn’t block verification, mention it — don’t bundle it.
+If the diff grows, explain what forced it and whether it can be split for review.
+
+EVIDENCE STANDARDS
+Complete requires observation of real behavior or UI at the relevant width/state — not file presence, not “should work,” not “looks wired up.”
+Partial requires naming the exact missing slice so a stranger could finish it.
+Missing means you searched and found no credible path.
+Superseded needs a citation to the newer instruction.
+Not Tested needs a concrete blocker (env, auth, missing asset, unreachable preview).
+
+When status is contested, split claims into Observed / Inferred / Assumed.
+Prefer a narrow fix you can retest over a broad rewrite you cannot.
+After fixing shared state (filters, theme, routing, auth, global CSS), re-check one adjacent path for regressions.
+
+DEBUG ETHICS
+No cosmetic cover-ups. No drive-by redesign. Smallest reversible fix wins.
+
+DETAILED EXECUTION EXPECTATIONS
+• Be specific to the current screen/flow — no generic filler
+• Use available tools to inspect UI/code before concluding
+• Prefer smallest correct change
+• Map every edit back to the ask
+• List what you refused to do
+
+
+EDGE CASES TO EXPLICITLY CONSIDER
+• Long content / truncation / wrapping at narrow widths
+• Empty vs error vs loading confusion
+• Permission-denied or logged-out entry
+• Double-submit / rapid repeat clicks
+• Browser back/forward mid-flow
+• Dark mode token mistakes if the product supports themes
+• First visit vs returning visit
+• Missing assets / failed image loads
+If a case is out of scope for THIS ask, say so — don’t silently ignore it as if it passed.
+
+
+COMMUNICATION STANDARD
+• Plain language, scannable bullets/tables
+• Severity labels when reviewing (Blocker / Major / Minor)
+• For each meaningful change: what changed · why it improves the outcome · how to verify
+• Separate Observed / Inferred / Assumed when status is contested
+• Never claim Complete without evidence
+
+
+STOP CONDITIONS
+• Stop when the ask’s acceptance criteria are met with evidence
+• Stop instead of inventing adjacent work
+• Stop and ask (or state one assumption) when a wrong guess is expensive
+• Stop at system boundaries (Design.md / Figma / screenshot) rather than “improving” them unasked
+
+══════════════════════════════════════
+FINAL GATE
+══════════════════════════════════════
+1. Restate done-criteria for THIS ask as 3–8 pass/fail bullets.
+2. Show evidence: what you inspected (UI paths, widths, states, files, tools).
+3. List residual risks and the non-goals / must-not-changes you respected.
+4. Give me the shortest path to re-verify your work myself.
+5. If anything remains open, name the single next best move (and whether it blocks ship).`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
@@ -515,18 +595,94 @@ Hypothesis mindset: Cause · Why plausible · Evidence · Result. Fix only after
     title: 'Match This Figma Frame',
     description: 'Push the agent to treat Figma as source of truth for spacing/type/color.',
     command:
-      `Implement this to match the provided Figma frame as source of truth. Prefer Figma over your taste. This is fidelity work, not a redesign.
+      `Implement this to match the provided Figma frame as source of truth. Prefer Figma over your taste. Fidelity work — not a redesign.
 
-* Inspect the frame with available tools/MCP; don’t guess from memory
-* Match layout/Auto Layout, spacing, type scale, color (map to tokens when equivalents exist), radii, elevation, assets, and component states
-* Reuse existing project components when they fit
-* Call out every intentional deviation (missing asset, font gap, token gap, platform limit) with why
-* Do not rewrite architecture or invent new visual patterns
-* Verify section-by-section against the frame and summarize matched / approximate / blocked
+MISSION
+Matched spacing/type/color/states with deviations logged. Region compare required.
 
-Focus on spacing, type, color tokens, and states — not a creative reinterpretation. If Approximate, say what would make it Matched.
+PHASE 1 — INSPECT FRAME
+Use tools/MCP/exports — don’t guess from memory.
 
-State coverage: if Figma shows hover/selected/disabled/error, those are part of fidelity — not optional polish. Don’t silently swap icons “close enough.”`,
+PHASE 2 — MATCH
+Layout/Auto Layout · spacing · type scale · color (token-map when possible) · radii/elevation · assets · component states. Reuse project components when they fit.
+
+PHASE 3 — VERIFY
+Section-by-section compare. Summarize matched / approximate / blocked. If Approximate, say what would make it Matched.
+
+STATES & ASSETS
+Shown hover/selected/disabled/error are fidelity. No silent close-enough icon swaps.
+
+ANTI-PATTERNS
+No creative reinterpretation. No architecture rewrite under fidelity cover.
+
+OUTPUT
+Fidelity summary + deviations + risks.
+
+SYSTEM FIDELITY CHECKS
+If Design.md / tokens exist, treat them as binding for color roles, type ramp, spacing scale, radius/elevation, component variants, icon rules, responsive behavior, and states — unless I explicitly override.
+Reuse order: exact variant → existing component + props → compose primitives → new primitive only with a named system gap (call the gap out).
+Red flags on touched UI: hardcoded hex beside tokens, one-off radii/shadows, custom focus rings, ad-hoc icon sizes, magic spacing, parallel button/input styles.
+If Design.md is missing, say so and fall back to the strongest live patterns — labeled as fallback, not as a new system.
+
+STATE COMPLETENESS LENS
+Where relevant, account for: default · hover · focus-visible · active/pressed · selected/toggled · disabled/read-only · loading/submitting · empty · error/invalid · success · permission-denied · overflow/truncation.
+Use existing variants/tokens. Don’t invent a parallel state language.
+Loading should prevent double-submit where relevant.
+Empty/error copy: what happened + what to do next — short and human.
+
+DIFF HYGIENE DEFAULTS
+Touch the fewest files that can satisfy the ask.
+No drive-by renames, import resorts, or format-only hunks outside edited lines.
+No new abstractions unless duplication already blocks a correct fix.
+No dependency bumps, token migrations, or “while I was here” refactors.
+If you find a nearby bug that doesn’t block verification, mention it — don’t bundle it.
+If the diff grows, explain what forced it and whether it can be split for review.
+
+FIDELITY NON-NEGOTIABLES
+Spacing rhythm · type styles · color roles · shown states. Taste is irrelevant.
+
+DETAILED EXECUTION EXPECTATIONS
+• Be specific to the current screen/flow — no generic filler
+• Use available tools to inspect UI/code before concluding
+• Prefer smallest correct change
+• Map every edit back to the ask
+• List what you refused to do
+
+
+EDGE CASES TO EXPLICITLY CONSIDER
+• Long content / truncation / wrapping at narrow widths
+• Empty vs error vs loading confusion
+• Permission-denied or logged-out entry
+• Double-submit / rapid repeat clicks
+• Browser back/forward mid-flow
+• Dark mode token mistakes if the product supports themes
+• First visit vs returning visit
+• Missing assets / failed image loads
+If a case is out of scope for THIS ask, say so — don’t silently ignore it as if it passed.
+
+
+COMMUNICATION STANDARD
+• Plain language, scannable bullets/tables
+• Severity labels when reviewing (Blocker / Major / Minor)
+• For each meaningful change: what changed · why it improves the outcome · how to verify
+• Separate Observed / Inferred / Assumed when status is contested
+• Never claim Complete without evidence
+
+
+STOP CONDITIONS
+• Stop when the ask’s acceptance criteria are met with evidence
+• Stop instead of inventing adjacent work
+• Stop and ask (or state one assumption) when a wrong guess is expensive
+• Stop at system boundaries (Design.md / Figma / screenshot) rather than “improving” them unasked
+
+══════════════════════════════════════
+FINAL GATE
+══════════════════════════════════════
+1. Restate done-criteria for THIS ask as 3–8 pass/fail bullets.
+2. Show evidence: what you inspected (UI paths, widths, states, files, tools).
+3. List residual risks and the non-goals / must-not-changes you respected.
+4. Give me the shortest path to re-verify your work myself.
+5. If anything remains open, name the single next best move (and whether it blocks ship).`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
@@ -539,20 +695,89 @@ State coverage: if Figma shows hover/selected/disabled/error, those are part of 
     title: 'Mobile-First Pass',
     description: 'Force a mobile layout pass before desktop polish.',
     command:
-      `Do a mobile-first pass for this screen at ~390px width (also spot-check ~768 if filters/nav change pattern). Fix real mobile failures inside the existing brand — no new feature work, no desktop redesign, no decorative invention.
+      `Do a mobile-first pass for this screen at ~390px (spot-check ~768 if nav/filters change). Fix real mobile failures inside the existing brand — no new features, no desktop redesign, no decorative invention.
 
-* Kill horizontal overflow and clipped controls
-* Fix stacking order so the primary job still leads
-* Improve tap targets and spacing between controls
-* Adjust typography for readable line length/size without inventing a parallel mobile type system
-* Ensure sticky headers/CTAs don’t eat the viewport
-* Use existing sheet/drawer/collapse patterns for nav/filters when needed
-* Prefer layout/CSS fixes over JS hacks
-* Follow Design.md responsive rules when present; if missing, say so and mirror live app patterns
+MISSION
+Primary job works on a phone without overflow or unreachable actions.
 
-Worst first: overflow and unreachable primary actions before type nitpicks. Show before/after notes for the worst issues and list what you deferred as lower impact.
+PHASE 1 — AUDIT 390 (AND 768 IF NEEDED)
+Overflow/clipping · stacking order · tap targets/spacing · type readability · sticky chrome · filters/nav via existing sheets/drawers.
 
-Verify matrix mentally: at 390/768 — overflow? primary CTA reachable? type OK? Document deferred items.`,
+PHASE 2 — FIX WORST FIRST
+Overflow and unreachable primary actions before type nitpicks. Prefer layout/CSS over JS hacks. Follow Design.md responsive rules when present; else mirror live patterns and say so.
+
+MATRIX
+Check project breakpoints if documented; otherwise use ~390, ~768, ~1024, ~1280.
+At each width record: horizontal overflow? primary CTA reachable? type readable? sticky chrome eating viewport? filters/nav usable via existing collapse patterns?
+Mobile failure taxonomy: 100vw / fixed min-widths / unshrinkable flex children · stacked stickies · tap targets under ~44px or cramped gaps · hover-only affordances · type that jumps from quiet to shouty.
+Tablet often breaks side-by-side first — don’t skip it.
+Prefer existing sheets/drawers/stacks over inventing a new mobile IA.
+
+ANTI-PATTERNS
+Don’t invent a parallel mobile type system. Don’t hide critical actions behind unlabeled icons without a product decision.
+
+OUTPUT
+Before/after on worst issues · deferred list · widths verified.
+
+SYSTEM FIDELITY CHECKS
+If Design.md / tokens exist, treat them as binding for color roles, type ramp, spacing scale, radius/elevation, component variants, icon rules, responsive behavior, and states — unless I explicitly override.
+Reuse order: exact variant → existing component + props → compose primitives → new primitive only with a named system gap (call the gap out).
+Red flags on touched UI: hardcoded hex beside tokens, one-off radii/shadows, custom focus rings, ad-hoc icon sizes, magic spacing, parallel button/input styles.
+If Design.md is missing, say so and fall back to the strongest live patterns — labeled as fallback, not as a new system.
+
+DIFF HYGIENE DEFAULTS
+Touch the fewest files that can satisfy the ask.
+No drive-by renames, import resorts, or format-only hunks outside edited lines.
+No new abstractions unless duplication already blocks a correct fix.
+No dependency bumps, token migrations, or “while I was here” refactors.
+If you find a nearby bug that doesn’t block verification, mention it — don’t bundle it.
+If the diff grows, explain what forced it and whether it can be split for review.
+
+PHONE JOB ONE
+If the primary action isn’t obvious/reachable at 390, that’s the top bug.
+
+DETAILED EXECUTION EXPECTATIONS
+• Be specific to the current screen/flow — no generic filler
+• Use available tools to inspect UI/code before concluding
+• Prefer smallest correct change
+• Map every edit back to the ask
+• List what you refused to do
+
+
+EDGE CASES TO EXPLICITLY CONSIDER
+• Long content / truncation / wrapping at narrow widths
+• Empty vs error vs loading confusion
+• Permission-denied or logged-out entry
+• Double-submit / rapid repeat clicks
+• Browser back/forward mid-flow
+• Dark mode token mistakes if the product supports themes
+• First visit vs returning visit
+• Missing assets / failed image loads
+If a case is out of scope for THIS ask, say so — don’t silently ignore it as if it passed.
+
+
+COMMUNICATION STANDARD
+• Plain language, scannable bullets/tables
+• Severity labels when reviewing (Blocker / Major / Minor)
+• For each meaningful change: what changed · why it improves the outcome · how to verify
+• Separate Observed / Inferred / Assumed when status is contested
+• Never claim Complete without evidence
+
+
+STOP CONDITIONS
+• Stop when the ask’s acceptance criteria are met with evidence
+• Stop instead of inventing adjacent work
+• Stop and ask (or state one assumption) when a wrong guess is expensive
+• Stop at system boundaries (Design.md / Figma / screenshot) rather than “improving” them unasked
+
+══════════════════════════════════════
+FINAL GATE
+══════════════════════════════════════
+1. Restate done-criteria for THIS ask as 3–8 pass/fail bullets.
+2. Show evidence: what you inspected (UI paths, widths, states, files, tools).
+3. List residual risks and the non-goals / must-not-changes you respected.
+4. Give me the shortest path to re-verify your work myself.
+5. If anything remains open, name the single next best move (and whether it blocks ship).`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
@@ -567,19 +792,97 @@ Verify matrix mentally: at 390/768 — overflow? primary CTA reachable? type OK?
     command:
       `Add or improve empty, loading, and error states for this flow so non-happy paths feel intentional and finished.
 
-* Inventory where empty/loading/error can appear
-* Match existing components, tokens, and patterns (skeletons vs spinners, inline errors vs banners)
-* Keep copy human, short, and actionable (what happened + what to do next)
-* Preserve layout stability where possible (avoid huge jumps)
-* Don’t invent new illustration systems or decorative empty-state marketing
-* Ensure disabled/loading buttons prevent double-submit where relevant
-* Check keyboard focus and accessible naming still make sense
+MISSION
+Complete the state set with existing patterns and short actionable copy.
 
-Copy pattern: title (what’s missing) → one line reason/next step → optional single action. Avoid blamey or jokey empty states unless the product voice already does that.
+PHASE 1 — INVENTORY
+Where empty/loading/error/success can appear.
 
-List each state you touched with before→after intent. No unrelated visual redesign of the happy path.
+PHASE 2 — IMPLEMENT WITH PATTERNS
+Match components/tokens (skeletons vs spinners, inline errors vs banners). Preserve layout stability. Prevent double-submit on loading. Keep a11y names/focus sane.
 
-List each state touched. No happy-path redesign while adding empties.`,
+COPY PATTERN
+Title (what’s missing) → one line reason/next step → optional single action. Avoid blamey/jokey empties unless product voice already does that.
+
+STATE LENS
+Where relevant, account for: default · hover · focus-visible · active/pressed · selected/toggled · disabled/read-only · loading/submitting · empty · error/invalid · success · permission-denied · overflow/truncation.
+Use existing variants/tokens. Don’t invent a parallel state language.
+Loading should prevent double-submit where relevant.
+Empty/error copy: what happened + what to do next — short and human.
+
+ANTI-PATTERNS
+No new illustration system. No happy-path redesign while adding empties.
+
+OUTPUT
+States touched with before→after intent.
+
+SYSTEM FIDELITY CHECKS
+If Design.md / tokens exist, treat them as binding for color roles, type ramp, spacing scale, radius/elevation, component variants, icon rules, responsive behavior, and states — unless I explicitly override.
+Reuse order: exact variant → existing component + props → compose primitives → new primitive only with a named system gap (call the gap out).
+Red flags on touched UI: hardcoded hex beside tokens, one-off radii/shadows, custom focus rings, ad-hoc icon sizes, magic spacing, parallel button/input styles.
+If Design.md is missing, say so and fall back to the strongest live patterns — labeled as fallback, not as a new system.
+
+ACCESS & INTERACTION BASELINE
+Critical paths first (enter, create, submit, navigate, pay).
+Prefer correct elements and visible labels over ARIA patches.
+Keyboard: operable without pointer; visible focus; no traps; dialogs move/restore focus; Esc/dismiss consistent with product patterns.
+Name/role/value: icon-only controls named; expandables expose state; errors associated to fields.
+Targets and contrast: practical hit areas; text/essential icons meet a usable contrast bar; fix via tokens when possible.
+Don’t restyle the product under an “a11y look” cover unless contrast/layout truly blocks access.
+
+DIFF HYGIENE DEFAULTS
+Touch the fewest files that can satisfy the ask.
+No drive-by renames, import resorts, or format-only hunks outside edited lines.
+No new abstractions unless duplication already blocks a correct fix.
+No dependency bumps, token migrations, or “while I was here” refactors.
+If you find a nearby bug that doesn’t block verification, mention it — don’t bundle it.
+If the diff grows, explain what forced it and whether it can be split for review.
+
+NON-HAPPY PATH FINISH LINE
+Empty/loading/error should feel designed, not forgotten.
+
+DETAILED EXECUTION EXPECTATIONS
+• Be specific to the current screen/flow — no generic filler
+• Use available tools to inspect UI/code before concluding
+• Prefer smallest correct change
+• Map every edit back to the ask
+• List what you refused to do
+
+
+EDGE CASES TO EXPLICITLY CONSIDER
+• Long content / truncation / wrapping at narrow widths
+• Empty vs error vs loading confusion
+• Permission-denied or logged-out entry
+• Double-submit / rapid repeat clicks
+• Browser back/forward mid-flow
+• Dark mode token mistakes if the product supports themes
+• First visit vs returning visit
+• Missing assets / failed image loads
+If a case is out of scope for THIS ask, say so — don’t silently ignore it as if it passed.
+
+
+COMMUNICATION STANDARD
+• Plain language, scannable bullets/tables
+• Severity labels when reviewing (Blocker / Major / Minor)
+• For each meaningful change: what changed · why it improves the outcome · how to verify
+• Separate Observed / Inferred / Assumed when status is contested
+• Never claim Complete without evidence
+
+
+STOP CONDITIONS
+• Stop when the ask’s acceptance criteria are met with evidence
+• Stop instead of inventing adjacent work
+• Stop and ask (or state one assumption) when a wrong guess is expensive
+• Stop at system boundaries (Design.md / Figma / screenshot) rather than “improving” them unasked
+
+══════════════════════════════════════
+FINAL GATE
+══════════════════════════════════════
+1. Restate done-criteria for THIS ask as 3–8 pass/fail bullets.
+2. Show evidence: what you inspected (UI paths, widths, states, files, tools).
+3. List residual risks and the non-goals / must-not-changes you respected.
+4. Give me the shortest path to re-verify your work myself.
+5. If anything remains open, name the single next best move (and whether it blocks ship).`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
@@ -592,24 +895,79 @@ List each state touched. No happy-path redesign while adding empties.`,
     title: 'Product Copy Pass',
     description: 'Tighten labels, CTAs, and error text without restyling.',
     command:
-      `Do a copy-only pass on this screen: labels, buttons, helper text, empty states, errors, and short headings.
+      `Do a copy-only pass on this screen: labels, buttons, helper text, empty states, errors, short headings.
 
-Rules:
+MISSION
+Clarity and consistency only — no visual redesign.
 
-* No visual redesign, spacing changes, or new components
-* Prefer plain language; clarity over cleverness
-* Same concept → same word
-* Action verbs on buttons; specific recoverable errors
-* Empty states say what’s missing and the next step
-* Match the product’s existing capitalization and tone
-* Don’t invent feature names that conflict with current product language
-* Don’t rewrite the whole product voice — only this screen’s user-facing strings
+PHASE 1 — INVENTORY & STANDARDIZE
+Collect strings. Fix vague/inconsistent/scary/bloated copy. Kill synonym drift to the product’s chosen terms.
 
-Audit synonym drift (e.g., Prompt vs Ask vs Command) and standardize to the product’s chosen term.
+PHASE 2 — APPLY
+Plain language · verbs on actions · recoverable errors · empties with next step · match capitalization/tone · no conflicting invented feature names.
 
-Return a short before→after list and any terms you standardized. Flag open product/legal questions instead of guessing.
+DELIVERABLE
+Before→after list · glossary · open product/legal questions (don’t guess).
 
-No layout restyle to fit copy unless a label clearly breaks the component.`,
+ANTI-PATTERNS
+No spacing/component changes unless a label truly breaks the layout. No product-wide voice rewrite.
+
+OUTPUT
+Before→after + glossary + questions.
+
+DIFF HYGIENE DEFAULTS
+Touch the fewest files that can satisfy the ask.
+No drive-by renames, import resorts, or format-only hunks outside edited lines.
+No new abstractions unless duplication already blocks a correct fix.
+No dependency bumps, token migrations, or “while I was here” refactors.
+If you find a nearby bug that doesn’t block verification, mention it — don’t bundle it.
+If the diff grows, explain what forced it and whether it can be split for review.
+
+WORDS ONLY
+If you changed CSS, you went out of scope.
+
+DETAILED EXECUTION EXPECTATIONS
+• Be specific to the current screen/flow — no generic filler
+• Use available tools to inspect UI/code before concluding
+• Prefer smallest correct change
+• Map every edit back to the ask
+• List what you refused to do
+
+
+EDGE CASES TO EXPLICITLY CONSIDER
+• Long content / truncation / wrapping at narrow widths
+• Empty vs error vs loading confusion
+• Permission-denied or logged-out entry
+• Double-submit / rapid repeat clicks
+• Browser back/forward mid-flow
+• Dark mode token mistakes if the product supports themes
+• First visit vs returning visit
+• Missing assets / failed image loads
+If a case is out of scope for THIS ask, say so — don’t silently ignore it as if it passed.
+
+
+COMMUNICATION STANDARD
+• Plain language, scannable bullets/tables
+• Severity labels when reviewing (Blocker / Major / Minor)
+• For each meaningful change: what changed · why it improves the outcome · how to verify
+• Separate Observed / Inferred / Assumed when status is contested
+• Never claim Complete without evidence
+
+
+STOP CONDITIONS
+• Stop when the ask’s acceptance criteria are met with evidence
+• Stop instead of inventing adjacent work
+• Stop and ask (or state one assumption) when a wrong guess is expensive
+• Stop at system boundaries (Design.md / Figma / screenshot) rather than “improving” them unasked
+
+══════════════════════════════════════
+FINAL GATE
+══════════════════════════════════════
+1. Restate done-criteria for THIS ask as 3–8 pass/fail bullets.
+2. Show evidence: what you inspected (UI paths, widths, states, files, tools).
+3. List residual risks and the non-goals / must-not-changes you respected.
+4. Give me the shortest path to re-verify your work myself.
+5. If anything remains open, name the single next best move (and whether it blocks ship).`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
@@ -622,20 +980,73 @@ No layout restyle to fit copy unless a label clearly breaks the component.`,
     title: 'Stakeholder Summary',
     description: 'Turn a messy coding session into a PM-friendly update.',
     command:
-      `Write a stakeholder update for this change in plain language a PM or lead can paste into Slack.
+      `Write a stakeholder update for this change in plain language a PM or lead can paste into Slack. Readable in 30–45 seconds.
 
-Include:
+MISSION
+Translate craft into outcomes — not commits.
 
-* What users will notice (outcomes, not components)
-* What’s still rough / explicitly unfinished
-* Risks or unknowns
-* How to try it (URL/steps/viewport)
-* Decisions that need input (if any)
-* One-line bottom line (ship / needs review / blocked)
+PHASE 1 — DRAFT
+What users will notice · what’s still rough · risks/unknowns · how to try (URL/steps/viewport) · decisions needed · one-line bottom line (ship / needs review / blocked).
 
-No implementation dump, no file lists unless a risk depends on them. Keep it scannable — readable in 30–45 seconds. If Design.md / Figma drove decisions, mention the source of truth in one line.
+SOURCE OF TRUTH
+If Design.md/Figma drove decisions, mention in one line.
 
-Translate craft into outcomes — not commits.`,
+ANTI-PATTERNS
+No implementation dump. No file lists unless a risk depends on them.
+
+OUTPUT
+Paste-ready Slack update.
+
+KEEP ARTIFACTS SCANNABLE
+Prefer tables/checklists over essays.
+Every finding should include: location, severity (Blocker/Major/Minor when reviewing), why it matters, smallest fix, and whether you applied it.
+End with risks and how I can verify quickly.
+
+SLACK-READY
+No jargon dump. Outcomes first. Bottom line last.
+
+DETAILED EXECUTION EXPECTATIONS
+• Be specific to the current screen/flow — no generic filler
+• Use available tools to inspect UI/code before concluding
+• Prefer smallest correct change
+• Map every edit back to the ask
+• List what you refused to do
+
+
+EDGE CASES TO EXPLICITLY CONSIDER
+• Long content / truncation / wrapping at narrow widths
+• Empty vs error vs loading confusion
+• Permission-denied or logged-out entry
+• Double-submit / rapid repeat clicks
+• Browser back/forward mid-flow
+• Dark mode token mistakes if the product supports themes
+• First visit vs returning visit
+• Missing assets / failed image loads
+If a case is out of scope for THIS ask, say so — don’t silently ignore it as if it passed.
+
+
+COMMUNICATION STANDARD
+• Plain language, scannable bullets/tables
+• Severity labels when reviewing (Blocker / Major / Minor)
+• For each meaningful change: what changed · why it improves the outcome · how to verify
+• Separate Observed / Inferred / Assumed when status is contested
+• Never claim Complete without evidence
+
+
+STOP CONDITIONS
+• Stop when the ask’s acceptance criteria are met with evidence
+• Stop instead of inventing adjacent work
+• Stop and ask (or state one assumption) when a wrong guess is expensive
+• Stop at system boundaries (Design.md / Figma / screenshot) rather than “improving” them unasked
+
+══════════════════════════════════════
+FINAL GATE
+══════════════════════════════════════
+1. Restate done-criteria for THIS ask as 3–8 pass/fail bullets.
+2. Show evidence: what you inspected (UI paths, widths, states, files, tools).
+3. List residual risks and the non-goals / must-not-changes you respected.
+4. Give me the shortest path to re-verify your work myself.
+5. If anything remains open, name the single next best move (and whether it blocks ship).`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
@@ -650,20 +1061,90 @@ Translate craft into outcomes — not commits.`,
     command:
       `From my request and this UI, write crisp acceptance criteria an engineer and QA can test. Do not implement yet.
 
-* Cover the primary user job end-to-end in observable pass/fail terms
-* Include meaningful edge cases: empty, error, long content, permission-denied if relevant
-* Include responsive must-haves at key widths used by this product
-* Include accessibility must-haves for critical interactions (keyboard, labels, focus visibility)
-* Use Given/When/Then or a tight checklist — each item must be testable without guessing
-* Separate MUST vs SHOULD
-* Call out assumptions and open questions explicitly
-* Avoid implementation detail (“use flexbox”) unless it is truly a product requirement
+MISSION
+Observable MUST/SHOULD criteria specific to this screen/flow — not generic QA boilerplate.
 
-Testability test: if two engineers could disagree whether a criterion passed, rewrite it until they wouldn’t.
+PHASE 1 — DERIVE
+Primary job end-to-end · edges (empty/error/long content/permissions) · responsive must-haves · a11y must-haves for critical interactions (keyboard/labels/focus).
 
-Output criteria only, ready to paste into a ticket. Be specific to this screen/flow, not generic QA boilerplate.
+PHASE 2 — WRITE TESTABLE ITEMS
+Given/When/Then or tight checklist. Separate MUST vs SHOULD. Call out assumptions/open questions. Avoid implementation detail unless truly required.
 
-Be specific to this screen/flow, not generic QA boilerplate.`,
+TESTABILITY TEST
+If two engineers could disagree whether it passed, rewrite until they wouldn’t.
+
+ANTI-PATTERNS
+No implementing. No vague criteria. No generic boilerplate.
+
+OUTPUT
+Paste-ready ticket criteria only.
+
+RESPONSIVE VERIFICATION MATRIX
+Check project breakpoints if documented; otherwise use ~390, ~768, ~1024, ~1280.
+At each width record: horizontal overflow? primary CTA reachable? type readable? sticky chrome eating viewport? filters/nav usable via existing collapse patterns?
+Mobile failure taxonomy: 100vw / fixed min-widths / unshrinkable flex children · stacked stickies · tap targets under ~44px or cramped gaps · hover-only affordances · type that jumps from quiet to shouty.
+Tablet often breaks side-by-side first — don’t skip it.
+Prefer existing sheets/drawers/stacks over inventing a new mobile IA.
+
+ACCESS & INTERACTION BASELINE
+Critical paths first (enter, create, submit, navigate, pay).
+Prefer correct elements and visible labels over ARIA patches.
+Keyboard: operable without pointer; visible focus; no traps; dialogs move/restore focus; Esc/dismiss consistent with product patterns.
+Name/role/value: icon-only controls named; expandables expose state; errors associated to fields.
+Targets and contrast: practical hit areas; text/essential icons meet a usable contrast bar; fix via tokens when possible.
+Don’t restyle the product under an “a11y look” cover unless contrast/layout truly blocks access.
+
+STATE COMPLETENESS LENS
+Where relevant, account for: default · hover · focus-visible · active/pressed · selected/toggled · disabled/read-only · loading/submitting · empty · error/invalid · success · permission-denied · overflow/truncation.
+Use existing variants/tokens. Don’t invent a parallel state language.
+Loading should prevent double-submit where relevant.
+Empty/error copy: what happened + what to do next — short and human.
+
+TESTABLE OR REWRITE
+Ambiguous criteria are defects in the criteria.
+
+DETAILED EXECUTION EXPECTATIONS
+• Be specific to the current screen/flow — no generic filler
+• Use available tools to inspect UI/code before concluding
+• Prefer smallest correct change
+• Map every edit back to the ask
+• List what you refused to do
+
+
+EDGE CASES TO EXPLICITLY CONSIDER
+• Long content / truncation / wrapping at narrow widths
+• Empty vs error vs loading confusion
+• Permission-denied or logged-out entry
+• Double-submit / rapid repeat clicks
+• Browser back/forward mid-flow
+• Dark mode token mistakes if the product supports themes
+• First visit vs returning visit
+• Missing assets / failed image loads
+If a case is out of scope for THIS ask, say so — don’t silently ignore it as if it passed.
+
+
+COMMUNICATION STANDARD
+• Plain language, scannable bullets/tables
+• Severity labels when reviewing (Blocker / Major / Minor)
+• For each meaningful change: what changed · why it improves the outcome · how to verify
+• Separate Observed / Inferred / Assumed when status is contested
+• Never claim Complete without evidence
+
+
+STOP CONDITIONS
+• Stop when the ask’s acceptance criteria are met with evidence
+• Stop instead of inventing adjacent work
+• Stop and ask (or state one assumption) when a wrong guess is expensive
+• Stop at system boundaries (Design.md / Figma / screenshot) rather than “improving” them unasked
+
+══════════════════════════════════════
+FINAL GATE
+══════════════════════════════════════
+1. Restate done-criteria for THIS ask as 3–8 pass/fail bullets.
+2. Show evidence: what you inspected (UI paths, widths, states, files, tools).
+3. List residual risks and the non-goals / must-not-changes you respected.
+4. Give me the shortest path to re-verify your work myself.
+5. If anything remains open, name the single next best move (and whether it blocks ship).`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
@@ -678,18 +1159,85 @@ Be specific to this screen/flow, not generic QA boilerplate.`,
     command:
       `Propose the smallest shippable slice of this UI for today. Be ruthless. Optimize for a reviewable demo that proves the core user job — not a half-polished everything.
 
-1. Restate the user outcome that must be true to learn something useful in a review.
-2. Separate must-have vs later vs never.
-3. If you already built extras, identify exactly what to revert, hide, or stub.
-4. Prefer cutting secondary states/decoration/edge polish over gutting the primary path.
-5. Name risks of shipping the cut slice (what can go wrong, what we will not know yet).
-6. Propose a verification path for the demo (who clicks what, at which width).
+MISSION
+A vertical slice plan stakeholders can agree on before more building.
 
-Prefer a vertical slice of the real job over horizontal stubs of everything. Name what the audience should judge in the demo.
+PHASE 1 — DEFINE THE LEARNING
+Restate the user outcome that must be true to learn something useful in review.
 
-Do not implement the cut unless I ask — first give the plan clearly so we can agree.
+PHASE 2 — CUT
+Must-have vs later vs never. If already overbuilt, identify exact reverts/hides/stubs. Prefer cutting secondary states/decoration over gutting the primary path.
 
-Plan first unless I ask to execute the cut.`,
+PHASE 3 — DEMO PLAN
+Risks of the cut · verification path (who clicks what, which width) · what the audience should judge.
+
+SHAPE
+Prefer vertical slice of the real job over horizontal stubs of everything.
+
+ANTI-PATTERNS
+Don’t implement the cut unless I ask — plan first. Don’t “cut” by deleting the primary path.
+
+OUTPUT
+Must/later/never · reverts · risks · demo verification.
+
+KEEP ARTIFACTS SCANNABLE
+Prefer tables/checklists over essays.
+Every finding should include: location, severity (Blocker/Major/Minor when reviewing), why it matters, smallest fix, and whether you applied it.
+End with risks and how I can verify quickly.
+
+DIFF HYGIENE DEFAULTS
+Touch the fewest files that can satisfy the ask.
+No drive-by renames, import resorts, or format-only hunks outside edited lines.
+No new abstractions unless duplication already blocks a correct fix.
+No dependency bumps, token migrations, or “while I was here” refactors.
+If you find a nearby bug that doesn’t block verification, mention it — don’t bundle it.
+If the diff grows, explain what forced it and whether it can be split for review.
+
+DEMO WORTHINESS
+If the slice doesn’t prove the job, cut differently.
+
+DETAILED EXECUTION EXPECTATIONS
+• Be specific to the current screen/flow — no generic filler
+• Use available tools to inspect UI/code before concluding
+• Prefer smallest correct change
+• Map every edit back to the ask
+• List what you refused to do
+
+
+EDGE CASES TO EXPLICITLY CONSIDER
+• Long content / truncation / wrapping at narrow widths
+• Empty vs error vs loading confusion
+• Permission-denied or logged-out entry
+• Double-submit / rapid repeat clicks
+• Browser back/forward mid-flow
+• Dark mode token mistakes if the product supports themes
+• First visit vs returning visit
+• Missing assets / failed image loads
+If a case is out of scope for THIS ask, say so — don’t silently ignore it as if it passed.
+
+
+COMMUNICATION STANDARD
+• Plain language, scannable bullets/tables
+• Severity labels when reviewing (Blocker / Major / Minor)
+• For each meaningful change: what changed · why it improves the outcome · how to verify
+• Separate Observed / Inferred / Assumed when status is contested
+• Never claim Complete without evidence
+
+
+STOP CONDITIONS
+• Stop when the ask’s acceptance criteria are met with evidence
+• Stop instead of inventing adjacent work
+• Stop and ask (or state one assumption) when a wrong guess is expensive
+• Stop at system boundaries (Design.md / Figma / screenshot) rather than “improving” them unasked
+
+══════════════════════════════════════
+FINAL GATE
+══════════════════════════════════════
+1. Restate done-criteria for THIS ask as 3–8 pass/fail bullets.
+2. Show evidence: what you inspected (UI paths, widths, states, files, tools).
+3. List residual risks and the non-goals / must-not-changes you respected.
+4. Give me the shortest path to re-verify your work myself.
+5. If anything remains open, name the single next best move (and whether it blocks ship).`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
@@ -704,18 +1252,80 @@ Plan first unless I ask to execute the cut.`,
     command:
       `Review the current diff against my original ask. Revert unrelated changes. Keep only what was required.
 
-1. Restate the original acceptance criteria
-2. Classify each change: required / helpful-but-out-of-scope / accidental churn
-3. Revert out-of-scope and churn (formatting-only, drive-by refactors, bonus features, parallel abstractions, taste-driven restyles)
-4. Preserve required behavior/UI
-5. Re-verify the ask still works
-6. Summarize what you removed and why, plus what remains
+MISSION
+Diff hygiene after an overbuild. Preserve required behavior/UI; remove churn.
 
-Churn examples to revert: unrelated renames, format-only hunks, bonus features, taste-driven restyles not in the ask, new abstractions used once.
+PHASE 1 — RESTATE ACCEPTANCE
+Original must-haves and must-nots.
 
-Do not use this as an excuse to redesign. Diff hygiene only.
+PHASE 2 — CLASSIFY EVERY CHANGE
+Required / helpful-but-out-of-scope / accidental churn.
 
-Preserve required behavior/UI. Re-verify the ask still works after reverts.`,
+PHASE 3 — REVERT & RE-VERIFY
+Revert out-of-scope and churn. Preserve required behavior/UI. Re-verify the ask still works. Summarize removals + remains.
+
+CHURN EXAMPLES
+Unrelated renames · format-only hunks · bonus features · taste-driven restyles not in the ask · new abstractions used once.
+
+ANTI-PATTERNS
+Don’t redesign while reverting. Diff hygiene only.
+
+OUTPUT
+Removed list + why · remaining required changes · verify notes.
+
+DIFF HYGIENE DEFAULTS
+Touch the fewest files that can satisfy the ask.
+No drive-by renames, import resorts, or format-only hunks outside edited lines.
+No new abstractions unless duplication already blocks a correct fix.
+No dependency bumps, token migrations, or “while I was here” refactors.
+If you find a nearby bug that doesn’t block verification, mention it — don’t bundle it.
+If the diff grows, explain what forced it and whether it can be split for review.
+
+KEEP REQUIRED ONLY
+Helpful extras are still extras — revert them.
+
+DETAILED EXECUTION EXPECTATIONS
+• Be specific to the current screen/flow — no generic filler
+• Use available tools to inspect UI/code before concluding
+• Prefer smallest correct change
+• Map every edit back to the ask
+• List what you refused to do
+
+
+EDGE CASES TO EXPLICITLY CONSIDER
+• Long content / truncation / wrapping at narrow widths
+• Empty vs error vs loading confusion
+• Permission-denied or logged-out entry
+• Double-submit / rapid repeat clicks
+• Browser back/forward mid-flow
+• Dark mode token mistakes if the product supports themes
+• First visit vs returning visit
+• Missing assets / failed image loads
+If a case is out of scope for THIS ask, say so — don’t silently ignore it as if it passed.
+
+
+COMMUNICATION STANDARD
+• Plain language, scannable bullets/tables
+• Severity labels when reviewing (Blocker / Major / Minor)
+• For each meaningful change: what changed · why it improves the outcome · how to verify
+• Separate Observed / Inferred / Assumed when status is contested
+• Never claim Complete without evidence
+
+
+STOP CONDITIONS
+• Stop when the ask’s acceptance criteria are met with evidence
+• Stop instead of inventing adjacent work
+• Stop and ask (or state one assumption) when a wrong guess is expensive
+• Stop at system boundaries (Design.md / Figma / screenshot) rather than “improving” them unasked
+
+══════════════════════════════════════
+FINAL GATE
+══════════════════════════════════════
+1. Restate done-criteria for THIS ask as 3–8 pass/fail bullets.
+2. Show evidence: what you inspected (UI paths, widths, states, files, tools).
+3. List residual risks and the non-goals / must-not-changes you respected.
+4. Give me the shortest path to re-verify your work myself.
+5. If anything remains open, name the single next best move (and whether it blocks ship).`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
@@ -812,18 +1422,83 @@ Preserve required behavior/UI. Re-verify the ask still works after reverts.`,
     command:
       `Audit this component for conflicting utility classes (padding, margin, display, position, text size/color, flex/grid, gaps). Keep the intended visual. Remove dead or fighting utilities.
 
-* Identify competing classes that cancel or ambiguously override each other
-* Preserve the rendered look users see now (unless a conflict is clearly a bug causing the wrong look)
-* Remove dead utilities
-* Prefer the project’s spacing/type tokens/patterns
-* Explain each removal in one line
-* Do not restyle or “improve” design while cleaning
+MISSION
+Clean class conflicts without restyling. Preserve intended look unless the conflict IS the bug.
 
-Class fight examples: p-2 and p-4 on same node; flex and hidden without breakpoint intent; text-sm text-base together; absolute + conflicting inset utilities.
+PHASE 1 — FIND FIGHTS
+Competing classes that cancel or ambiguously override. Dead utilities.
 
-If the intended visual is unclear, say so and pick the interpretation that matches surrounding design-system usage. Call out any Design.md token that should replace a raw utility.
+PHASE 2 — REMOVE WITH REASONS
+Remove conflicts/dead classes. Prefer project spacing/type tokens/patterns. Explain each removal in one line.
 
-Explain each removal in one line. Keep the winning intent.`,
+CLASS FIGHT EXAMPLES
+p-2 + p-4 · flex + hidden without breakpoint intent · text-sm + text-base · absolute + conflicting insets.
+
+ANTI-PATTERNS
+Don’t restyle or “improve” design while cleaning. If intent unclear, pick the interpretation matching surrounding system usage and say so.
+
+OUTPUT
+Removals with one-line reasons · any token replacements · residual ambiguity.
+
+SYSTEM FIDELITY CHECKS
+If Design.md / tokens exist, treat them as binding for color roles, type ramp, spacing scale, radius/elevation, component variants, icon rules, responsive behavior, and states — unless I explicitly override.
+Reuse order: exact variant → existing component + props → compose primitives → new primitive only with a named system gap (call the gap out).
+Red flags on touched UI: hardcoded hex beside tokens, one-off radii/shadows, custom focus rings, ad-hoc icon sizes, magic spacing, parallel button/input styles.
+If Design.md is missing, say so and fall back to the strongest live patterns — labeled as fallback, not as a new system.
+
+DIFF HYGIENE DEFAULTS
+Touch the fewest files that can satisfy the ask.
+No drive-by renames, import resorts, or format-only hunks outside edited lines.
+No new abstractions unless duplication already blocks a correct fix.
+No dependency bumps, token migrations, or “while I was here” refactors.
+If you find a nearby bug that doesn’t block verification, mention it — don’t bundle it.
+If the diff grows, explain what forced it and whether it can be split for review.
+
+PRESERVE LOOK
+Cleaning classes is not a redesign opportunity.
+
+DETAILED EXECUTION EXPECTATIONS
+• Be specific to the current screen/flow — no generic filler
+• Use available tools to inspect UI/code before concluding
+• Prefer smallest correct change
+• Map every edit back to the ask
+• List what you refused to do
+
+
+EDGE CASES TO EXPLICITLY CONSIDER
+• Long content / truncation / wrapping at narrow widths
+• Empty vs error vs loading confusion
+• Permission-denied or logged-out entry
+• Double-submit / rapid repeat clicks
+• Browser back/forward mid-flow
+• Dark mode token mistakes if the product supports themes
+• First visit vs returning visit
+• Missing assets / failed image loads
+If a case is out of scope for THIS ask, say so — don’t silently ignore it as if it passed.
+
+
+COMMUNICATION STANDARD
+• Plain language, scannable bullets/tables
+• Severity labels when reviewing (Blocker / Major / Minor)
+• For each meaningful change: what changed · why it improves the outcome · how to verify
+• Separate Observed / Inferred / Assumed when status is contested
+• Never claim Complete without evidence
+
+
+STOP CONDITIONS
+• Stop when the ask’s acceptance criteria are met with evidence
+• Stop instead of inventing adjacent work
+• Stop and ask (or state one assumption) when a wrong guess is expensive
+• Stop at system boundaries (Design.md / Figma / screenshot) rather than “improving” them unasked
+
+══════════════════════════════════════
+FINAL GATE
+══════════════════════════════════════
+1. Restate done-criteria for THIS ask as 3–8 pass/fail bullets.
+2. Show evidence: what you inspected (UI paths, widths, states, files, tools).
+3. List residual risks and the non-goals / must-not-changes you respected.
+4. Give me the shortest path to re-verify your work myself.
+5. If anything remains open, name the single next best move (and whether it blocks ship).`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
