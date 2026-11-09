@@ -20,7 +20,9 @@ export function EmptyState({ onReset }: EmptyStateProps) {
       </div>
       <h2 className="text-lg font-semibold text-ink">No commands match</h2>
       <p className="mt-2 max-w-sm text-sm leading-relaxed text-ink-muted">
-        Try a different search term, or clear filters to browse the full library.
+        Try a different search term, clear filters, or heart a few commands —
+        favorites stay in the page link so you can open the same set on another
+        device.
       </p>
       <button
         type="button"

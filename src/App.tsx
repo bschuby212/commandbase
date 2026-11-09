@@ -11,7 +11,8 @@ import { getCopyText } from './lib/getCopyText'
 import type { Command } from './types/command'
 
 function App() {
-  const { favoriteIds, isFavorite, toggleFavorite } = useFavorites()
+  const { favoriteIds, favoriteCount, isFavorite, toggleFavorite } =
+    useFavorites()
   const { isDark, toggleTheme } = useTheme()
 
   const {
@@ -58,6 +59,8 @@ function App() {
     onSecondaryChange: setSecondary,
     favoriteFilter,
     onFavoriteFilterChange: setFavoriteFilter,
+    favoriteIds,
+    favoriteCount,
     availableSecondary,
     tools,
     languages,

@@ -6,6 +6,7 @@ import {
   ProgramIcon,
   ToolFieldIcon,
 } from './FilterIcons'
+import { FavoritesSyncButton } from './FavoritesSyncButton'
 import { FilterBottomSheet } from './FilterBottomSheet'
 import { FilterDropdown } from './FilterDropdown'
 import {
@@ -33,6 +34,8 @@ type CategoryFiltersProps = {
   onSecondaryChange: (value: SecondaryCategory | null) => void
   favoriteFilter: FavoriteFilter
   onFavoriteFilterChange: (value: FavoriteFilter) => void
+  favoriteIds: Set<string>
+  favoriteCount: number
   availableSecondary: SecondaryCategory[]
   tools: Platform[]
   languages: CommandLanguage[]
@@ -57,6 +60,8 @@ export function CategoryFilters({
   onSecondaryChange,
   favoriteFilter,
   onFavoriteFilterChange,
+  favoriteIds,
+  favoriteCount,
   availableSecondary,
   tools,
   languages,
@@ -72,6 +77,8 @@ export function CategoryFilters({
   const [sheetOpen, setSheetOpen] = useState(false)
   const functionValue: FunctionFilter = secondary ?? 'all'
   const favoritesOn = favoriteFilter === 'favorites'
+  const favoritesLabel =
+    favoriteCount > 0 ? `Favorites (${favoriteCount})` : 'Favorites'
 
   const toolOptions = useMemo(
     () =>
@@ -123,8 +130,8 @@ export function CategoryFilters({
   return (
     <>
       {showMobile ? (
-        <div className={`relative z-30 w-full ${className}`}>
-          <div className="toolbar-shell w-full">
+        <div className={`relative z-30 flex w-full items-center gap-2 ${className}`}>
+          <div className="toolbar-shell min-w-0 flex-1">
             <button
               type="button"
               aria-haspopup="dialog"
@@ -159,6 +166,7 @@ export function CategoryFilters({
               </svg>
             </button>
           </div>
+          <FavoritesSyncButton favoriteIds={favoriteIds} />
         </div>
       ) : null}
 
@@ -196,7 +204,9 @@ export function CategoryFilters({
               type="button"
               aria-pressed={favoritesOn}
               aria-label={
-                favoritesOn ? 'Show all commands' : 'Show favorites only'
+                favoritesOn
+                  ? 'Show all commands'
+                  : `Show favorites only${favoriteCount > 0 ? `, ${favoriteCount} saved` : ''}`
               }
               onClick={() =>
                 onFavoriteFilterChange(favoritesOn ? 'all' : 'favorites')
@@ -221,9 +231,10 @@ export function CategoryFilters({
                   fill={favoritesOn ? 'currentColor' : 'none'}
                 />
               </svg>
-              <span>Favorites</span>
+              <span>{favoritesLabel}</span>
             </button>
           </div>
+          <FavoritesSyncButton favoriteIds={favoriteIds} />
         </div>
       ) : null}
 
@@ -241,6 +252,8 @@ export function CategoryFilters({
           selectedFunctions={functions}
           onToggleFunction={onToggleFunction}
           favoritesOn={favoritesOn}
+          favoriteCount={favoriteCount}
+          favoriteIds={favoriteIds}
           onFavoritesToggle={() =>
             onFavoriteFilterChange(favoritesOn ? 'all' : 'favorites')
           }
