@@ -2587,14 +2587,82 @@ Run a competitive analysis for the filled-in product/category. Designer/PM-usefu
   {
     id: 'cursor-big-agent-no-purple',
     title: 'Agent: Anti-AI Aesthetic Guardrails',
-    description: 'Block the default purple/glow/pill look models default to.',
-    command:
-      'Avoid purple gradients, glow effects, rounded-full pill clusters, and multi-layer shadows. Follow our tokens.',
+    description:
+      'Strip obvious AI UI defaults: tiny type, ALL CAPS, excess lines, pills, glow, card spam.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Screen(s) / files: 
+Design system to keep: 
+Implement now? (yes / report only): 
+══════════════════════════════════════
+
+Review and cut obvious AI-generated design tells on the filled-in UI. Follow our tokens. Do not invent a new brand.
+
+Cut or tone down:
+• Excessive small / micro text
+• Excessive ALL CAPS and wide-tracked labels
+• Excessive hairlines, dividers, and boxed chrome
+• Card spam; cards in the hero; floating badges/chips on media
+• Pill clusters, multi-layer shadows, glow effects
+• Purple gradients / generic AI color themes
+• Dashboard clutter in a marketing/first viewport
+• Decorative motion and emoji ornament
+
+Prefer fewer clearer elements. One job per section. If a border/shadow/radius isn’t needed for understanding, remove it. Return a tell inventory with severity, then apply smallest fixes only if implement = yes.`,
     platform: 'cursor',
     language: 'editor',
     category: 'Sessions',
     type: 'terminal',
-    keywords: ['guardrails', 'aesthetic', 'purple', 'agent'],
+    keywords: [
+      'guardrails',
+      'aesthetic',
+      'anti ai',
+      'ai generated',
+      'all caps',
+      'small text',
+      'lines',
+      'dividers',
+      'purple',
+      'pills',
+      'glow',
+      'agent',
+      'review',
+    ],
+  },
+  {
+    id: 'codex-work-cut-ai-tells',
+    title: 'Codex/ChatGPT: Cut AI Design Tells',
+    description:
+      'Overall pass to remove tiny type, ALL CAPS, excess lines, and other AI-default chrome.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Product / screen: 
+(e.g. SaaS banking app home, pricing page, settings)
+Design system / tokens: 
+Must not change: 
+Implement fixes now? (yes / recommendations only): 
+══════════════════════════════════════
+
+Do an overall review to cut obvious AI-generated design. Inventory and fix (if allowed): excessive small text, excessive ALL CAPS/wide tracking, excessive lines/dividers/boxed sections, card spam, pill/badge clutter, glow/multi-shadows, purple/generic AI themes, hero overlays, decorative motion. Stay in the design system. Rank by severity, prefer the smallest cuts that make it look intentional and human.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'terminal',
+    keywords: [
+      'codex',
+      'chatgpt',
+      'anti ai',
+      'ai generated',
+      'all caps',
+      'small text',
+      'excessive lines',
+      'dividers',
+      'review',
+      'work',
+      'fill',
+    ],
   },
   {
     id: 'cursor-big-multi-file-ui',
