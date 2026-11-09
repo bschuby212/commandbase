@@ -1,10 +1,10 @@
 import type { Command } from '../types/command'
 
 /** Shown on cards when a prompt expects user-specific context. */
-export const FILL_IN_CHIP = 'Fill in first'
+export const FILL_IN_CHIP = 'Add your details'
 
 export const FILL_IN_HINT =
-  'Name one specific product, screen, or feature before pasting — results are much better.'
+  'Fill the blank lines before you paste — examples in (parentheses) show what to write, not final answers.'
 
 const FILL_BLOCK_RE = /FILL THIS IN BEFORE PASTING/i
 
@@ -16,11 +16,15 @@ export function commandNeedsFillIn(command: Command): boolean {
   return FILL_BLOCK_RE.test(command.command)
 }
 
-/** Standard fill-in header. Keep fields short — one specific thing beats a novel. */
+/**
+ * Standard fill-in header for designers/PMs.
+ * Keep labels short; put examples in parentheses on the next line.
+ */
 export function fillInHeader(fields: string[]): string {
   const body = fields.map((field) => `${field}\n`).join('')
   return `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
 ${body}══════════════════════════════════════
 

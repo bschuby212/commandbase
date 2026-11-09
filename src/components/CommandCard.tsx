@@ -28,9 +28,10 @@ export function CommandCard({
 }: CommandCardProps) {
   const descriptionId = useId()
   const needsFillIn = commandNeedsFillIn(command)
+  const descriptionAlreadyGuides =
+    /\b(fill in|fill the|paste |add your|blank line)/i.test(command.description)
   const description = needsFillIn
-    ? command.description.includes('Fill in') ||
-      command.description.includes('fill in')
+    ? descriptionAlreadyGuides
       ? command.description
       : `${command.description} ${FILL_IN_HINT}`
     : command.description

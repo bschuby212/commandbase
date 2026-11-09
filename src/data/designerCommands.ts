@@ -807,13 +807,21 @@ export const designerCommands: Command[] = [
   {
     id: 'codex-favicon-setup',
     title: 'Codex: Favicon + Title',
-    description: 'Set document title and SVG favicon.',
-    command: 'Set a clear <title> and SVG favicon that works in light and dark tabs.',
+    description: 'Fill in the page title — set title + favicon for light and dark tabs.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+What should the browser tab say? 
+(example: Acme Banking · Settings)
+══════════════════════════════════════
+
+Set a clear document title from the details above and an SVG favicon that works in light and dark tabs.`,
     platform: 'codex',
-    language: 'editor',
+    language: 'prompt',
     category: 'Setup',
     type: 'terminal',
-    keywords: ['favicon', 'title'],
+    keywords: ['favicon', 'title', 'fill'],
   },
   {
     id: 'codex-seo-meta',
@@ -900,9 +908,22 @@ export const designerCommands: Command[] = [
   {
     id: 'codex-work-one-job',
     title: 'Codex: One UI Job Only',
-    description: 'Short work brief so Codex does not redesign the whole app.',
-    command:
-      'Do exactly one UI job. Job: <change>. Where: <file/component>. Reuse the existing design system. Must not change: brand, IA, APIs, unrelated screens. Done when: <3 pass/fail checks>. Smallest diff. Ask one question if a product decision is unclear.',
+    description: 'Fill in the one change — keep Codex from redesigning the whole app.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+What one UI change? 
+(example: fix empty search state on Settings)
+Where in the product? 
+(example: Settings → Users table, or “search the repo for UsersTable”)
+How will we know it’s done? 
+(example: empty state shows helpful copy; table still loads)
+What must stay the same? 
+(example: brand, navigation, APIs)
+══════════════════════════════════════
+
+Do exactly one UI job from the details above. Reuse the existing design system. Do not change brand, information architecture, APIs, or unrelated screens. Smallest change. Ask one question if a product decision is unclear.`,
     platform: 'codex',
     language: 'prompt',
     category: 'Sessions',
@@ -1004,12 +1025,16 @@ export const designerCommands: Command[] = [
     description: 'Fill the product/screen, then paste into ChatGPT or Codex.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Product / screen: 
-(e.g. SaaS banking settings, checkout step 2, admin user table)
-Audience: 
-Screenshot / link / what to inspect: 
-Must not change: 
+Which product / screen? 
+(example: banking Settings, checkout step 2, admin user table)
+Who is this for? 
+(example: existing customers on desktop)
+What should it look at? 
+(example: paste a screenshot note, Figma link, or “the live page”)
+What must stay the same? 
+(example: brand, layout structure)
 ══════════════════════════════════════
 
 You are a staff product designer reviewing the filled-in UI. Critique hierarchy, spacing, states (empty/loading/error), responsive behavior, and accessibility. Do not rewrite the brand. Return: top issues (Blocker/Major/Minor), smallest fixes, and what is already working.`,
@@ -1033,11 +1058,14 @@ You are a staff product designer reviewing the filled-in UI. Critique hierarchy,
     description: 'Fill the strings/context, then tighten enterprise UI copy.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Product: 
-(e.g. SaaS banking app, B2B analytics)
-Voice notes (optional): 
-Copy to improve (buttons, labels, errors, empty states): 
+Which product? 
+(example: SaaS banking app, B2B analytics)
+Voice notes? (optional) 
+(example: calm, clear, no hype)
+Paste the copy to improve: 
+(example: button labels, errors, empty-state text)
 ══════════════════════════════════════
 
 Rewrite the filled-in UI microcopy for clarity and tone. Keep it short, human, and consistent with enterprise product voice (no hype, no emoji). Provide: original → suggested. Flag anything ambiguous.`,
@@ -1070,21 +1098,38 @@ Rewrite the filled-in UI microcopy for clarity and tone. Keep it short, human, a
   {
     id: 'codex-work-exec-small-fix',
     title: 'Codex Exec: Small UI Fix',
-    description: 'Non-interactive one-shot for a tightly scoped visual fix.',
-    command:
-      'codex exec "Fix only this UI issue: <issue>. Touch the fewest files. Reuse existing components/tokens. Do not refactor unrelated code. Summarize what changed."',
+    description: 'Fill in the UI issue — one-shot Codex fix with the smallest change.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+What UI issue should be fixed? 
+(example: primary button text wraps on mobile checkout)
+══════════════════════════════════════
+
+Fix only the UI issue filled in above. Touch the fewest files. Reuse existing components. Do not change unrelated code. Summarize what changed.
+
+If you prefer a one-shot terminal run after filling the issue into the quotes:
+codex exec "Fix only this UI issue: [paste the issue]. Touch the fewest files. Reuse existing components. Do not change unrelated code. Summarize what changed."`,
     platform: 'codex',
-    language: 'shell',
+    language: 'prompt',
     category: 'Utilities',
     type: 'terminal',
-    keywords: ['codex', 'exec', 'fix', 'one shot', 'chatgpt', 'work'],
+    keywords: ['codex', 'exec', 'fix', 'one shot', 'chatgpt', 'work', 'fill'],
   },
   {
     id: 'codex-work-explain-legacy',
     title: 'Codex: Explain Legacy UI Code',
-    description: 'Get a plain-English map of a legacy React/Angular screen.',
-    command:
-      'Explain this UI code for a designer/PM: what the screen does, key components, data dependencies, risky spots to edit, and where styles/tokens live. No refactor unless I ask. Target: <file or folder>.',
+    description: 'Name the screen or folder — get a plain-English map for designers/PMs.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Which screen, file, or folder? 
+(example: src/pages/Settings, CheckoutStep2, “Users table”)
+══════════════════════════════════════
+
+Explain this UI for a designer/PM: what the screen does, key pieces, what data it needs, risky spots to edit, and where styles live. Do not rewrite code unless I ask.`,
     platform: 'codex',
     language: 'prompt',
     category: 'Utilities',
@@ -1102,9 +1147,18 @@ Rewrite the filled-in UI microcopy for clarity and tone. Keep it short, human, a
   {
     id: 'codex-work-angular-component',
     title: 'Codex: Generate Angular Component',
-    description: 'Ask Codex to scaffold an Angular component in repo style.',
-    command:
-      'Create an Angular component for <name> matching this repo’s patterns (standalone vs module, OnPush, naming, folder structure). Include template, styles, and inputs/outputs. Use the existing design-system components. Add a simple empty and loading state. Do not add a new global CSS framework.',
+    description: 'Name the component — scaffold it in this repo’s Angular style.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Component name? 
+(example: AccountSummaryCard)
+What should it show / do? 
+(example: show account balance + “View details” button)
+══════════════════════════════════════
+
+Create an Angular component matching this repo’s patterns. Include template, styles, and inputs/outputs. Use existing design-system pieces. Add simple empty and loading states. Do not add a new global CSS framework.`,
     platform: 'codex',
     language: 'prompt',
     category: 'Utilities',
@@ -1114,9 +1168,18 @@ Rewrite the filled-in UI microcopy for clarity and tone. Keep it short, human, a
   {
     id: 'codex-work-react-component',
     title: 'Codex: Generate React Component',
-    description: 'Scaffold a React component that matches existing patterns.',
-    command:
-      'Create a React + TypeScript component for <name> matching this repo’s patterns (hooks, file layout, styling approach). Reuse the design-system / shadcn / MUI primitives already in the project. Include props types, empty/loading/error affordances if relevant, and accessible labels. Smallest files possible.',
+    description: 'Name the component — scaffold it in this repo’s React style.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Component name? 
+(example: EmptySearchState)
+What should it show / do? 
+(example: friendly empty state when filters return nothing)
+══════════════════════════════════════
+
+Create a React + TypeScript component matching this repo’s patterns. Reuse existing design-system / shadcn / MUI pieces. Include empty/loading/error when relevant, and clear labels. Keep files as small as possible.`,
     platform: 'codex',
     language: 'prompt',
     category: 'Utilities',
@@ -1126,9 +1189,18 @@ Rewrite the filled-in UI microcopy for clarity and tone. Keep it short, human, a
   {
     id: 'codex-work-figma-to-ds',
     title: 'Codex: Figma → Design System Mapping',
-    description: 'Map a Figma frame to existing library components before coding.',
-    command:
-      'Given this Figma/frame description, map each UI block to an existing design-system / shadcn / MUI / Angular library component. Call out gaps that need a new variant vs a net-new component. Do not implement yet — produce a mapping table first. Frame notes: <paste>.',
+    description: 'Paste Figma/frame notes — get a component mapping before anyone codes.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Paste Figma link or frame notes: 
+(example: frame name, what’s on the screen, or a short description)
+Design system in this project? 
+(example: shadcn, MUI, our Angular library, “not sure — look in the repo”)
+══════════════════════════════════════
+
+Map each UI block to an existing design-system component. Call out gaps that need a new variant vs a brand-new component. Do not build yet — mapping table only.`,
     platform: 'codex',
     language: 'prompt',
     category: 'Sessions',
@@ -1169,13 +1241,18 @@ Rewrite the filled-in UI microcopy for clarity and tone. Keep it short, human, a
     description: 'Fill the ticket, then get a Codex-ready plan before coding.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Ticket title / ID: 
-Product: 
-(e.g. SaaS banking web app)
-Ticket body / acceptance notes: 
-Design system to reuse: 
-Constraints / must not change: 
+Ticket name or ID? 
+(example: BANK-204 Improve empty search)
+Which product? 
+(example: banking web app)
+Paste the ticket / acceptance notes: 
+(example: what “done” looks like in plain language)
+Design system to reuse? 
+(example: our shared components)
+What must stay the same? 
+(example: navigation, APIs, brand)
 ══════════════════════════════════════
 
 Turn the filled-in ticket into an implementation plan for Codex. Do not code yet. Include: restated goal, in/out of scope, design-system components to reuse, files likely touched, edge cases, test/verification steps, and open questions.`,
@@ -1201,13 +1278,14 @@ Turn the filled-in ticket into an implementation plan for Codex. Do not code yet
       'Fill in one tool (e.g. Netlify, gh, Figma MCP) — get auth unblock steps without pasting secrets.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Tool / plugin that needs auth: 
-(e.g. Netlify CLI · GitHub CLI · Figma MCP · Slack plugin)
-What I’m trying to do after auth: 
-(e.g. force Netlify production deploy, open PR, read Figma)
-Where I’m stuck: 
-(e.g. not logged in · 401 · wrong account · no browser in this environment)
+Which tool or plugin? 
+(example: Netlify, GitHub, Figma plugin, Slack)
+What do you want to do after login? 
+(example: publish the live site, open a pull request, open a Figma file)
+What's going wrong? 
+(example: not logged in, wrong account, can't open a browser here)
 ══════════════════════════════════════
 
 Unblock auth for that one tool/plugin only. Give official login or token steps, where to store credentials (env/secret store — never paste secrets into chat), a verify command, then the exact retry command for my task.`,
@@ -1235,14 +1313,18 @@ Unblock auth for that one tool/plugin only. Give official login or token steps, 
       'Fill the job and priorities, then get a model/tool recommendation before spending credits.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-What I need to do: 
-(e.g. UI critique for SaaS banking settings, implement a shadcn form, debug Netlify deploy)
-Tools available: 
-(e.g. ChatGPT · Codex · Cursor · Claude)
-Models / modes I can pick (or “not sure”): 
-Priority: quality · speed · cost/credits · privacy · design taste
-Constraints: 
+What do you need help with? 
+(example: critique Settings UI, build a simple form, fix a site that won’t update)
+Which AI tools can you use? 
+(example: ChatGPT, Codex, Cursor, Claude)
+Which models can you pick? 
+(example: not sure — suggest)
+What matters most? 
+(example: quality, speed, save credits, privacy, design taste)
+Any limits? 
+(example: recommendations only, keep work data private)
 ══════════════════════════════════════
 
 Recommend the best model/mode/tool for this job only. Do not do the work yet. Give: primary pick + why, runner-up for cheaper/faster, what to avoid, and a 3–5 bullet brief I should paste next.`,
@@ -1268,12 +1350,16 @@ Recommend the best model/mode/tool for this job only. Do not do the work yet. Gi
     description: 'Fill your product (e.g. SaaS banking app), then run a teardown.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Your product / category: 
-(e.g. SaaS banking app, B2B analytics dashboard)
-Competitors to include (or “pick 3–5 strong ones”): 
-Compare: IA · onboarding · pricing UX · visual system · empty states · mobile · trust cues
-Our differentiator hypothesis: 
+Your product or category? 
+(example: SaaS banking app, B2B analytics dashboard)
+Competitors to include? 
+(example: list names, or “pick 3–5 strong ones”)
+What should we compare? 
+(example: onboarding, pricing page, empty states, mobile, trust cues)
+What do you think makes you different? 
+(example: clearer first-run for small teams)
 ══════════════════════════════════════
 
 Run a competitive analysis for the filled-in product/category. Designer/PM-useful teardown: competitor table, patterns to steal/avoid, opportunities, next design bets. No fake quotes or invented metrics. Recommendations only — do not redesign our product unless asked.`,
@@ -2631,14 +2717,21 @@ Run a competitive analysis for the filled-in product/category. Designer/PM-usefu
   {
     id: 'cursor-big-agent-redesign-section',
     title: 'Agent: Redesign One Section',
-    description: 'Scope the agent to a single section so it does not rewrite the app.',
-    command:
-      'Only edit the <SectionName> section. Match existing tokens. Do not touch routing, data fetching, or unrelated files.',
+    description: 'Name one section — keep the agent from rewriting the whole app.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Which section only? 
+(example: Home hero, Pricing FAQ, Settings profile form)
+══════════════════════════════════════
+
+Only edit that section. Match existing styles. Do not touch routing, data loading, or unrelated files.`,
     platform: 'cursor',
-    language: 'editor',
+    language: 'prompt',
     category: 'Sessions',
     type: 'terminal',
-    keywords: ['agent', 'scope', 'section', 'cursor'],
+    keywords: ['agent', 'scope', 'section', 'cursor', 'fill'],
   },
   {
     id: 'cursor-big-agent-pixel-diff',
@@ -2659,10 +2752,14 @@ Run a competitive analysis for the filled-in product/category. Designer/PM-usefu
       'Strip obvious AI UI defaults: tiny type, ALL CAPS, excess lines, pills, glow, card spam.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Screen(s) / files: 
-Design system to keep: 
-Implement now? (yes / report only): 
+Which screen(s)? 
+(example: Home hero, Settings page)
+Design system to keep? 
+(example: our live styles / Design.md)
+Fix now, or only report? 
+(example: report only / yes, fix obvious AI-looking chrome)
 ══════════════════════════════════════
 
 Review and cut obvious AI-generated design tells on the filled-in UI. Follow our tokens. Do not invent a new brand.
@@ -2679,7 +2776,7 @@ Cut or tone down:
 
 Prefer fewer clearer elements. One job per section. If a border/shadow/radius isn’t needed for understanding, remove it. Return a tell inventory with severity, then apply smallest fixes only if implement = yes.`,
     platform: 'cursor',
-    language: 'editor',
+    language: 'prompt',
     category: 'Sessions',
     type: 'terminal',
     keywords: [
@@ -2696,6 +2793,7 @@ Prefer fewer clearer elements. One job per section. If a border/shadow/radius is
       'glow',
       'agent',
       'review',
+      'fill',
     ],
   },
   {
@@ -2705,12 +2803,16 @@ Prefer fewer clearer elements. One job per section. If a border/shadow/radius is
       'Overall pass to remove tiny type, ALL CAPS, excess lines, and other AI-default chrome.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Product / screen: 
-(e.g. SaaS banking app home, pricing page, settings)
-Design system / tokens: 
-Must not change: 
-Implement fixes now? (yes / recommendations only): 
+Which product / screen? 
+(example: banking home, pricing page, settings)
+Design system to keep? 
+(example: our existing components)
+What must not change? 
+(example: brand, navigation, real content)
+Fix now, or only recommend? 
+(example: recommendations only)
 ══════════════════════════════════════
 
 Do an overall review to cut obvious AI-generated design. Inventory and fix (if allowed): excessive small text, excessive ALL CAPS/wide tracking, excessive lines/dividers/boxed sections, card spam, pill/badge clutter, glow/multi-shadows, purple/generic AI themes, hero overlays, decorative motion. Stay in the design system. Rank by severity, prefer the smallest cuts that make it look intentional and human.`,
@@ -2735,14 +2837,21 @@ Do an overall review to cut obvious AI-generated design. Inventory and fix (if a
   {
     id: 'cursor-big-multi-file-ui',
     title: 'Agent: Multi-File UI Consistency',
-    description: 'Ask the agent to align spacing/type across related screens.',
-    command:
-      'Make spacing, type, and chip styles consistent across these files: <paths>. No new patterns.',
+    description: 'List the screens/files — align spacing and type with no new patterns.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Which screens or files should match? 
+(example: Settings and Profile, or list file names if you know them)
+══════════════════════════════════════
+
+Make spacing, type, and chip styles consistent across those places. No new patterns.`,
     platform: 'cursor',
-    language: 'editor',
+    language: 'prompt',
     category: 'Sessions',
     type: 'terminal',
-    keywords: ['consistency', 'multi-file', 'agent'],
+    keywords: ['consistency', 'multi-file', 'agent', 'fill'],
   },
   {
     id: 'cursor-big-composer-plan',

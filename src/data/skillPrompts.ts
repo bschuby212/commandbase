@@ -13,17 +13,18 @@ export const skillPrompts: Command[] = [
       'Fill in the one tool or plugin — then prompt any AI to set up, fix, or unblock auth for it.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Tool / plugin that needs auth: 
-(e.g. Netlify CLI · GitHub CLI · Figma MCP · Slack · Notion · Cursor plugin · OpenAI Codex)
-What I’m trying to do: 
-(e.g. force production deploy, open a PR, read design tokens, post a message)
-Where I’m stuck: 
-(e.g. “not logged in”, 401, missing token, browser login loop, wrong account)
-Environment: 
-(e.g. work laptop · personal · CI · Cursor cloud agent)
-Must not do: 
-(e.g. paste secrets into chat, commit .env, use personal account on work repo)
+Which tool or plugin? 
+(example: Netlify, Figma plugin, Slack, GitHub)
+What do you want to finish? 
+(example: publish the live site, open a design file)
+What's going wrong? 
+(example: it says I'm not logged in / wrong account)
+Where are you working? 
+(example: work laptop, personal computer)
+Anything you must not do? 
+(example: don't use my personal login on the work project)
 ══════════════════════════════════════
 
 Help me get authenticated for the filled-in tool/plugin so I can finish the task.
@@ -81,16 +82,18 @@ Auth method · step-by-step · verify command · retry command for my original t
       'Fill the task and constraints, then ask any AI which model/mode is the best fit.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-What I need to do: 
-(e.g. refactor a messy React form, critique a SaaS banking dashboard, write AC from a ticket, debug a flaky CI, competitive teardown)
-Tools I can use: 
-(e.g. ChatGPT · Codex · Cursor · Claude Code · all of the above)
-Models / modes I can pick (if known): 
-(e.g. GPT-5 / o-series · Codex · Composer · Claude Sonnet/Opus · “not sure — suggest”)
-Priority (rank): quality · speed · cost/credits · privacy · depth of reasoning · UI/design taste
-Constraints: 
-(e.g. company data can’t leave work tools, need answer in <10 min, must edit the repo, recommendations only)
+What do you need help with? 
+(example: review our banking settings screen, write acceptance criteria, fix a deploy that won't update)
+Which AI tools can you use? 
+(example: ChatGPT, Codex, Cursor, Claude — or “any”)
+Which models can you pick? (if you know) 
+(example: “not sure — suggest” / GPT / Claude / Codex)
+What matters most? (rank a few) 
+(example: best quality, save credits, faster answer, keep work data private)
+Any limits? 
+(example: under 10 minutes, recommendations only, stay in our work tools)
 ══════════════════════════════════════
 
 Recommend the best model / mode / tool for the filled-in job. Do not do the job yet.
@@ -147,13 +150,18 @@ Primary pick · why · runner-up · avoid · starter brief · switch criteria.`,
       'Fill the product/category, then paste into Codex, ChatGPT, Cursor, or Claude.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Your product / category: 
-(e.g. SaaS banking app, B2B analytics dashboard, consumer fitness tracker)
-Competitors to include (or write “pick 3–5 strong ones”): 
-What to compare (check any): IA · onboarding · pricing UX · visual system · empty states · mobile · a11y · trust/compliance cues
-Our differentiator hypothesis: 
-Must not invent fake quotes or unverifiable metrics: 
+Your product or category? 
+(example: SaaS banking app, B2B analytics dashboard)
+Competitors to include? 
+(example: list 2–3 names, or write “pick 3–5 strong ones”)
+What should we compare? 
+(example: first-time setup, pricing page, empty states, mobile, trust cues)
+What do you think makes you different? 
+(example: faster onboarding for small teams)
+Reminders: 
+(example: no fake quotes or made-up numbers)
 ══════════════════════════════════════
 
 Run a competitive analysis for the product/category filled in above.
@@ -201,13 +209,20 @@ Competitor table · pattern synthesis · opportunity list · suggested next rese
       'Fill the screen/context, then get a visual-design improvement pass with system fidelity.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Product / screen: 
-Audience: 
-Design system / tokens to respect (or “use existing live patterns”): 
-What feels weak today (hierarchy, spacing, type, color, density, chrome): 
-Must not change: 
-Done when: 
+Which product and screen? 
+(example: Acme Banking → Settings)
+Who is this for? 
+(example: operations managers on desktop)
+Design system to follow? 
+(example: our existing components / “match what’s live”)
+What feels off today? 
+(example: too much tiny text, weak hierarchy, cramped)
+What must stay the same? 
+(example: brand colors, navigation)
+Done when… 
+(example: hierarchy is clear at a glance on desktop and phone)
 ══════════════════════════════════════
 
 Act as a senior product designer improving visual design for the filled-in screen — without inventing a new brand.
@@ -249,12 +264,18 @@ If implementing is allowed by the user, apply the smallest visual fixes first; o
       'Fill product context, then align UI to tokens/components instead of one-offs.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Product: 
-Library / system to use (shadcn · MUI · Angular Material · internal @scope/ui · Design.md): 
-Screens / components in scope: 
-Known one-offs to eliminate (optional): 
-Must not change (brand meaning / IA / APIs): 
+Which product? 
+(example: Acme Banking web app)
+Which design system / UI kit? 
+(example: our shared library, shadcn, Material, Design.md)
+Which screens or components? 
+(example: Filters bar, Empty search state)
+Any one-off styles to clean up? (optional) 
+(example: custom purple buttons on Settings)
+What must stay the same? 
+(example: brand meaning, information architecture)
 ══════════════════════════════════════
 
 Act as a design-systems designer. Align the filled-in UI to the named system.
@@ -297,12 +318,18 @@ Mapping table · one-offs removed · residual gaps · verification steps.`,
       'Fill the product/icon library, then standardize icons for size, stroke, and a11y.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Product / screens: 
-Icon library in use (lucide · heroicons · MUI icons · Phosphor · Tabler · mixed/unknown): 
-Preferred size / stroke rules (or “match existing”): 
-Problems seen (mixed sets, wrong optical size, missing labels): 
-Must not change: 
+Which product / screens? 
+(example: Dashboard home + side nav)
+Which icon set do you use? 
+(example: Lucide, Heroicons, Material icons, or “not sure”)
+Size / style to match? 
+(example: match what’s already on the page)
+What’s wrong with icons today? 
+(example: mixed styles, too small, missing labels)
+What must stay the same? 
+(example: brand illustration style)
 ══════════════════════════════════════
 
 Standardize icons for the filled-in product.
@@ -342,12 +369,18 @@ Issues found · recommended rules · concrete swap list · residual gaps.`,
       'Fill product constraints, then define purposeful motion with reduced-motion respect.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Product / screens: 
-Motion library available (Motion/Framer · GSAP · Angular animations · CSS only · unknown): 
-Brand feel (calm / snappy / playful) — or “match existing”: 
-Problems today (jank, decorative noise, missing feedback): 
-Must not change: 
+Which product / screens? 
+(example: Checkout success, modal open/close)
+Any animation library already in the project? 
+(example: Motion/Framer, CSS only, or “not sure”)
+How should motion feel? 
+(example: calm, snappy, playful — or “match existing”)
+What’s wrong today? 
+(example: too flashy, missing feedback, feels janky)
+What must stay the same? 
+(example: no new marketing-style animations)
 ══════════════════════════════════════
 
 Design a purposeful motion system for the filled-in product.
@@ -387,11 +420,16 @@ Principles · when to animate / when not · token-like duration/easing suggestio
       'Fill the stack, then audit hard-coded values vs tokens.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Product / repo area: 
-Token source (CSS variables · Tailwind theme · MUI theme · Design.md · unknown): 
-Screens / files in scope: 
-Must not do a full redesign: 
+Which product or area? 
+(example: Marketing site header, App settings)
+Where do design tokens live? 
+(example: Design.md, theme file, or “not sure — find them”)
+Which screens are in scope? 
+(example: Home + Pricing only)
+Important: 
+(example: audit only — do not redesign the whole product)
 ══════════════════════════════════════
 
 Audit design tokens vs hard-coded values in the filled-in scope.
@@ -425,13 +463,18 @@ Do not invent a new palette unless asked.`,
       'Fill the component need, then design props/variants before coding.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Component need: 
-(e.g. filter dropdown, empty state, settings row, data table toolbar)
-Product / design system: 
-Existing close matches in the repo (or “search first”): 
-Platform (React · Angular · unknown): 
-Must support states: 
+What component do you need? 
+(example: filter dropdown, empty state, settings row)
+Product / design system? 
+(example: Acme UI kit / Material)
+Anything similar already built? 
+(example: search first / we have a basic Dropdown)
+App type? 
+(example: React, Angular, or “not sure”)
+Which states must it support? 
+(example: default, hover, disabled, error, empty)
 ══════════════════════════════════════
 
 Design the component API before implementation.
@@ -467,12 +510,18 @@ Do not implement code until the user asks.`,
       'Fill the product, then critique first-run UX vs competitors’ patterns.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Product: 
-First-run path to review (signup → aha): 
-Primary user job to value: 
-Competitors to glance at (optional): 
-Constraints (compliance, sales-led, invite-only, etc.): 
+Which product? 
+(example: Acme Banking)
+First-run path to review? 
+(example: sign up → connect account → first dashboard)
+What should a new user achieve first? 
+(example: see their balance and one clear next step)
+Competitors to peek at? (optional) 
+(example: Brand A, Brand B)
+Any constraints? 
+(example: invite-only, compliance copy required)
 ══════════════════════════════════════
 
 Critique the first-run / onboarding experience for the filled-in product.
@@ -507,13 +556,18 @@ No full visual redesign unless asked.`,
       'Fill the product type, then tune information density without clutter.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Product type: 
-(e.g. SaaS banking ops console, B2B analytics, admin settings)
-Screen(s): 
-Problem (too sparse · too cramped · inconsistent density): 
-Users (power users · occasional · mixed): 
-Must not change: 
+What kind of product? 
+(example: banking ops console, B2B analytics, admin settings)
+Which screen(s)? 
+(example: Users table, Filters panel)
+What's the density problem? 
+(example: too sparse / too cramped / inconsistent)
+Who uses it? 
+(example: power users all day, or occasional visitors)
+What must stay the same? 
+(example: column set, brand, primary actions)
 ══════════════════════════════════════
 
 Tune visual density for the filled-in SaaS/enterprise screen.
@@ -549,13 +603,16 @@ Findings by severity · concrete spacing/type/layout adjustments · what not to 
       'Overall review that strips AI-default UI: tiny type, ALL CAPS, excess lines, pills, glow, card spam.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Product / screen(s): 
-(e.g. SaaS banking dashboard, marketing hero, settings page)
-Design system / tokens to keep: 
-(or “use existing live patterns”)
-Must not change (brand meaning, IA, real content voice): 
-Implement fixes now? (yes / recommendations only): 
+Which product / screen(s)? 
+(example: banking dashboard, marketing hero, settings)
+Design system to keep? 
+(example: our live patterns / Design.md)
+What must not change? 
+(example: brand meaning, navigation, real content voice)
+Should it fix now, or only recommend? 
+(example: recommendations only / yes, fix the obvious ones)
 ══════════════════════════════════════
 
 Do an overall anti-AI-aesthetic review of the filled-in UI. Goal: remove the obvious “generated by a model” look while staying inside the design system.

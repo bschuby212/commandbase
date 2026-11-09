@@ -492,14 +492,19 @@ export const vibeCommands: Command[] = [
     command:
       `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-What’s broken: 
-Where (screen / component / control): 
-Steps to reproduce / viewport: 
-Expected: 
-Actual: 
-
-(If you only know “it looks wrong,” still name the region and what feels off — layout, type, color, clipping, interaction, or data.)
+What’s broken? 
+(example: Save button does nothing / layout looks clipped)
+Where is it? 
+(example: Settings → Profile, top-right control)
+How do you reproduce it? 
+(example: open on phone width ~390, tap Save)
+What should happen? 
+(example: shows a success message)
+What happens instead? 
+(example: nothing changes)
+(If you only know “it looks wrong,” still name the area and what feels off — spacing, type, color, clipping, or interaction.)
 ══════════════════════════════════════
 
 Use the “What’s broken / Where / Steps / Expected / Actual” fields above as the bug report. If any field is blank, infer carefully and state assumptions — but prefer the user’s filled-in details over guesswork.
@@ -611,10 +616,14 @@ FINAL GATE
     command:
       `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Figma link / file: 
-Frame / node name (or paste the frame): 
-Notes / must-match details (optional): 
+Figma link or file? 
+(example: paste the Figma URL)
+Which frame / screen? 
+(example: “Home / Desktop” or paste the frame name)
+Must-match notes? (optional) 
+(example: keep our spacing tokens, match the empty state exactly)
 ══════════════════════════════════════
 
 Implement this to match the provided Figma frame as source of truth. Prefer Figma over your taste. Fidelity work — not a redesign.
@@ -719,10 +728,14 @@ FINAL GATE
     command:
       `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Screen / route: 
-What’s broken on mobile (overflow, stacking, taps, type, etc.): 
-Viewport(s) to prioritize (default ~390): 
+Which screen? 
+(example: Pricing, Dashboard, Checkout)
+What’s broken on mobile? 
+(example: horizontal scroll, tiny tap targets, type too small)
+Which phone size to prioritize? 
+(example: ~390 wide, spot-check tablet ~768)
 ══════════════════════════════════════
 
 Do a mobile-first pass for this screen at ~390px (spot-check ~768 if nav/filters change). Fix real mobile failures inside the existing brand — no new features, no desktop redesign, no decorative invention.
@@ -822,10 +835,14 @@ FINAL GATE
     command:
       `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Flow / screen: 
-Which states need work (empty / loading / error / all): 
-Notes: 
+Which flow or screen? 
+(example: Search results, Invite teammates)
+Which states need work? 
+(example: empty, loading, error — or all)
+Extra notes? 
+(example: keep copy short and calm)
 ══════════════════════════════════════
 
 Add or improve empty, loading, and error states for this flow so non-happy paths feel intentional and finished.
@@ -935,10 +952,14 @@ FINAL GATE
     command:
       `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Screen / flow: 
-Copy problems to prioritize (optional): 
-Terms that must stay consistent (optional): 
+Which screen or flow? 
+(example: Onboarding step 2, Empty search)
+Any copy problems to prioritize? (optional) 
+(example: vague buttons, scary errors)
+Words that must stay consistent? (optional) 
+(example: always say “workspace,” never “project”)
 ══════════════════════════════════════
 
 Do a copy-only pass on this screen: labels, buttons, helper text, empty states, errors, short headings.
@@ -1457,13 +1478,16 @@ FINAL GATE
       'Fill in where you’re stuck — get auth steps, then the force production deploy command.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Where I’m stuck: 
-(e.g. “Netlify site not updating” · CLI says not logged in · 401 on deploy · wrong team/site linked)
-Site name / URL (if known): 
-Environment: 
-(e.g. local Mac · work laptop · Cursor cloud agent)
-I can open a browser for login? (yes / no): 
+Where are you stuck? 
+(example: live site not updating / says I’m not logged in / wrong site linked)
+Site name or URL? (if you know it) 
+(example: my-app.netlify.app)
+Where are you working? 
+(example: work laptop, personal computer)
+Can you open a browser to log in? 
+(example: yes / no)
 ══════════════════════════════════════
 
 Unblock Netlify CLI auth for the filled-in situation, then force a production deploy so the live site shows the latest build.
@@ -1588,9 +1612,12 @@ Ordered commands I can copy · what “success” looks like · common failure f
     command:
       `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Component / file path: 
-What looks wrong (or “classes fighting — clean without restyle”): 
+Which component or screen? 
+(example: Filter chips row, Hero section)
+What’s wrong? 
+(example: styles look like they’re fighting / clean up without changing the look)
 ══════════════════════════════════════
 
 Audit this component for conflicting utility classes (padding, margin, display, position, text size/color, flex/grid, gaps). Keep the intended visual. Remove dead or fighting utilities.
@@ -1684,9 +1711,11 @@ FINAL GATE
   {
     id: 'vibe-clone-and-run',
     title: 'Clone, Install & Run',
-    description: 'The “I just got the repo link” onboarding one-liner.',
+    description: 'Paste the repo link, then install and run — first-day onboarding.',
     command:
-      'git clone <repository-url> && cd <repo-folder> && npm install && npm run dev',
+      'git clone PASTE-REPO-LINK-HERE && cd PASTE-FOLDER-NAME && npm install && npm run dev',
+    notes:
+      'Replace PASTE-REPO-LINK-HERE with the GitHub link (example: https://github.com/your-team/your-project). Replace PASTE-FOLDER-NAME with the folder name that appears after clone.',
     platform: 'github',
     language: 'shell',
     category: 'Setup',
@@ -1803,15 +1832,24 @@ FINAL GATE
     id: 'vibe-prompt-one-job-only',
     title: 'One Job Only (Save Credits)',
     description:
-      'Short brief that stops the agent from redesigning the whole page.',
-    command: `Do exactly one job. Nothing else.
+      'Fill in one specific change — stops the agent from redesigning the whole page.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+What is the one job? 
+(example: fix the empty search state on Library)
+Where is it? 
+(example: Command Library → search results)
+What must stay the same? 
+(example: brand, navigation, unrelated screens)
+Done when… 
+(example: empty state shows clear next step on phone and desktop)
+══════════════════════════════════════
 
-Job: <what must change>
-Where: <file/component/screen>
-Must not change: <brand, IA, unrelated flows, APIs>
-Done when: <3–5 pass/fail checks>
+Do exactly one job. Nothing else. Use the filled-in details above.
 If unsure, ask one question — do not guess product decisions.
-Prefer the smallest diff. No drive-by refactors, renames, or new dependencies.`,
+Prefer the smallest change. No drive-by redesigns or unrelated edits.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
@@ -1831,14 +1869,24 @@ Prefer the smallest diff. No drive-by refactors, renames, or new dependencies.`,
     id: 'vibe-prompt-ask-before-code',
     title: 'Ask First, Then Code',
     description:
-      'Force a short plan + questions before any edits — fewer wasted agent turns.',
-    command: `Do not edit code yet.
+      'Fill in your ask first — then force a short plan before any edits.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+What do you want done? 
+(example: make the Filters sheet usable on phone)
+Any must-not-change notes? 
+(example: keep current desktop layout)
+══════════════════════════════════════
+
+Do not edit anything yet.
 
 1. Restate my ask in one sentence.
 2. List assumptions (max 5).
-3. Ask only the questions that would change the implementation (max 5).
-4. Propose the smallest plan (files + steps).
-5. Wait for my OK before coding.`,
+3. Ask only the questions that would change the plan (max 5).
+4. Propose the smallest plan (what you’ll touch + steps).
+5. Wait for my OK before making changes.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
@@ -1858,17 +1906,25 @@ Prefer the smallest diff. No drive-by refactors, renames, or new dependencies.`,
     id: 'vibe-prompt-diagnose-only',
     title: 'Diagnose Only (No Fix Yet)',
     description:
-      'Get a root-cause read without burning a whole coding turn on the wrong fix.',
-    command: `Diagnose only. Do not change code.
+      'Fill in what’s broken — get a diagnosis before spending a full fix turn.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+What's broken? 
+(example: copy button never shows “Copied”)
+What should happen? 
+(example: shows Copied for about a second)
+Where did you notice it? 
+(example: Library cards on desktop)
+══════════════════════════════════════
 
-What's broken: <symptom>
-Expected: <what should happen>
-Where I looked: <screen/url/file>
+Diagnose only. Do not change anything yet.
 
 Return:
-• Likely root cause (Observed vs Inferred)
-• 2–3 evidence checks I can run myself
-• Smallest fix options ranked by risk
+• Likely root cause (what you saw vs what you’re guessing)
+• 2–3 checks I can run myself
+• Smallest fix options, safest first
 • What you would NOT touch`,
     platform: 'aiprompt',
     language: 'prompt',
@@ -1888,12 +1944,18 @@ Return:
     id: 'vibe-prompt-write-user-stories',
     title: 'Write User Stories + AC',
     description:
-      'Turn a vague product ask into stories and acceptance criteria without implementing.',
-    command: `Turn this product ask into shippable user stories. Do not implement.
+      'Paste one product ask — get user stories and acceptance criteria (no building yet).',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Paste your product ask or notes: 
+(example: “We need a clearer empty state when search has no results”)
+══════════════════════════════════════
 
-Ask: <paste request / screenshot notes>
+Turn this into shippable user stories. Do not build yet.
 
-For each story:
+For each story include:
 • Title
 • User story (As a… I want… so that…)
 • Priority (Must / Should / Later)
@@ -1920,19 +1982,25 @@ Keep the set as small as possible for a useful first slice.`,
     id: 'vibe-prompt-prd-lite',
     title: 'PRD Lite (One Pager)',
     description:
-      'Draft a short PRD you can paste into Linear/Notion instead of re-briefing AI.',
-    command: `Write a one-page PRD lite. Do not implement.
+      'Fill in the problem in plain language — get a one-page PRD you can paste into Linear/Notion.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Who is hurting / why now? 
+(example: new users can’t tell what to do after signup)
+What should the user be able to do? 
+(example: finish setup and see one clear next step)
+What is out of scope? 
+(example: no new billing, no redesign of the whole app)
+Happy path in a few steps: 
+(example: land → connect account → see dashboard)
+══════════════════════════════════════
 
-Problem: <who hurts / why now>
-Goal: <user outcome>
-Non-goals: <explicit>
-Primary flow: <happy path steps>
-States to design: empty / loading / error / success / permission
-Success metrics: <1–3>
-Risks / open questions
-MVP cut: must ship vs later
+Write a one-page PRD lite from the details above. Do not build yet.
 
-Keep it scannable. No filler strategy essay.`,
+Also include: states to design (empty / loading / error / success), 1–3 success measures, risks / open questions, and must-ship vs later.
+Keep it scannable. No long strategy essay.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
@@ -1944,19 +2012,25 @@ Keep it scannable. No filler strategy essay.`,
     id: 'vibe-prompt-bug-report',
     title: 'Write a Dev-Ready Bug Report',
     description:
-      'Turn a vague “it’s broken” note into a bug engineers (or agents) can act on.',
-    command: `Rewrite this into a bug report a developer can act on. Do not fix it.
+      'Paste messy “it’s broken” notes — get a clear bug report someone can act on.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Paste your messy notes / screenshot description: 
+(example: “on phone the filters sheet is cut off and I can’t reach Apply”)
+══════════════════════════════════════
 
-Notes: <paste messy notes / screenshots description>
+Rewrite this into a bug report someone can act on. Do not fix it yet.
 
-Output:
+Include:
 • Title
 • Severity (Blocker / Major / Minor)
 • Steps to reproduce
 • Expected vs actual
-• Environment (device/width/browser/account)
-• Suspected area (if any — label as guess)
-• Acceptance criteria for the fix`,
+• Where you saw it (device, screen size, browser/account if known)
+• Suspected area (if any — mark as a guess)
+• What “fixed” looks like`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
@@ -1968,13 +2042,18 @@ Output:
     id: 'vibe-prompt-prioritize-rice',
     title: 'Prioritize with RICE',
     description:
-      'Score a backlog so you decide offline instead of debating with an agent.',
-    command: `Prioritize these ideas with a lightweight RICE score. Do not implement.
+      'Paste your idea list — get a simple RICE-style priority order.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Paste your ideas / backlog: 
+(example: empty states, onboarding tips, dark mode polish, new filter)
+══════════════════════════════════════
 
-Ideas:
-<paste list>
+Prioritize these with a lightweight RICE score. Do not build yet.
 
-For each: Reach · Impact (1–3) · Confidence (%) · Effort (person-weeks) · RICE score · 1-line rationale · recommended order.
+For each idea include: Reach, Impact (1–3), Confidence (%), Effort, score, one-line why, and recommended order.
 Call out what to kill or park. Be opinionated but show the math.`,
     platform: 'aiprompt',
     language: 'prompt',
@@ -1987,19 +2066,24 @@ Call out what to kill or park. Be opinionated but show the math.`,
     id: 'vibe-prompt-research-synthesis',
     title: 'Synthesize Research Notes',
     description:
-      'Turn interview/notes dumps into themes, quotes, and opportunities.',
-    command: `Synthesize these research notes. Do not invent quotes.
+      'Paste interview or feedback notes — get themes and opportunities (no invented quotes).',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Paste your research notes: 
+(example: interview notes, support tickets, feedback snippets)
+══════════════════════════════════════
 
-Notes:
-<paste interview notes / support tickets / feedback>
+Synthesize these notes. Do not invent quotes.
 
-Output:
+Return:
 • Top themes (with quote evidence)
-• Jobs-to-be-done
+• Jobs to be done
 • Pain → opportunity pairs
 • Contradictions / unknowns
-• Recommended next experiments (small)
-No product solutionizing beyond opportunities.`,
+• Small next experiments
+Stop at opportunities — don’t jump to a full redesign.`,
     platform: 'aiprompt',
     language: 'prompt',
     category: 'Prompts',
@@ -2019,12 +2103,20 @@ No product solutionizing beyond opportunities.`,
     id: 'vibe-prompt-interview-script',
     title: 'Draft a User Interview Script',
     description:
-      'Build a 30-minute interview script before you talk to users (no AI needed live).',
-    command: `Draft a 30-minute user interview script.
+      'Fill in who you’re talking to and what you want to learn — get a 30-minute interview script.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+What do you want to learn? 
+(example: why people abandon setup)
+Who are you interviewing? 
+(example: new small-business admins)
+Product context in one short paragraph: 
+(example: we help teams track expenses; setup has 4 steps)
+══════════════════════════════════════
 
-Goal of the interview: <learning goal>
-Who: <persona / recruit criteria>
-Product context: <one paragraph>
+Draft a 30-minute user interview script from the details above.
 
 Include:
 • Intro + consent (short)
@@ -2053,11 +2145,18 @@ Flag questions that bias toward our current solution.`,
     id: 'vibe-prompt-nielsen-heuristics',
     title: 'Heuristic Review (DIY Checklist)',
     description:
-      'Run a Nielsen-style heuristic pass you can do yourself or paste to an agent.',
-    command: `Do a heuristic UX review of this screen/flow. Do not redesign from scratch.
+      'Name the screen — get a simple heuristic UX review (no full redesign).',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Which screen or flow? 
+(example: Checkout step 2, or paste a URL)
+What can you share as evidence? 
+(example: screenshot notes / “look at the live page”)
+══════════════════════════════════════
 
-Screen/flow: <name or URL>
-Evidence: <screenshot notes / what you can inspect>
+Do a heuristic UX review of this screen/flow. Do not redesign from scratch.
 
 For each of Nielsen’s 10 heuristics:
 • Pass / Risk / Fail
@@ -2083,14 +2182,21 @@ End with top 5 issues ranked by user impact. No new visual brand.`,
     id: 'vibe-prompt-edge-case-matrix',
     title: 'Edge-Case Matrix',
     description:
-      'List states and edges before coding so the agent doesn’t invent them mid-flight.',
-    command: `Build an edge-case / UI-state matrix for this flow. Do not implement yet.
+      'Name the flow — get an edge-case / state checklist before anyone builds.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Which flow? 
+(example: Invite teammate, Search library)
+Happy path in one sentence? 
+(example: user searches, finds a command, copies it)
+══════════════════════════════════════
 
-Flow: <name>
-Happy path: <brief>
+Build an edge-case / UI-state matrix for this flow. Do not build yet.
 
 Cover: empty · loading · error · success · permission denied · long content · offline/slow · first visit vs return · mobile vs desktop.
-For each cell: what the user sees · primary action · copy tone · out of scope?
+For each: what the user sees · primary action · copy tone · out of scope?
 
 Return a compact table plus the 3 riskiest gaps.`,
     platform: 'aiprompt',
@@ -2112,16 +2218,21 @@ Return a compact table plus the 3 riskiest gaps.`,
     id: 'vibe-prompt-changelog-human',
     title: 'Human Changelog / Release Notes',
     description:
-      'Turn a diff or commit list into release notes non-engineers understand.',
-    command: `Write human release notes from this change list. Do not invent features.
+      'Paste what changed — get release notes non-engineers understand.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Paste what changed: 
+(example: PR summary, commit list, or bullet notes)
+Who is this for? 
+(example: customers, internal team, design partners)
+══════════════════════════════════════
 
-Changes:
-<paste commits / PR summary / bullets>
-
-Audience: <customers / internal / design partners>
+Write human release notes from the change list above. Do not invent features.
 Tone: clear, non-hype.
 
-Output:
+Include:
 • What’s new (user benefit)
 • What’s fixed
 • What to watch / known limits
@@ -2143,13 +2254,20 @@ Output:
     id: 'vibe-prompt-cursor-rule-from-decision',
     title: 'Turn a Decision into a Cursor Rule',
     description:
-      'Encode a design decision once so you stop re-pasting it every chat.',
-    command: `Turn this design decision into a short Cursor/agent rule I can save in the repo.
+      'Paste one design decision — get a short reusable rule for future chats.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+What decision should always be followed? 
+(example: never use purple gradients; always reuse our buttons)
+Product / brand context? 
+(example: Acme Banking, calm enterprise look)
+══════════════════════════════════════
 
-Decision: <paste decision / “always do X / never do Y”>
-Context: <product / brand / stack>
+Turn this into a short agent/Cursor rule I can save.
 
-Output a paste-ready markdown rule with:
+Include:
 • When it applies
 • Hard requirements (MUST / MUST NOT)
 • Good vs bad examples (brief)
@@ -2174,20 +2292,32 @@ Keep it under ~40 lines. No essay.`,
     id: 'vibe-prompt-design-md-scaffold',
     title: 'Scaffold a Design.md',
     description:
-      'Generate a Design.md outline so agents stop freelancing your visual system.',
-    command: `Draft a Design.md scaffold for this product. Ask me to fill blanks — do not invent a brand.
+      'Name the product — get a Design.md outline agents can follow (no invented brand).',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Product name? 
+(example: Acme Banking)
+Who is it for? 
+(example: small-business finance admins)
+Any must-nots? (optional) 
+(example: no purple gradients, keep our logo)
+══════════════════════════════════════
+
+Draft a Design.md scaffold for this product. Ask me to fill blanks — do not invent a brand.
 
 Include sections:
 • Product / audience
 • Brand voice
 • Color roles (not raw hex unless I provide them)
-• Type ramp
-• Spacing / radius / elevation
+• Type scale
+• Spacing / corners / elevation
 • Component reuse order
 • Motion rules
 • Responsive breakpoints
 • Content & empty-state rules
-• Anti-patterns (AI-slop to avoid)
+• Anti-patterns (AI-looking defaults to avoid)
 • MUST NOT change list
 
 Leave TODOs where my input is required.`,
@@ -2209,18 +2339,23 @@ Leave TODOs where my input is required.`,
     id: 'vibe-prompt-tighten-my-ask',
     title: 'Tighten My Messy Ask',
     description:
-      'Rewrite a fuzzy request into a sharp brief before you spend agent credits.',
-    command: `Rewrite my messy ask into a tight agent brief. Do not implement.
+      'Paste a fuzzy ask — get a clear brief before you spend credits.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Paste your messy ask: 
+(example: “can you make the filters less confusing on mobile somehow”)
+══════════════════════════════════════
 
-Messy ask:
-<paste>
+Rewrite this into a tight brief. Do not build yet.
 
 Return:
 • One-sentence job
 • In scope / out of scope
-• Constraints & must-not-changes
+• What must stay the same
 • Done-when checks
-• Files/areas likely involved (guesses labeled)
+• Likely areas involved (label guesses)
 • Risks / questions
 
 Optimize for fewest agent turns.`,
@@ -2287,11 +2422,16 @@ Optimize for fewest agent turns.`,
     id: 'vibe-prompt-plain-english-pr',
     title: 'Explain This PR in Plain English',
     description:
-      'Get a stakeholder-safe summary of a diff without another design-review essay.',
-    command: `Explain this PR/diff in plain English for a PM/designer audience. Do not rewrite code.
+      'Paste PR/diff notes — get a plain-English summary for PMs and designers.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Paste the PR / change summary: 
+(example: list of changed screens, or “filters + empty state updated”)
+══════════════════════════════════════
 
-Diff/context:
-<paste summary, file list, or describe the PR>
+Explain this PR/diff in plain English for a PM/designer audience. Do not rewrite code.
 
 Cover:
 • What a user would notice
