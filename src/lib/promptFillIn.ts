@@ -1,7 +1,7 @@
 import type { Command } from '../types/command'
 
 /** Shown on cards when a prompt expects user-specific context. */
-export const FILL_IN_CHIP = 'Add your details'
+export const FILL_IN_CHIP = 'Add details'
 
 export const FILL_IN_HINT =
   'Fill the blank lines before you paste — examples in (parentheses) show what to write, not final answers.'
