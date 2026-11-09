@@ -20,6 +20,7 @@ type FilterBottomSheetProps = {
   selectedFunctions: SecondaryCategory[]
   onToggleFunction: (value: SecondaryCategory) => void
   favoritesOn: boolean
+  favoriteCount: number
   onFavoritesToggle: () => void
   hasActiveFilters: boolean
   onClear: () => void
@@ -38,6 +39,7 @@ export function FilterBottomSheet({
   selectedFunctions,
   onToggleFunction,
   favoritesOn,
+  favoriteCount,
   onFavoritesToggle,
   hasActiveFilters,
   onClear,
@@ -154,17 +156,17 @@ export function FilterBottomSheet({
 
           <SheetSection label="Favorites">
             <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              aria-pressed={favoritesOn}
-              title="Only show commands you have favorited."
-              onClick={onFavoritesToggle}
-              className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[15px] font-medium transition focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
-                favoritesOn
-                  ? 'border-ink bg-ink text-page'
-                  : 'border-border bg-surface text-ink hover:bg-surface-muted'
-              }`}
-            >
+              <button
+                type="button"
+                aria-pressed={favoritesOn}
+                title="Only show commands you have favorited."
+                onClick={onFavoritesToggle}
+                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[15px] font-medium transition focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
+                  favoritesOn
+                    ? 'border-ink bg-ink text-page'
+                    : 'border-border bg-surface text-ink hover:bg-surface-muted'
+                }`}
+              >
                 <svg
                   width="15"
                   height="15"
@@ -181,7 +183,9 @@ export function FilterBottomSheet({
                     fill={favoritesOn ? 'currentColor' : 'none'}
                   />
                 </svg>
-                Favorites
+                {favoriteCount > 0
+                  ? `Favorites (${favoriteCount})`
+                  : 'Favorites'}
               </button>
             </div>
           </SheetSection>

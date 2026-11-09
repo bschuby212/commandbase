@@ -2,6 +2,11 @@ import { useId, type KeyboardEvent, type MouseEvent } from 'react'
 import { CopyIconButton } from './CopyIconButton'
 import { FavoriteButton } from './FavoriteButton'
 import { LANGUAGE_LABELS } from '../lib/platformLabels'
+import {
+  commandNeedsFillIn,
+  FILL_IN_CHIP,
+  FILL_IN_HINT,
+} from '../lib/promptFillIn'
 import type { Command } from '../types/command'
 
 type CommandCardProps = {
@@ -22,6 +27,14 @@ export function CommandCard({
   onToggleFavorite,
 }: CommandCardProps) {
   const descriptionId = useId()
+  const needsFillIn = commandNeedsFillIn(command)
+  const descriptionAlreadyGuides =
+    /\b(fill in|fill the|paste |add your|blank line)/i.test(command.description)
+  const description = needsFillIn
+    ? descriptionAlreadyGuides
+      ? command.description
+      : `${command.description} ${FILL_IN_HINT}`
+    : command.description
 
   const handleActivate = () => {
     onCopy()
@@ -44,7 +57,11 @@ export function CommandCard({
       role="button"
       tabIndex={0}
       aria-describedby={descriptionId}
-      aria-label={`Copy command: ${command.title}`}
+      aria-label={
+        needsFillIn
+          ? `Copy prompt (fill in your specific screen or feature first): ${command.title}`
+          : `Copy command: ${command.title}`
+      }
       aria-pressed={copied}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
@@ -62,8 +79,9 @@ export function CommandCard({
           <p
             id={descriptionId}
             className="mt-0.5 line-clamp-2 min-h-8 text-xs leading-4 text-ink-muted"
+            title={needsFillIn ? FILL_IN_HINT : undefined}
           >
-            {command.description}
+            {description}
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-0.5">
@@ -80,19 +98,27 @@ export function CommandCard({
 
       <pre
         className={`pointer-events-none flex min-h-[3rem] max-w-full items-center overflow-hidden rounded-lg bg-code-bg px-2.5 py-2 text-[12px] leading-snug text-code-text whitespace-pre-wrap break-words [overflow-wrap:anywhere] ${
-          command.type === 'prompt' ? 'font-sans' : 'font-mono'
+          command.type === 'prompt' || command.language === 'prompt'
+            ? 'font-sans'
+            : 'font-mono'
         }`}
       >
         <code className="line-clamp-2">{displayCommand}</code>
       </pre>
 
       <div className="pointer-events-none mt-auto flex min-w-0 flex-wrap gap-1.5 pt-2.5">
+        {needsFillIn ? (
+          <span className="inline-flex items-center rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-accent">
+            {FILL_IN_CHIP}
+          </span>
+        ) : null}
         {[
           LANGUAGE_LABELS[command.language],
           command.category,
           ...(command.tags ?? []).slice(0, 2),
         ]
           .filter((label, index, list) => list.indexOf(label) === index)
+          .slice(0, needsFillIn ? 2 : 3)
           .map((label) => (
             <span
               key={label}

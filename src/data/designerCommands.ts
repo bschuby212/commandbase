@@ -308,7 +308,7 @@ export const designerCommands: Command[] = [
   {
     id: 'claude-design-review-prompt',
     title: 'Design Review Prompt',
-    description: 'Ask Claude to critique hierarchy, spacing, and CTA clarity.',
+    description: 'Critique hierarchy, spacing, and CTA clarity.',
     command:
       'Review this UI for hierarchy, spacing rhythm, and CTA clarity. Suggest concrete class/token changes only.',
     platform: 'claude',
@@ -423,7 +423,7 @@ export const designerCommands: Command[] = [
   {
     id: 'claude-screenshot-feedback',
     title: 'Screenshot Feedback Prompt',
-    description: 'Ask Claude to compare a screenshot to the live page.',
+    description: 'Compare a screenshot to the live page.',
     command:
       'Compare this screenshot to the current page. List visual deltas and patch only those.',
     platform: 'claude',
@@ -554,7 +554,7 @@ export const designerCommands: Command[] = [
   {
     id: 'claude-focus-trap-ask',
     title: 'Modal Focus Trap Reminder',
-    description: 'Ask Claude to verify modal focus behavior.',
+    description: 'Verify modal focus behavior.',
     command:
       'Ensure this dialog traps focus, restores focus on close, and closes on Escape.',
     platform: 'claude',
@@ -602,8 +602,8 @@ export const designerCommands: Command[] = [
   // --- Codex (+25) ---
   {
     id: 'codex-design-constraints',
-    title: 'Codex: Design Constraints Preamble',
-    description: 'Prime Codex with brand/layout constraints before coding.',
+    title: 'Design Constraints Preamble',
+    description: 'Prime with brand/layout constraints before coding.',
     command:
       'Constraints: Inter, grey page, white cards, no purple, no emoji chrome, reuse tokens.',
     platform: 'codex',
@@ -614,7 +614,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-fix-component',
-    title: 'Codex: Build Form Field',
+    title: 'Build Form Field',
     description: 'Generate a labeled input with error text slot.',
     command:
       'Create an accessible text field with label, hint, and error text using existing styles.',
@@ -626,7 +626,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-button-states',
-    title: 'Codex: Button State Set',
+    title: 'Button State Set',
     description: 'Implement primary/secondary button states.',
     command:
       'Implement primary and secondary buttons with hover, focus-visible, disabled.',
@@ -638,7 +638,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-nav-mobile',
-    title: 'Codex: Mobile Nav',
+    title: 'Mobile Nav',
     description: 'Ask for a simple responsive nav without hamburger gimmicks.',
     command:
       'Build a responsive top nav: collapse links cleanly on small screens, keep tap targets ≥44px.',
@@ -650,7 +650,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-toast-pattern',
-    title: 'Codex: Toast Pattern',
+    title: 'Toast Pattern',
     description: 'Add a non-blocking success toast for copy actions.',
     command:
       'Add a short-lived success toast for copy. Auto-dismiss ~1.5s. No modal.',
@@ -662,7 +662,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-skeleton-list',
-    title: 'Codex: Skeleton List',
+    title: 'Skeleton List',
     description: 'Placeholder rows matching final card height.',
     command:
       'Add skeleton placeholders matching final card height for this grid.',
@@ -674,7 +674,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-filter-chips',
-    title: 'Codex: Filter Chip Row',
+    title: 'Filter Chip Row',
     description: 'Build compact filter chips that do not wrap endlessly.',
     command:
       'Build a filter chip row that stays one line on desktop and wraps gracefully on mobile.',
@@ -686,7 +686,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-dropdown-a11y',
-    title: 'Codex: Accessible Dropdown',
+    title: 'Accessible Dropdown',
     description: 'Listbox keyboard support for custom selects.',
     command:
       'Make this custom dropdown a proper listbox: arrow keys, Escape, aria-expanded.',
@@ -698,7 +698,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-theme-toggle',
-    title: 'Codex: Theme Toggle',
+    title: 'Theme Toggle',
     description: 'Persist light/dark preference in localStorage.',
     command:
       'Add a theme toggle that persists to localStorage and avoids flash on load.',
@@ -710,7 +710,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-grid-responsive',
-    title: 'Codex: Responsive Card Grid',
+    title: 'Responsive Card Grid',
     description: '1→2→3→4 column grid without awkward gaps.',
     command:
       'Create a responsive card grid: 1 / 2 / 3 / 4 columns by breakpoint with equal row heights.',
@@ -722,7 +722,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-image-aspect',
-    title: 'Codex: Aspect Ratio Media',
+    title: 'Aspect Ratio Media',
     description: 'Lock media frames so layouts do not jump.',
     command:
       'Wrap media in a fixed aspect-ratio container to prevent layout shift.',
@@ -734,7 +734,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-sticky-toolbar',
-    title: 'Codex: Sticky Toolbar',
+    title: 'Sticky Toolbar',
     description: 'Keep filters visible while scrolling results.',
     command:
       'Make the filter toolbar sticky under the header without covering content.',
@@ -746,7 +746,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-empty-search',
-    title: 'Codex: Empty Search State',
+    title: 'Empty Search State',
     description: 'Friendly zero-results with a clear reset action.',
     command:
       'Add an empty-search state with a single Reset filters action.',
@@ -758,7 +758,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-copy-button',
-    title: 'Codex: Copy with Check Feedback',
+    title: 'Copy with Check Feedback',
     description: 'Icon swap to checkmark for ~1.5s after copy.',
     command:
       'On copy, swap the icon to a checkmark for 1.5s then revert. Whole card clickable optional.',
@@ -770,7 +770,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-focus-ring',
-    title: 'Codex: Visible Focus Rings',
+    title: 'Visible Focus Rings',
     description: 'Ensure keyboard focus is obvious on controls.',
     command:
       'Add visible focus-visible rings on interactive controls; do not remove outlines.',
@@ -782,7 +782,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-reduce-shadows',
-    title: 'Codex: Unify Shadows',
+    title: 'Unify Shadows',
     description: 'Match card shadows to input shadows.',
     command:
       'Use one shared shadow token for inputs and cards. Remove heavier multi-layer shadows.',
@@ -794,7 +794,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-font-loading',
-    title: 'Codex: Font Display Swap',
+    title: 'Font Display Swap',
     description: 'Avoid invisible text while webfonts load.',
     command:
       'Ensure webfonts use display=swap and a sensible fallback stack.',
@@ -806,18 +806,26 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-favicon-setup',
-    title: 'Codex: Favicon + Title',
-    description: 'Set document title and SVG favicon.',
-    command: 'Set a clear <title> and SVG favicon that works in light and dark tabs.',
+    title: 'Favicon + Title',
+    description: 'Fill in the page title — set title + favicon for light and dark tabs.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+What should the browser tab say? 
+(example: Acme Banking · Settings)
+══════════════════════════════════════
+
+Set a clear document title from the details above and an SVG favicon that works in light and dark tabs.`,
     platform: 'codex',
-    language: 'editor',
+    language: 'prompt',
     category: 'Setup',
     type: 'terminal',
-    keywords: ['favicon', 'title'],
+    keywords: ['favicon', 'title', 'fill'],
   },
   {
     id: 'codex-seo-meta',
-    title: 'Codex: Basic Meta Description',
+    title: 'Basic Meta Description',
     description: 'Add a meta description for the landing page.',
     command: 'Add a concise meta description reflecting the product purpose.',
     platform: 'codex',
@@ -828,8 +836,8 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-lint-fix',
-    title: 'Codex: Fix Lint After UI Edit',
-    description: 'Ask Codex to fix lint only, no redesign.',
+    title: 'Fix Lint After UI Edit',
+    description: 'Fix lint only, no redesign.',
     command: 'Fix lint/type errors from the last UI edit. Do not change visuals.',
     platform: 'codex',
     language: 'javascript',
@@ -839,7 +847,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-pr-description',
-    title: 'Codex: PR Description for UI',
+    title: 'PR Description for UI',
     description: 'Draft a PR body focused on visual changes.',
     command:
       'Write a PR description listing visual changes, breakpoints checked, and how to verify.',
@@ -851,7 +859,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-branch-ui',
-    title: 'Codex: Suggest UI Branch Name',
+    title: 'Suggest UI Branch Name',
     description: 'Get a clean branch name for a visual change.',
     command: 'Suggest a short branch name for this UI change (kebab-case).',
     platform: 'codex',
@@ -862,7 +870,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-storybook-stub',
-    title: 'Codex: Component Story Stub',
+    title: 'Component Story Stub',
     description: 'Stub a Storybook story for a pure UI component.',
     command:
       'Create a minimal Storybook story for this component with default and dense variants.',
@@ -874,7 +882,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-playwright-screenshot',
-    title: 'Codex: Visual Smoke Screenshot',
+    title: 'Visual Smoke Screenshot',
     description: 'Script a quick homepage screenshot for QA.',
     command:
       'Write a Playwright snippet that screenshots the homepage at 1440×900.',
@@ -886,7 +894,7 @@ export const designerCommands: Command[] = [
   },
   {
     id: 'codex-remove-console',
-    title: 'Codex: Strip Debug Logs',
+    title: 'Strip Debug Logs',
     description: 'Remove console.log left from design debugging.',
     command: 'Remove leftover console.log/debug statements from UI files.',
     platform: 'codex',
@@ -894,6 +902,480 @@ export const designerCommands: Command[] = [
     category: 'Utilities',
     type: 'terminal',
     keywords: ['console', 'cleanup'],
+  },
+
+  // --- Codex / ChatGPT work prompts (enterprise UI) ---
+  {
+    id: 'codex-work-one-job',
+    title: 'One UI Job Only',
+    description: 'Fill in the one change — keep the agent from redesigning the whole app.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+What one UI change? 
+(example: fix empty search state on Settings)
+Where in the product? 
+(example: Settings → Users table, or “search the repo for UsersTable”)
+How will we know it’s done? 
+(example: empty state shows helpful copy; table still loads)
+What must stay the same? 
+(example: brand, navigation, APIs)
+══════════════════════════════════════
+
+Do exactly one UI job from the details above. Reuse the existing design system. Do not change brand, information architecture, APIs, or unrelated screens. Smallest change. Ask one question if a product decision is unclear.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Sessions',
+    type: 'terminal',
+    keywords: ['codex', 'chatgpt', 'work', 'one job', 'brief', 'scope'],
+  },
+  {
+    id: 'codex-work-design-system-first',
+    title: 'Reuse Design System First',
+    description: 'Force reuse of company components over inventing new UI.',
+    command:
+      'Before creating any new UI primitive, search the repo for the existing design-system / component library and reuse it. Prefer: exact variant → existing component + props → compose primitives → new primitive only if you name the system gap. No one-off colors, radii, or button styles.',
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Sessions',
+    type: 'terminal',
+    keywords: [
+      'codex',
+      'chatgpt',
+      'design system',
+      'reuse',
+      'library',
+      'work',
+    ],
+  },
+  {
+    id: 'codex-work-shadcn',
+    title: 'Build with shadcn/ui',
+    description: 'Implement using shadcn patterns already in the repo.',
+    command:
+      'Implement this UI using the project’s existing shadcn/ui components and Tailwind tokens. Run or mirror `npx shadcn@latest add <component>` only if the component is missing. Do not invent parallel button/input styles. Keep accessibility (label, focus-visible, keyboard) intact.',
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Utilities',
+    type: 'terminal',
+    keywords: ['codex', 'shadcn', 'ui', 'tailwind', 'react', 'chatgpt', 'work'],
+  },
+  {
+    id: 'codex-work-mui',
+    title: 'Build with MUI / Material',
+    description: 'Prefer Material UI components and theme over custom CSS.',
+    command:
+      'Implement this UI with existing MUI (Material UI) components and the app theme (`sx` / theme tokens). Prefer Button, TextField, Dialog, Menu, Stack/Grid from MUI. Do not add competing CSS frameworks. Match spacing/typography to the theme. Keep a11y props (aria-*, labels) correct.',
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Utilities',
+    type: 'terminal',
+    keywords: [
+      'codex',
+      'mui',
+      'material',
+      'material ui',
+      'react',
+      'chatgpt',
+      'work',
+    ],
+  },
+  {
+    id: 'codex-work-angular-ds',
+    title: 'Use Angular Design System',
+    description: 'Use the company Angular component library.',
+    command:
+      'Implement this in Angular using the existing design-system / shared UI library in this monorepo (find the library path first). Prefer library components and inputs/outputs over raw HTML+CSS. Follow existing module/standalone patterns, OnPush if used, and BEM/token conventions already in the repo. No new global styles.',
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Sessions',
+    type: 'terminal',
+    keywords: [
+      'codex',
+      'angular',
+      'design system',
+      'library',
+      'chatgpt',
+      'work',
+    ],
+  },
+  {
+    id: 'codex-work-react-library',
+    title: 'Use React Component Library',
+    description: 'Reuse the shared React package instead of one-off markup.',
+    command:
+      'Implement this with the shared React component library already in the repo (locate the package / path first). Reuse exported components and variants. Extend via props/composition. Do not copy-paste library internals into the app. Keep TypeScript props accurate.',
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Sessions',
+    type: 'terminal',
+    keywords: [
+      'codex',
+      'react',
+      'component library',
+      'design system',
+      'chatgpt',
+      'work',
+    ],
+  },
+  {
+    id: 'codex-work-chatgpt-critique',
+    title: 'Design Critique',
+    description: 'Fill the product/screen, then paste into any AI.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Which product / screen? 
+(example: banking Settings, checkout step 2, admin user table)
+Who is this for? 
+(example: existing customers on desktop)
+What should it look at? 
+(example: paste a screenshot note, Figma link, or “the live page”)
+What must stay the same? 
+(example: brand, layout structure)
+══════════════════════════════════════
+
+You are a staff product designer reviewing the filled-in UI. Critique hierarchy, spacing, states (empty/loading/error), responsive behavior, and accessibility. Do not rewrite the brand. Return: top issues (Blocker/Major/Minor), smallest fixes, and what is already working.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'terminal',
+    keywords: [
+      'chatgpt',
+      'codex',
+      'critique',
+      'review',
+      'design',
+      'work',
+      'fill',
+    ],
+  },
+  {
+    id: 'codex-work-chatgpt-microcopy',
+    title: 'Microcopy Pass',
+    description: 'Fill the strings/context, then tighten enterprise UI copy.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Which product? 
+(example: SaaS banking app, B2B analytics)
+Voice notes? (optional) 
+(example: calm, clear, no hype)
+Paste the copy to improve: 
+(example: button labels, errors, empty-state text)
+══════════════════════════════════════
+
+Rewrite the filled-in UI microcopy for clarity and tone. Keep it short, human, and consistent with enterprise product voice (no hype, no emoji). Provide: original → suggested. Flag anything ambiguous.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'terminal',
+    keywords: [
+      'chatgpt',
+      'codex',
+      'microcopy',
+      'ux writing',
+      'content',
+      'work',
+      'fill',
+    ],
+  },
+  {
+    id: 'codex-work-pr-review',
+    title: 'Review My UI PR',
+    description: 'Review the current diff like a careful UI teammate.',
+    command:
+      'Review the current git diff for UI regressions. Check design-system reuse, a11y (labels/focus/keyboard), responsive breakage, empty/loading/error states, and drive-by unrelated changes. Suggest the smallest fixes. Do not rewrite unrelated files.',
+    platform: 'codex',
+    language: 'shell',
+    category: 'Commits & Changes',
+    type: 'terminal',
+    keywords: ['codex', 'review', 'pr', 'diff', 'ui', 'chatgpt', 'work'],
+  },
+  {
+    id: 'codex-work-exec-small-fix',
+    title: 'Small UI Fix',
+    description: 'Fill in the UI issue — one-shot fix with the smallest change.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+What UI issue should be fixed? 
+(example: primary button text wraps on mobile checkout)
+══════════════════════════════════════
+
+Fix only the UI issue filled in above. Touch the fewest files. Reuse existing components. Do not change unrelated code. Summarize what changed.
+
+Touch the fewest files. Reuse existing components. Do not change unrelated code. Summarize what changed.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Utilities',
+    type: 'terminal',
+    keywords: ['codex', 'exec', 'fix', 'one shot', 'chatgpt', 'work', 'fill'],
+  },
+  {
+    id: 'codex-work-explain-legacy',
+    title: 'Explain Legacy UI Code',
+    description: 'Name the screen or folder — get a plain-English map for designers/PMs.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Which screen, file, or folder? 
+(example: src/pages/Settings, CheckoutStep2, “Users table”)
+══════════════════════════════════════
+
+Explain this UI for a designer/PM: what the screen does, key pieces, what data it needs, risky spots to edit, and where styles live. Do not rewrite code unless I ask.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Utilities',
+    type: 'terminal',
+    keywords: [
+      'codex',
+      'chatgpt',
+      'explain',
+      'legacy',
+      'angular',
+      'react',
+      'work',
+    ],
+  },
+  {
+    id: 'codex-work-angular-component',
+    title: 'Generate Angular Component',
+    description: 'Name the component — scaffold it in this repo’s Angular style.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Component name? 
+(example: AccountSummaryCard)
+What should it show / do? 
+(example: show account balance + “View details” button)
+══════════════════════════════════════
+
+Create an Angular component matching this repo’s patterns. Include template, styles, and inputs/outputs. Use existing design-system pieces. Add simple empty and loading states. Do not add a new global CSS framework.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Utilities',
+    type: 'terminal',
+    keywords: ['codex', 'angular', 'component', 'generate', 'chatgpt', 'work'],
+  },
+  {
+    id: 'codex-work-react-component',
+    title: 'Generate React Component',
+    description: 'Name the component — scaffold it in this repo’s React style.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Component name? 
+(example: EmptySearchState)
+What should it show / do? 
+(example: friendly empty state when filters return nothing)
+══════════════════════════════════════
+
+Create a React + TypeScript component matching this repo’s patterns. Reuse existing design-system / shadcn / MUI pieces. Include empty/loading/error when relevant, and clear labels. Keep files as small as possible.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Utilities',
+    type: 'terminal',
+    keywords: ['codex', 'react', 'component', 'typescript', 'chatgpt', 'work'],
+  },
+  {
+    id: 'codex-work-figma-to-ds',
+    title: 'Figma → Design System Mapping',
+    description: 'Paste Figma/frame notes — get a component mapping before anyone codes.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Paste Figma link or frame notes: 
+(example: frame name, what’s on the screen, or a short description)
+Design system in this project? 
+(example: shadcn, MUI, our Angular library, “not sure — look in the repo”)
+══════════════════════════════════════
+
+Map each UI block to an existing design-system component. Call out gaps that need a new variant vs a brand-new component. Do not build yet — mapping table only.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Sessions',
+    type: 'terminal',
+    keywords: [
+      'codex',
+      'figma',
+      'design system',
+      'mapping',
+      'shadcn',
+      'mui',
+      'angular',
+      'chatgpt',
+    ],
+  },
+  {
+    id: 'codex-work-a11y-enterprise',
+    title: 'Enterprise A11y Pass',
+    description: 'Accessibility pass tuned for enterprise forms and data UIs.',
+    command:
+      'Run an accessibility pass on this enterprise UI: keyboard order, focus-visible, labels for icon buttons, form errors tied to inputs, dialog focus trap, table/list semantics, contrast via theme tokens. Fix only clear a11y bugs. Do not restyle the brand. Summarize fixes.',
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Utilities',
+    type: 'terminal',
+    keywords: [
+      'codex',
+      'a11y',
+      'accessibility',
+      'enterprise',
+      'chatgpt',
+      'work',
+    ],
+  },
+  {
+    id: 'codex-work-ticket-to-plan',
+    title: 'Ticket → Implementation Plan',
+    description: 'Fill the ticket, then get a ready plan before coding.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Ticket name or ID? 
+(example: BANK-204 Improve empty search)
+Which product? 
+(example: banking web app)
+Paste the ticket / acceptance notes: 
+(example: what “done” looks like in plain language)
+Design system to reuse? 
+(example: our shared components)
+What must stay the same? 
+(example: navigation, APIs, brand)
+══════════════════════════════════════
+
+Turn the filled-in ticket into an implementation plan. Do not code yet. Include: restated goal, in/out of scope, design-system components to reuse, files likely touched, edge cases, test/verification steps, and open questions.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'terminal',
+    keywords: [
+      'chatgpt',
+      'codex',
+      'ticket',
+      'jira',
+      'linear',
+      'plan',
+      'work',
+      'fill',
+    ],
+  },
+  {
+    id: 'codex-work-push-auth',
+    title: 'Push Auth for Tool / Plugin',
+    description:
+      'Fill in one tool (e.g. Netlify, gh, Figma MCP) — get auth unblock steps without pasting secrets.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Which tool or plugin? 
+(example: Netlify, GitHub, Figma plugin, Slack)
+What do you want to do after login? 
+(example: publish the live site, open a pull request, open a Figma file)
+What's going wrong? 
+(example: not logged in, wrong account, can't open a browser here)
+══════════════════════════════════════
+
+Unblock auth for that one tool/plugin only. Give official login or token steps, where to store credentials (env/secret store — never paste secrets into chat), a verify command, then the exact retry command for my task.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'terminal',
+    keywords: [
+      'codex',
+      'chatgpt',
+      'auth',
+      'login',
+      'plugin',
+      'tool',
+      'netlify',
+      'token',
+      'work',
+      'fill',
+    ],
+  },
+  {
+    id: 'codex-work-pick-model',
+    title: 'Which Model Fits?',
+    description:
+      'Fill the job and priorities, then get a model/tool recommendation before spending credits.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+What do you need help with? 
+(example: critique Settings UI, build a simple form, fix a site that won’t update)
+Which AI tools can you use? 
+(example: whichever AI tools you can use — or “any”)
+Which models can you pick? 
+(example: not sure — suggest)
+What matters most? 
+(example: quality, speed, save credits, privacy, design taste)
+Any limits? 
+(example: recommendations only, keep work data private)
+══════════════════════════════════════
+
+Recommend the best model/mode/tool for this job only. Do not do the work yet. Give: primary pick + why, runner-up for cheaper/faster, what to avoid, and a 3–5 bullet brief I should paste next.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'terminal',
+    keywords: [
+      'codex',
+      'chatgpt',
+      'model',
+      'which model',
+      'best fit',
+      'credits',
+      'recommend',
+      'work',
+      'fill',
+    ],
+  },
+  {
+    id: 'codex-work-competitive-analysis',
+    title: 'Competitive Analysis',
+    description: 'Fill your product (e.g. SaaS banking app), then run a teardown.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Your product or category? 
+(example: SaaS banking app, B2B analytics dashboard)
+Competitors to include? 
+(example: list names, or “pick 3–5 strong ones”)
+What should we compare? 
+(example: onboarding, pricing page, empty states, mobile, trust cues)
+What do you think makes you different? 
+(example: clearer first-run for small teams)
+══════════════════════════════════════
+
+Run a competitive analysis for the filled-in product/category. Designer/PM-useful teardown: competitor table, patterns to steal/avoid, opportunities, next design bets. No fake quotes or invented metrics. Recommendations only — do not redesign our product unless asked.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'terminal',
+    keywords: [
+      'chatgpt',
+      'codex',
+      'competitive analysis',
+      'competitors',
+      'saas',
+      'banking',
+      'work',
+      'fill',
+    ],
   },
 
   // --- VS Code / Copilot (+25) ---
@@ -2126,7 +2608,7 @@ export const designerCommands: Command[] = [
   {
     id: 'claude-big-design-system-pass',
     title: 'Full Design-System Alignment Pass',
-    description: 'Ask Claude to rewrite a screen to tokens/components only.',
+    description: 'Rewrite a screen to tokens/components only.',
     command:
       'Rewrite this screen to use only existing tokens and shared components. Remove one-off colors, radii, and type styles. Keep content identical.',
     platform: 'claude',
@@ -2150,7 +2632,7 @@ export const designerCommands: Command[] = [
   {
     id: 'claude-big-responsive-matrix',
     title: 'Responsive Matrix Audit',
-    description: 'Have Claude check 375 / 768 / 1024 / 1440 systematically.',
+    description: 'Check 375 / 768 / 1024 / 1440 systematically.',
     command:
       'Audit layout at 375, 768, 1024, and 1440. Fix overflow, wrapping, and tap targets. Report what changed per breakpoint.',
     platform: 'claude',
@@ -2234,14 +2716,21 @@ export const designerCommands: Command[] = [
   {
     id: 'cursor-big-agent-redesign-section',
     title: 'Agent: Redesign One Section',
-    description: 'Scope the agent to a single section so it does not rewrite the app.',
-    command:
-      'Only edit the <SectionName> section. Match existing tokens. Do not touch routing, data fetching, or unrelated files.',
+    description: 'Name one section — keep the agent from rewriting the whole app.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Which section only? 
+(example: Home hero, Pricing FAQ, Settings profile form)
+══════════════════════════════════════
+
+Only edit that section. Match existing styles. Do not touch routing, data loading, or unrelated files.`,
     platform: 'cursor',
-    language: 'editor',
+    language: 'prompt',
     category: 'Sessions',
     type: 'terminal',
-    keywords: ['agent', 'scope', 'section', 'cursor'],
+    keywords: ['agent', 'scope', 'section', 'cursor', 'fill'],
   },
   {
     id: 'cursor-big-agent-pixel-diff',
@@ -2258,26 +2747,110 @@ export const designerCommands: Command[] = [
   {
     id: 'cursor-big-agent-no-purple',
     title: 'Agent: Anti-AI Aesthetic Guardrails',
-    description: 'Block the default purple/glow/pill look models default to.',
-    command:
-      'Avoid purple gradients, glow effects, rounded-full pill clusters, and multi-layer shadows. Follow our tokens.',
+    description:
+      'Strip obvious AI UI defaults: tiny type, ALL CAPS, excess lines, pills, glow, card spam.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Which screen(s)? 
+(example: Home hero, Settings page)
+Design system to keep? 
+(example: our live styles / Design.md)
+Fix now, or only report? 
+(example: report only / yes, fix obvious AI-looking chrome)
+══════════════════════════════════════
+
+Review and cut obvious AI-generated design tells on the filled-in UI. Follow our tokens. Do not invent a new brand.
+
+Cut or tone down:
+• Excessive small / micro text
+• Excessive ALL CAPS and wide-tracked labels
+• Excessive hairlines, dividers, and boxed chrome
+• Card spam; cards in the hero; floating badges/chips on media
+• Pill clusters, multi-layer shadows, glow effects
+• Purple gradients / generic AI color themes
+• Dashboard clutter in a marketing/first viewport
+• Decorative motion and emoji ornament
+
+Prefer fewer clearer elements. One job per section. If a border/shadow/radius isn’t needed for understanding, remove it. Return a tell inventory with severity, then apply smallest fixes only if implement = yes.`,
     platform: 'cursor',
-    language: 'editor',
+    language: 'prompt',
     category: 'Sessions',
     type: 'terminal',
-    keywords: ['guardrails', 'aesthetic', 'purple', 'agent'],
+    keywords: [
+      'guardrails',
+      'aesthetic',
+      'anti ai',
+      'ai generated',
+      'all caps',
+      'small text',
+      'lines',
+      'dividers',
+      'purple',
+      'pills',
+      'glow',
+      'agent',
+      'review',
+      'fill',
+    ],
+  },
+  {
+    id: 'codex-work-cut-ai-tells',
+    title: 'Cut AI Design Tells',
+    description:
+      'Overall pass to remove tiny type, ALL CAPS, excess lines, and other AI-default chrome.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Which product / screen? 
+(example: banking home, pricing page, settings)
+Design system to keep? 
+(example: our existing components)
+What must not change? 
+(example: brand, navigation, real content)
+Fix now, or only recommend? 
+(example: recommendations only)
+══════════════════════════════════════
+
+Do an overall review to cut obvious AI-generated design. Inventory and fix (if allowed): excessive small text, excessive ALL CAPS/wide tracking, excessive lines/dividers/boxed sections, card spam, pill/badge clutter, glow/multi-shadows, purple/generic AI themes, hero overlays, decorative motion. Stay in the design system. Rank by severity, prefer the smallest cuts that make it look intentional and human.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'terminal',
+    keywords: [
+      'codex',
+      'chatgpt',
+      'anti ai',
+      'ai generated',
+      'all caps',
+      'small text',
+      'excessive lines',
+      'dividers',
+      'review',
+      'work',
+      'fill',
+    ],
   },
   {
     id: 'cursor-big-multi-file-ui',
     title: 'Agent: Multi-File UI Consistency',
-    description: 'Ask the agent to align spacing/type across related screens.',
-    command:
-      'Make spacing, type, and chip styles consistent across these files: <paths>. No new patterns.',
+    description: 'List the screens/files — align spacing and type with no new patterns.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
+══════════════════════════════════════
+Which screens or files should match? 
+(example: Settings and Profile, or list file names if you know them)
+══════════════════════════════════════
+
+Make spacing, type, and chip styles consistent across those places. No new patterns.`,
     platform: 'cursor',
-    language: 'editor',
+    language: 'prompt',
     category: 'Sessions',
     type: 'terminal',
-    keywords: ['consistency', 'multi-file', 'agent'],
+    keywords: ['consistency', 'multi-file', 'agent', 'fill'],
   },
   {
     id: 'cursor-big-composer-plan',

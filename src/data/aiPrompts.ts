@@ -402,10 +402,14 @@ FINAL GATE
       'Translate an existing Figma design into a faithful implementation.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Figma link / file: 
-Frame / node name (or paste the frame): 
-Notes / must-match details (optional): 
+Figma link or file? 
+(example: paste the Figma URL)
+Which frame or screen? 
+(example: Home / Desktop, or paste the frame name)
+Anything that must match exactly? (optional) 
+(example: keep our logo size, don’t change colors)
 ══════════════════════════════════════
 
 Implement the provided Figma as faithfully as possible. Figma is the visual source of truth — inspect it with available tools/MCP or exports; do not guess from memory. Measurement beats taste.
@@ -544,11 +548,16 @@ FINAL GATE
       'Recreate an interface from a screenshot without improvisation.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-Screenshot(s) attached: yes/no
-Which screen / state this is: 
-Must-match notes (optional): 
-Known differences to ignore (optional): 
+Did you attach screenshot(s)? 
+(example: yes / no)
+Which screen or state is this? 
+(example: Checkout empty cart on mobile)
+Anything that must match? (optional) 
+(example: keep current button styles)
+Known differences to ignore? (optional) 
+(example: placeholder images, lorem text)
 ══════════════════════════════════════
 
 Recreate or correct the UI to match the provided screenshot(s) with high fidelity. The screenshot is the visual target for layout, hierarchy, spacing, type, and color — not a vague mood board.
@@ -2541,10 +2550,14 @@ FINAL GATE
       'Review only the current change set for risk, regressions, and gaps.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-PR / branch / diff scope (optional): 
-What you want reviewed hardest: 
-Known risk areas (optional): 
+What should be reviewed? (optional) 
+(example: this PR, current changes, branch name)
+What should get the closest look? 
+(example: empty states, mobile layout, copy)
+Known risk areas? (optional) 
+(example: shared buttons, login, payments)
 ══════════════════════════════════════
 
 Review only the current diff (or specified PR/patch). Do not wander into unrelated code unless the diff clearly breaks it. Catch correctness, UX regressions, and scope creep in what changed.
@@ -2663,14 +2676,20 @@ FINAL GATE
       'Fill in what’s broken first, then reproduce, find the real cause, fix, and retest.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
+Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
 ══════════════════════════════════════
-What’s broken: 
-Where (screen / component / control): 
-Steps to reproduce / viewport: 
-Expected: 
-Actual: 
+What’s broken? 
+(example: Save button does nothing / spacing looks off)
+Where? 
+(example: Settings → Profile on mobile)
+How do you reproduce it? 
+(example: open Settings, tap Edit, try Save)
+What should happen? 
+(example: profile saves and shows a success message)
+What happens instead? 
+(example: nothing / error / wrong layout)
 
-(If you only know “it looks wrong,” still name the region and what feels off — layout, type, color, clipping, interaction, or data.)
+(If you only know “it looks wrong,” still name the area and what feels off — layout, type, color, clipping, or interaction.)
 ══════════════════════════════════════
 
 Use the “What’s broken / Where / Steps / Expected / Actual” fields above as the starting bug report. Treat blank fields as unknown — ask or state assumptions rather than inventing symptoms.

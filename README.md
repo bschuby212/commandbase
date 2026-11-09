@@ -1,6 +1,6 @@
 # Command Library
 
-A standalone, responsive quick-reference library for developer commands covering Git/GitHub, Cursor, Claude Code, Codex, and VS Code / Copilot.
+A standalone, responsive quick-reference library for developer commands and paste-ready prompts covering Codex, ChatGPT, Cursor, Claude Code, Git/GitHub, VS Code / Copilot, plus React/Angular design-system helpers (shadcn, MUI, Angular Material).
 
 ## Features
 

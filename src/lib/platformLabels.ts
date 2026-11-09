@@ -74,7 +74,7 @@ export const TOOL_DESCRIPTIONS: Partial<Record<PrimaryFilter, string>> = {
   github: 'Git and GitHub workflows.',
   cursor: 'Cursor editor and agent commands.',
   claude: 'Claude Code CLI and slash commands.',
-  codex: 'Codex CLI and session commands.',
+  codex: 'Codex CLI, ChatGPT-ready prompts, and session commands.',
   vscode: 'VS Code and Copilot shortcuts.',
   powershell: 'Windows PowerShell setup and fixes.',
   macterminal: 'Mac Terminal, Homebrew, and shell fixes.',

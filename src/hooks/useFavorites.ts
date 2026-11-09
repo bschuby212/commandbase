@@ -1,27 +1,39 @@
-import { useCallback, useState } from 'react'
-
-const STORAGE_KEY = 'commandbase:favorites'
-
-function readFavorites(): Set<string> {
-  if (typeof window === 'undefined') return new Set()
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) return new Set()
-    const parsed = JSON.parse(raw) as unknown
-    if (!Array.isArray(parsed)) return new Set()
-    return new Set(parsed.filter((id): id is string => typeof id === 'string'))
-  } catch {
-    return new Set()
-  }
-}
+import { useCallback, useEffect, useState } from 'react'
+import {
+  FAVORITES_STORAGE_KEY,
+  persistFavorites,
+  readFavoritesFromStorage,
+  readFavoritesFromUrl,
+  readInitialFavorites,
+} from '../lib/favoriteSync'
 
 export function useFavorites() {
-  const [favoriteIds, setFavoriteIds] = useState<Set<string>>(readFavorites)
+  const [favoriteIds, setFavoriteIds] = useState<Set<string>>(readInitialFavorites)
 
-  const persist = useCallback((next: Set<string>) => {
-    setFavoriteIds(next)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...next]))
+  const apply = useCallback((next: Set<string>) => {
+    const frozen = new Set(next)
+    setFavoriteIds(frozen)
+    persistFavorites(frozen)
   }, [])
+
+  useEffect(() => {
+    const onStorage = (event: StorageEvent) => {
+      if (event.key !== FAVORITES_STORAGE_KEY) return
+      apply(readFavoritesFromStorage())
+    }
+
+    const onHashChange = () => {
+      const fromUrl = readFavoritesFromUrl()
+      if (fromUrl) apply(fromUrl)
+    }
+
+    window.addEventListener('storage', onStorage)
+    window.addEventListener('hashchange', onHashChange)
+    return () => {
+      window.removeEventListener('storage', onStorage)
+      window.removeEventListener('hashchange', onHashChange)
+    }
+  }, [apply])
 
   const isFavorite = useCallback(
     (id: string) => favoriteIds.has(id),
@@ -30,13 +42,29 @@ export function useFavorites() {
 
   const toggleFavorite = useCallback(
     (id: string) => {
-      const next = new Set(favoriteIds)
-      if (next.has(id)) next.delete(id)
-      else next.add(id)
-      persist(next)
+      setFavoriteIds((current) => {
+        const next = new Set(current)
+        if (next.has(id)) next.delete(id)
+        else next.add(id)
+        persistFavorites(next)
+        return next
+      })
     },
-    [favoriteIds, persist],
+    [],
   )
 
-  return { favoriteIds, isFavorite, toggleFavorite }
+  const replaceFavorites = useCallback(
+    (ids: Iterable<string>) => {
+      apply(new Set([...ids].filter(Boolean)))
+    },
+    [apply],
+  )
+
+  return {
+    favoriteIds,
+    favoriteCount: favoriteIds.size,
+    isFavorite,
+    toggleFavorite,
+    replaceFavorites,
+  }
 }

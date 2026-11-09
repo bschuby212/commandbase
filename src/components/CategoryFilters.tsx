@@ -33,6 +33,7 @@ type CategoryFiltersProps = {
   onSecondaryChange: (value: SecondaryCategory | null) => void
   favoriteFilter: FavoriteFilter
   onFavoriteFilterChange: (value: FavoriteFilter) => void
+  favoriteCount: number
   availableSecondary: SecondaryCategory[]
   tools: Platform[]
   languages: CommandLanguage[]
@@ -57,6 +58,7 @@ export function CategoryFilters({
   onSecondaryChange,
   favoriteFilter,
   onFavoriteFilterChange,
+  favoriteCount,
   availableSecondary,
   tools,
   languages,
@@ -72,6 +74,8 @@ export function CategoryFilters({
   const [sheetOpen, setSheetOpen] = useState(false)
   const functionValue: FunctionFilter = secondary ?? 'all'
   const favoritesOn = favoriteFilter === 'favorites'
+  const favoritesLabel =
+    favoriteCount > 0 ? `Favorites (${favoriteCount})` : 'Favorites'
 
   const toolOptions = useMemo(
     () =>
@@ -123,8 +127,8 @@ export function CategoryFilters({
   return (
     <>
       {showMobile ? (
-        <div className={`relative z-30 w-full ${className}`}>
-          <div className="toolbar-shell w-full">
+        <div className={`relative z-30 flex w-full items-center gap-2 ${className}`}>
+          <div className="toolbar-shell min-w-0 flex-1">
             <button
               type="button"
               aria-haspopup="dialog"
@@ -196,7 +200,9 @@ export function CategoryFilters({
               type="button"
               aria-pressed={favoritesOn}
               aria-label={
-                favoritesOn ? 'Show all commands' : 'Show favorites only'
+                favoritesOn
+                  ? 'Show all commands'
+                  : `Show favorites only${favoriteCount > 0 ? `, ${favoriteCount} saved` : ''}`
               }
               onClick={() =>
                 onFavoriteFilterChange(favoritesOn ? 'all' : 'favorites')
@@ -221,7 +227,7 @@ export function CategoryFilters({
                   fill={favoritesOn ? 'currentColor' : 'none'}
                 />
               </svg>
-              <span>Favorites</span>
+              <span>{favoritesLabel}</span>
             </button>
           </div>
         </div>
@@ -241,6 +247,7 @@ export function CategoryFilters({
           selectedFunctions={functions}
           onToggleFunction={onToggleFunction}
           favoritesOn={favoritesOn}
+          favoriteCount={favoriteCount}
           onFavoritesToggle={() =>
             onFavoriteFilterChange(favoritesOn ? 'all' : 'favorites')
           }

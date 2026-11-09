@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react'
 import { commands } from '../data/commands'
 import type {
-  Command,
   CommandLanguage,
   FavoriteFilter,
   LanguageFilter,
@@ -9,6 +8,10 @@ import type {
   PrimaryFilter,
   SecondaryCategory,
 } from '../types/command'
+import {
+  compareSearchRelevance,
+  matchesSearch,
+} from '../lib/commandSearch'
 import { getDisplayCommand } from '../lib/getCopyText'
 
 const ALL_SECONDARY: SecondaryCategory[] = [
@@ -21,29 +24,6 @@ const ALL_SECONDARY: SecondaryCategory[] = [
   'Utilities',
   'Prompts',
 ]
-
-function matchesSearch(command: Command, query: string): boolean {
-  if (!query) return true
-
-  const haystack = [
-    command.title,
-    command.description,
-    command.command,
-    command.category,
-    command.platform,
-    command.language,
-    command.type,
-    command.notes ?? '',
-    command.shortcut?.mac ?? '',
-    command.shortcut?.windows ?? '',
-    ...(command.tags ?? []),
-    ...command.keywords,
-  ]
-    .join(' ')
-    .toLowerCase()
-
-  return haystack.includes(query)
-}
 
 function toggleInList<T>(list: T[], value: T): T[] {
   return list.includes(value)
@@ -95,9 +75,9 @@ export function useCommandFilter(favoriteIds: Set<string>) {
   }
 
   const filtered = useMemo(() => {
-    const query = search.trim().toLowerCase()
+    const query = search.trim()
 
-    return commands.filter((command) => {
+    const matched = commands.filter((command) => {
       if (tools.length > 0 && !tools.includes(command.platform)) return false
       if (languages.length > 0 && !languages.includes(command.language)) {
         return false
@@ -110,6 +90,9 @@ export function useCommandFilter(favoriteIds: Set<string>) {
       }
       return matchesSearch(command, query)
     })
+
+    if (!query) return matched
+    return [...matched].sort((a, b) => compareSearchRelevance(a, b, query))
   }, [tools, languages, functions, favoriteFilter, favoriteIds, search])
 
   const availableSecondary = useMemo(() => {
