@@ -1676,4 +1676,521 @@ FINAL GATE
     type: 'terminal',
     keywords: ['stash', 'pop', 'restore'],
   },
+
+  // --- Credit savers: short prompts + durable project memory ---
+  // Intentionally brief. Paste these instead of re-explaining constraints every turn.
+  {
+    id: 'vibe-prompt-one-job-only',
+    title: 'One Job Only (Save Credits)',
+    description:
+      'Short brief that stops the agent from redesigning the whole page.',
+    command: `Do exactly one job. Nothing else.
+
+Job: <what must change>
+Where: <file/component/screen>
+Must not change: <brand, IA, unrelated flows, APIs>
+Done when: <3–5 pass/fail checks>
+If unsure, ask one question — do not guess product decisions.
+Prefer the smallest diff. No drive-by refactors, renames, or new dependencies.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'one job',
+      'credits',
+      'short',
+      'scope',
+      'brief',
+      'save',
+      'prompt',
+    ],
+    tags: ['Credits', 'Planning'],
+  },
+  {
+    id: 'vibe-prompt-ask-before-code',
+    title: 'Ask First, Then Code',
+    description:
+      'Force a short plan + questions before any edits — fewer wasted agent turns.',
+    command: `Do not edit code yet.
+
+1. Restate my ask in one sentence.
+2. List assumptions (max 5).
+3. Ask only the questions that would change the implementation (max 5).
+4. Propose the smallest plan (files + steps).
+5. Wait for my OK before coding.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'ask',
+      'plan',
+      'before',
+      'code',
+      'credits',
+      'questions',
+      'prompt',
+    ],
+    tags: ['Credits', 'Planning'],
+  },
+  {
+    id: 'vibe-prompt-diagnose-only',
+    title: 'Diagnose Only (No Fix Yet)',
+    description:
+      'Get a root-cause read without burning a whole coding turn on the wrong fix.',
+    command: `Diagnose only. Do not change code.
+
+What's broken: <symptom>
+Expected: <what should happen>
+Where I looked: <screen/url/file>
+
+Return:
+• Likely root cause (Observed vs Inferred)
+• 2–3 evidence checks I can run myself
+• Smallest fix options ranked by risk
+• What you would NOT touch`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'diagnose',
+      'debug',
+      'root cause',
+      'credits',
+      'no fix',
+      'prompt',
+    ],
+    tags: ['Credits', 'QA'],
+  },
+  {
+    id: 'vibe-prompt-write-user-stories',
+    title: 'Write User Stories + AC',
+    description:
+      'Turn a vague product ask into stories and acceptance criteria without implementing.',
+    command: `Turn this product ask into shippable user stories. Do not implement.
+
+Ask: <paste request / screenshot notes>
+
+For each story:
+• Title
+• User story (As a… I want… so that…)
+• Priority (Must / Should / Later)
+• Acceptance criteria (testable bullets)
+• Edge cases worth naming
+• Open questions
+
+Keep the set as small as possible for a useful first slice.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'user stories',
+      'acceptance',
+      'pm',
+      'prd',
+      'criteria',
+      'prompt',
+    ],
+    tags: ['PM', 'Planning'],
+  },
+  {
+    id: 'vibe-prompt-prd-lite',
+    title: 'PRD Lite (One Pager)',
+    description:
+      'Draft a short PRD you can paste into Linear/Notion instead of re-briefing AI.',
+    command: `Write a one-page PRD lite. Do not implement.
+
+Problem: <who hurts / why now>
+Goal: <user outcome>
+Non-goals: <explicit>
+Primary flow: <happy path steps>
+States to design: empty / loading / error / success / permission
+Success metrics: <1–3>
+Risks / open questions
+MVP cut: must ship vs later
+
+Keep it scannable. No filler strategy essay.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: ['prd', 'one pager', 'pm', 'spec', 'brief', 'prompt'],
+    tags: ['PM', 'Planning'],
+  },
+  {
+    id: 'vibe-prompt-bug-report',
+    title: 'Write a Dev-Ready Bug Report',
+    description:
+      'Turn a vague “it’s broken” note into a bug engineers (or agents) can act on.',
+    command: `Rewrite this into a bug report a developer can act on. Do not fix it.
+
+Notes: <paste messy notes / screenshots description>
+
+Output:
+• Title
+• Severity (Blocker / Major / Minor)
+• Steps to reproduce
+• Expected vs actual
+• Environment (device/width/browser/account)
+• Suspected area (if any — label as guess)
+• Acceptance criteria for the fix`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: ['bug', 'report', 'issue', 'qa', 'pm', 'repro', 'prompt'],
+    tags: ['PM', 'QA', 'Handoff'],
+  },
+  {
+    id: 'vibe-prompt-prioritize-rice',
+    title: 'Prioritize with RICE',
+    description:
+      'Score a backlog so you decide offline instead of debating with an agent.',
+    command: `Prioritize these ideas with a lightweight RICE score. Do not implement.
+
+Ideas:
+<paste list>
+
+For each: Reach · Impact (1–3) · Confidence (%) · Effort (person-weeks) · RICE score · 1-line rationale · recommended order.
+Call out what to kill or park. Be opinionated but show the math.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: ['rice', 'prioritize', 'backlog', 'pm', 'roadmap', 'prompt'],
+    tags: ['PM', 'Planning'],
+  },
+  {
+    id: 'vibe-prompt-research-synthesis',
+    title: 'Synthesize Research Notes',
+    description:
+      'Turn interview/notes dumps into themes, quotes, and opportunities.',
+    command: `Synthesize these research notes. Do not invent quotes.
+
+Notes:
+<paste interview notes / support tickets / feedback>
+
+Output:
+• Top themes (with quote evidence)
+• Jobs-to-be-done
+• Pain → opportunity pairs
+• Contradictions / unknowns
+• Recommended next experiments (small)
+No product solutionizing beyond opportunities.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'research',
+      'synthesis',
+      'interview',
+      'insights',
+      'pm',
+      'ux',
+      'prompt',
+    ],
+    tags: ['PM', 'UX', 'Research'],
+  },
+  {
+    id: 'vibe-prompt-interview-script',
+    title: 'Draft a User Interview Script',
+    description:
+      'Build a 30-minute interview script before you talk to users (no AI needed live).',
+    command: `Draft a 30-minute user interview script.
+
+Goal of the interview: <learning goal>
+Who: <persona / recruit criteria>
+Product context: <one paragraph>
+
+Include:
+• Intro + consent (short)
+• Warm-up
+• 6–10 open questions (no leading)
+• 1–2 task prompts if relevant
+• Probe suggestions
+• Wrap-up
+Flag questions that bias toward our current solution.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'interview',
+      'script',
+      'research',
+      'user',
+      'pm',
+      'ux',
+      'prompt',
+    ],
+    tags: ['Research', 'UX', 'PM'],
+  },
+  {
+    id: 'vibe-prompt-nielsen-heuristics',
+    title: 'Heuristic Review (DIY Checklist)',
+    description:
+      'Run a Nielsen-style heuristic pass you can do yourself or paste to an agent.',
+    command: `Do a heuristic UX review of this screen/flow. Do not redesign from scratch.
+
+Screen/flow: <name or URL>
+Evidence: <screenshot notes / what you can inspect>
+
+For each of Nielsen’s 10 heuristics:
+• Pass / Risk / Fail
+• One concrete example
+• Smallest fix (prefer existing patterns)
+
+End with top 5 issues ranked by user impact. No new visual brand.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'nielsen',
+      'heuristics',
+      'ux review',
+      'checklist',
+      'qa',
+      'prompt',
+    ],
+    tags: ['UX', 'QA'],
+  },
+  {
+    id: 'vibe-prompt-edge-case-matrix',
+    title: 'Edge-Case Matrix',
+    description:
+      'List states and edges before coding so the agent doesn’t invent them mid-flight.',
+    command: `Build an edge-case / UI-state matrix for this flow. Do not implement yet.
+
+Flow: <name>
+Happy path: <brief>
+
+Cover: empty · loading · error · success · permission denied · long content · offline/slow · first visit vs return · mobile vs desktop.
+For each cell: what the user sees · primary action · copy tone · out of scope?
+
+Return a compact table plus the 3 riskiest gaps.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'edge cases',
+      'states',
+      'matrix',
+      'empty',
+      'error',
+      'planning',
+      'prompt',
+    ],
+    tags: ['UX', 'Planning', 'QA'],
+  },
+  {
+    id: 'vibe-prompt-changelog-human',
+    title: 'Human Changelog / Release Notes',
+    description:
+      'Turn a diff or commit list into release notes non-engineers understand.',
+    command: `Write human release notes from this change list. Do not invent features.
+
+Changes:
+<paste commits / PR summary / bullets>
+
+Audience: <customers / internal / design partners>
+Tone: clear, non-hype.
+
+Output:
+• What’s new (user benefit)
+• What’s fixed
+• What to watch / known limits
+• One-line summary for Slack`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'changelog',
+      'release notes',
+      'pm',
+      'stakeholders',
+      'prompt',
+    ],
+    tags: ['PM', 'Handoff'],
+  },
+  {
+    id: 'vibe-prompt-cursor-rule-from-decision',
+    title: 'Turn a Decision into a Cursor Rule',
+    description:
+      'Encode a design decision once so you stop re-pasting it every chat.',
+    command: `Turn this design decision into a short Cursor/agent rule I can save in the repo.
+
+Decision: <paste decision / “always do X / never do Y”>
+Context: <product / brand / stack>
+
+Output a paste-ready markdown rule with:
+• When it applies
+• Hard requirements (MUST / MUST NOT)
+• Good vs bad examples (brief)
+• Exceptions (if any)
+
+Keep it under ~40 lines. No essay.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'cursor rule',
+      'agents.md',
+      'design.md',
+      'memory',
+      'credits',
+      'prompt',
+    ],
+    tags: ['Credits', 'Setup'],
+  },
+  {
+    id: 'vibe-prompt-design-md-scaffold',
+    title: 'Scaffold a Design.md',
+    description:
+      'Generate a Design.md outline so agents stop freelancing your visual system.',
+    command: `Draft a Design.md scaffold for this product. Ask me to fill blanks — do not invent a brand.
+
+Include sections:
+• Product / audience
+• Brand voice
+• Color roles (not raw hex unless I provide them)
+• Type ramp
+• Spacing / radius / elevation
+• Component reuse order
+• Motion rules
+• Responsive breakpoints
+• Content & empty-state rules
+• Anti-patterns (AI-slop to avoid)
+• MUST NOT change list
+
+Leave TODOs where my input is required.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'design.md',
+      'scaffold',
+      'design system',
+      'tokens',
+      'credits',
+      'prompt',
+    ],
+    tags: ['Credits', 'Setup', 'Design'],
+  },
+  {
+    id: 'vibe-prompt-tighten-my-ask',
+    title: 'Tighten My Messy Ask',
+    description:
+      'Rewrite a fuzzy request into a sharp brief before you spend agent credits.',
+    command: `Rewrite my messy ask into a tight agent brief. Do not implement.
+
+Messy ask:
+<paste>
+
+Return:
+• One-sentence job
+• In scope / out of scope
+• Constraints & must-not-changes
+• Done-when checks
+• Files/areas likely involved (guesses labeled)
+• Risks / questions
+
+Optimize for fewest agent turns.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'tighten',
+      'brief',
+      'rewrite',
+      'credits',
+      'scope',
+      'prompt',
+    ],
+    tags: ['Credits', 'Planning'],
+  },
+  {
+    id: 'vibe-scaffold-design-md',
+    title: 'Create Empty Design.md',
+    description:
+      'Drop a starter Design.md in the repo so constraints persist across chats.',
+    command:
+      'printf "%s\\n" "# Design.md" "" "## Product" "- Audience:" "- Primary job:" "" "## Must not change" "- Brand:" "- IA:" "- Unrelated flows:" "" "## Visual system" "- Color roles:" "- Type:" "- Spacing / radius:" "- Components to reuse:" "" "## Motion" "- Use existing only unless specified:" "" "## Responsive" "- Breakpoints:" "" "## Anti-patterns" "- No purple-glow AI aesthetic" "- No card spam in hero" "- No drive-by refactors" "" > Design.md && ls -la Design.md',
+    platform: 'github',
+    language: 'shell',
+    category: 'Setup',
+    type: 'terminal',
+    keywords: [
+      'design.md',
+      'scaffold',
+      'setup',
+      'credits',
+      'memory',
+      'create',
+    ],
+    notes:
+      'Edit the file with your real tokens/rules. Pair with “Scaffold a Design.md” prompt to fill it.',
+  },
+  {
+    id: 'vibe-scaffold-cursor-rule',
+    title: 'Create a Cursor Rule File',
+    description:
+      'Add a project rule file agents will keep reading — biggest ongoing credit saver.',
+    command:
+      'mkdir -p .cursor/rules && printf "%s\\n" "---" "description: UI guardrails for vibe-coding agents" "globs:" "alwaysApply: true" "---" "" "# UI guardrails" "" "- Prefer smallest diff; no drive-by refactors." "- Follow Design.md / existing tokens; no new parallel styles." "- One job per request; ask before expanding scope." "- Preserve brand, IA, and unrelated flows." "- Mobile: check ~390 and ~768 before claiming done." "- Empty/loading/error states need real copy, not placeholders." "" > .cursor/rules/ui-guardrails.mdc && ls -la .cursor/rules/',
+    platform: 'github',
+    language: 'shell',
+    category: 'Setup',
+    type: 'terminal',
+    keywords: [
+      'cursor',
+      'rules',
+      'mdc',
+      'setup',
+      'credits',
+      'guardrails',
+      'agents',
+    ],
+    notes:
+      'Commit this so every new agent chat inherits the constraints. Customize after creating.',
+  },
+  {
+    id: 'vibe-prompt-plain-english-pr',
+    title: 'Explain This PR in Plain English',
+    description:
+      'Get a stakeholder-safe summary of a diff without another design-review essay.',
+    command: `Explain this PR/diff in plain English for a PM/designer audience. Do not rewrite code.
+
+Diff/context:
+<paste summary, file list, or describe the PR>
+
+Cover:
+• What a user would notice
+• What stayed the same on purpose
+• Risk areas to click-test
+• Suggested screenshot checklist
+Keep it under half a page.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'pr',
+      'summary',
+      'plain english',
+      'stakeholder',
+      'pm',
+      'prompt',
+    ],
+    tags: ['PM', 'Handoff'],
+  },
 ]
