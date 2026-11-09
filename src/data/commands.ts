@@ -2,6 +2,7 @@ import type { Command } from '../types/command'
 import { aiPrompts } from './aiPrompts'
 import { designerCommands } from './designerCommands'
 import { frameworkCommands } from './frameworkCommands'
+import { skillPrompts } from './skillPrompts'
 import { vibeCommands } from './vibeCommands'
 
 export const commands: Command[] = [
@@ -4004,5 +4005,6 @@ export const commands: Command[] = [
   ...frameworkCommands,
   ...designerCommands,
   ...vibeCommands,
+  ...skillPrompts,
   ...aiPrompts,
 ]

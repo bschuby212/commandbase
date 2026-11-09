@@ -1001,9 +1001,18 @@ export const designerCommands: Command[] = [
   {
     id: 'codex-work-chatgpt-critique',
     title: 'ChatGPT: Design Critique',
-    description: 'Paste into ChatGPT/Codex chat for a fast design second opinion.',
-    command:
-      'You are a staff product designer reviewing this UI. Critique hierarchy, spacing, states (empty/loading/error), responsive behavior, and accessibility. Do not rewrite the brand. Return: top issues (Blocker/Major/Minor), smallest fixes, and what is already working. UI notes: <paste screenshot description or constraints>.',
+    description: 'Fill the product/screen, then paste into ChatGPT or Codex.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Product / screen: 
+(e.g. SaaS banking settings, checkout step 2, admin user table)
+Audience: 
+Screenshot / link / what to inspect: 
+Must not change: 
+══════════════════════════════════════
+
+You are a staff product designer reviewing the filled-in UI. Critique hierarchy, spacing, states (empty/loading/error), responsive behavior, and accessibility. Do not rewrite the brand. Return: top issues (Blocker/Major/Minor), smallest fixes, and what is already working.`,
     platform: 'codex',
     language: 'prompt',
     category: 'Prompts',
@@ -1015,14 +1024,23 @@ export const designerCommands: Command[] = [
       'review',
       'design',
       'work',
+      'fill',
     ],
   },
   {
     id: 'codex-work-chatgpt-microcopy',
     title: 'ChatGPT: Microcopy Pass',
-    description: 'Tighten button labels, errors, and empty states for work UIs.',
-    command:
-      'Rewrite UI microcopy for clarity and tone. Keep it short, human, and consistent with enterprise product voice (no hype, no emoji). Provide: original → suggested for buttons, labels, helper text, errors, empty states. Flag anything ambiguous. Copy to improve: <paste>.',
+    description: 'Fill the strings/context, then tighten enterprise UI copy.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Product: 
+(e.g. SaaS banking app, B2B analytics)
+Voice notes (optional): 
+Copy to improve (buttons, labels, errors, empty states): 
+══════════════════════════════════════
+
+Rewrite the filled-in UI microcopy for clarity and tone. Keep it short, human, and consistent with enterprise product voice (no hype, no emoji). Provide: original → suggested. Flag anything ambiguous.`,
     platform: 'codex',
     language: 'prompt',
     category: 'Prompts',
@@ -1034,6 +1052,7 @@ export const designerCommands: Command[] = [
       'ux writing',
       'content',
       'work',
+      'fill',
     ],
   },
   {
@@ -1147,9 +1166,19 @@ export const designerCommands: Command[] = [
   {
     id: 'codex-work-ticket-to-plan',
     title: 'ChatGPT: Ticket → Implementation Plan',
-    description: 'Turn a Jira/Linear ticket into a Codex-ready plan before coding.',
-    command:
-      'Turn this ticket into an implementation plan for Codex. Do not code yet. Include: restated goal, in/out of scope, design-system components to reuse, files likely touched, edge cases, test/verification steps, and open questions. Ticket: <paste>.',
+    description: 'Fill the ticket, then get a Codex-ready plan before coding.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Ticket title / ID: 
+Product: 
+(e.g. SaaS banking web app)
+Ticket body / acceptance notes: 
+Design system to reuse: 
+Constraints / must not change: 
+══════════════════════════════════════
+
+Turn the filled-in ticket into an implementation plan for Codex. Do not code yet. Include: restated goal, in/out of scope, design-system components to reuse, files likely touched, edge cases, test/verification steps, and open questions.`,
     platform: 'codex',
     language: 'prompt',
     category: 'Prompts',
@@ -1162,6 +1191,37 @@ export const designerCommands: Command[] = [
       'linear',
       'plan',
       'work',
+      'fill',
+    ],
+  },
+  {
+    id: 'codex-work-competitive-analysis',
+    title: 'Codex/ChatGPT: Competitive Analysis',
+    description: 'Fill your product (e.g. SaaS banking app), then run a teardown.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Your product / category: 
+(e.g. SaaS banking app, B2B analytics dashboard)
+Competitors to include (or “pick 3–5 strong ones”): 
+Compare: IA · onboarding · pricing UX · visual system · empty states · mobile · trust cues
+Our differentiator hypothesis: 
+══════════════════════════════════════
+
+Run a competitive analysis for the filled-in product/category. Designer/PM-useful teardown: competitor table, patterns to steal/avoid, opportunities, next design bets. No fake quotes or invented metrics. Recommendations only — do not redesign our product unless asked.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'terminal',
+    keywords: [
+      'chatgpt',
+      'codex',
+      'competitive analysis',
+      'competitors',
+      'saas',
+      'banking',
+      'work',
+      'fill',
     ],
   },
 
