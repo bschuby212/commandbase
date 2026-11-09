@@ -97,7 +97,9 @@ export function CommandCard({
 
       <pre
         className={`pointer-events-none flex min-h-[3rem] max-w-full items-center overflow-hidden rounded-lg bg-code-bg px-2.5 py-2 text-[12px] leading-snug text-code-text whitespace-pre-wrap break-words [overflow-wrap:anywhere] ${
-          command.type === 'prompt' ? 'font-sans' : 'font-mono'
+          command.type === 'prompt' || command.language === 'prompt'
+            ? 'font-sans'
+            : 'font-mono'
         }`}
       >
         <code className="line-clamp-2">{displayCommand}</code>

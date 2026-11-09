@@ -72,7 +72,7 @@ export function getDisplayCommand(
   if (command.type === 'shortcut' && command.shortcut) {
     return os === 'mac' ? command.shortcut.mac : command.shortcut.windows
   }
-  if (command.type === 'prompt') {
+  if (command.type === 'prompt' || command.language === 'prompt') {
     return getPromptPreview(command.command)
   }
   return command.command
@@ -82,7 +82,7 @@ export function getCopyText(
   command: Command,
   os: 'mac' | 'windows' = detectShortcutOs(),
 ): string {
-  if (command.type === 'prompt') {
+  if (command.type === 'prompt' || command.language === 'prompt') {
     return command.command
   }
   return getDisplayCommand(command, os)
