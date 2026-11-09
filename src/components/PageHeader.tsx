@@ -39,8 +39,8 @@ export function PageHeader() {
         Commands, Simplified.
       </h1>
       <p className="mx-auto mt-3 max-w-xl text-pretty text-sm leading-relaxed text-ink-muted sm:mt-4 sm:text-lg">
-        Terminal commands plus plain-language prompts you can paste into any AI
-        tool — find what you need, copy it, and get back to building.
+        Terminal commands and paste-ready prompts for Codex, ChatGPT, Cursor,
+        Claude, and Git — find what you need, copy it, and get back to building.
       </p>
     </header>
   )

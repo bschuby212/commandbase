@@ -1,6 +1,7 @@
 import type { Command } from '../types/command'
 import { aiPrompts } from './aiPrompts'
 import { designerCommands } from './designerCommands'
+import { frameworkCommands } from './frameworkCommands'
 import { vibeCommands } from './vibeCommands'
 
 export const commands: Command[] = [
@@ -4000,6 +4001,7 @@ export const commands: Command[] = [
     keywords: ["ssh", "public", "key", "github", "copy", "auth", "setup"],
   },
 
+  ...frameworkCommands,
   ...designerCommands,
   ...vibeCommands,
   ...aiPrompts,
