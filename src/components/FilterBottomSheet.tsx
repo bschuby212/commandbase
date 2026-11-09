@@ -1,6 +1,5 @@
 import { useEffect, useId, useRef, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
-import { FavoritesSyncButton } from './FavoritesSyncButton'
 import type { FilterOption } from './FilterDropdown'
 import type {
   CommandLanguage,
@@ -22,7 +21,6 @@ type FilterBottomSheetProps = {
   onToggleFunction: (value: SecondaryCategory) => void
   favoritesOn: boolean
   favoriteCount: number
-  favoriteIds: Set<string>
   onFavoritesToggle: () => void
   hasActiveFilters: boolean
   onClear: () => void
@@ -42,7 +40,6 @@ export function FilterBottomSheet({
   onToggleFunction,
   favoritesOn,
   favoriteCount,
-  favoriteIds,
   onFavoritesToggle,
   hasActiveFilters,
   onClear,
@@ -158,45 +155,38 @@ export function FilterBottomSheet({
           </SheetSection>
 
           <SheetSection label="Favorites">
-            <div className="flex flex-col gap-3">
-              <div className="flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  aria-pressed={favoritesOn}
-                  title="Only show commands you have favorited."
-                  onClick={onFavoritesToggle}
-                  className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[15px] font-medium transition focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
-                    favoritesOn
-                      ? 'border-ink bg-ink text-page'
-                      : 'border-border bg-surface text-ink hover:bg-surface-muted'
-                  }`}
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                aria-pressed={favoritesOn}
+                title="Only show commands you have favorited."
+                onClick={onFavoritesToggle}
+                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[15px] font-medium transition focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:outline-none ${
+                  favoritesOn
+                    ? 'border-ink bg-ink text-page'
+                    : 'border-border bg-surface text-ink hover:bg-surface-muted'
+                }`}
+              >
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 15 15"
+                  fill="none"
+                  aria-hidden="true"
+                  className="shrink-0"
                 >
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 15 15"
-                    fill="none"
-                    aria-hidden="true"
-                    className="shrink-0"
-                  >
-                    <path
-                      d="M7.5 12.6S2.4 9.4 2.4 5.9A2.85 2.85 0 0 1 7.5 4.3 2.85 2.85 0 0 1 12.6 5.9c0 3.5-5.1 6.7-5.1 6.7Z"
-                      stroke="currentColor"
-                      strokeWidth="1.35"
-                      strokeLinejoin="round"
-                      fill={favoritesOn ? 'currentColor' : 'none'}
-                    />
-                  </svg>
-                  {favoriteCount > 0
-                    ? `Favorites (${favoriteCount})`
-                    : 'Favorites'}
-                </button>
-              </div>
-              <p className="text-sm leading-relaxed text-ink-muted">
-                Favorites sync in the page link. Copy it, then open that link on
-                your work or personal computer.
-              </p>
-              <FavoritesSyncButton favoriteIds={favoriteIds} />
+                  <path
+                    d="M7.5 12.6S2.4 9.4 2.4 5.9A2.85 2.85 0 0 1 7.5 4.3 2.85 2.85 0 0 1 12.6 5.9c0 3.5-5.1 6.7-5.1 6.7Z"
+                    stroke="currentColor"
+                    strokeWidth="1.35"
+                    strokeLinejoin="round"
+                    fill={favoritesOn ? 'currentColor' : 'none'}
+                  />
+                </svg>
+                {favoriteCount > 0
+                  ? `Favorites (${favoriteCount})`
+                  : 'Favorites'}
+              </button>
             </div>
           </SheetSection>
         </div>

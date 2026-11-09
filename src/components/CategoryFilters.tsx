@@ -6,7 +6,6 @@ import {
   ProgramIcon,
   ToolFieldIcon,
 } from './FilterIcons'
-import { FavoritesSyncButton } from './FavoritesSyncButton'
 import { FilterBottomSheet } from './FilterBottomSheet'
 import { FilterDropdown } from './FilterDropdown'
 import {
@@ -34,7 +33,6 @@ type CategoryFiltersProps = {
   onSecondaryChange: (value: SecondaryCategory | null) => void
   favoriteFilter: FavoriteFilter
   onFavoriteFilterChange: (value: FavoriteFilter) => void
-  favoriteIds: Set<string>
   favoriteCount: number
   availableSecondary: SecondaryCategory[]
   tools: Platform[]
@@ -60,7 +58,6 @@ export function CategoryFilters({
   onSecondaryChange,
   favoriteFilter,
   onFavoriteFilterChange,
-  favoriteIds,
   favoriteCount,
   availableSecondary,
   tools,
@@ -166,7 +163,6 @@ export function CategoryFilters({
               </svg>
             </button>
           </div>
-          <FavoritesSyncButton favoriteIds={favoriteIds} />
         </div>
       ) : null}
 
@@ -234,7 +230,6 @@ export function CategoryFilters({
               <span>{favoritesLabel}</span>
             </button>
           </div>
-          <FavoritesSyncButton favoriteIds={favoriteIds} />
         </div>
       ) : null}
 
@@ -253,7 +248,6 @@ export function CategoryFilters({
           onToggleFunction={onToggleFunction}
           favoritesOn={favoritesOn}
           favoriteCount={favoriteCount}
-          favoriteIds={favoriteIds}
           onFavoritesToggle={() =>
             onFavoriteFilterChange(favoritesOn ? 'all' : 'favorites')
           }

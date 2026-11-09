@@ -87,9 +87,9 @@ Write plain answers on the blank lines. Text in (parentheses) is just an example
 What do you need help with? 
 (example: review our banking settings screen, write acceptance criteria, fix a deploy that won't update)
 Which AI tools can you use? 
-(example: ChatGPT, Codex, Cursor, Claude — or “any”)
+(example: whichever AI tools you can use — or “any”)
 Which models can you pick? (if you know) 
-(example: “not sure — suggest” / GPT / Claude / Codex)
+(example: “not sure — suggest” / list what you can pick)
 What matters most? (rank a few) 
 (example: best quality, save credits, faster answer, keep work data private)
 Any limits? 
@@ -147,7 +147,7 @@ Primary pick · why · runner-up · avoid · starter brief · switch criteria.`,
     id: 'skill-competitive-analysis',
     title: 'Competitive Analysis (Fill Product)',
     description:
-      'Fill the product/category, then paste into Codex, ChatGPT, Cursor, or Claude.',
+      'Fill the product/category, then paste into any AI.',
     command: `══════════════════════════════════════
 FILL THIS IN BEFORE PASTING
 Write plain answers on the blank lines. Text in (parentheses) is just an example — replace it with yours.
@@ -685,7 +685,7 @@ OUTPUT
   },
   {
     id: 'skill-prompt-library-scaffold',
-    title: 'Scaffold a Cursor Skill File',
+    title: 'Scaffold a Skill File',
     description:
       'Create a starter skill markdown you can refine when you drop in real skill links later.',
     command:

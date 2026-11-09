@@ -59,7 +59,6 @@ function App() {
     onSecondaryChange: setSecondary,
     favoriteFilter,
     onFavoriteFilterChange: setFavoriteFilter,
-    favoriteIds,
     favoriteCount,
     availableSecondary,
     tools,

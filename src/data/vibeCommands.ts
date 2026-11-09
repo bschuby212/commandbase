@@ -2252,7 +2252,7 @@ Include:
   },
   {
     id: 'vibe-prompt-cursor-rule-from-decision',
-    title: 'Turn a Decision into a Cursor Rule',
+    title: 'Turn a Decision into an Agent Rule',
     description:
       'Paste one design decision — get a short reusable rule for future chats.',
     command: `══════════════════════════════════════
@@ -2265,7 +2265,7 @@ Product / brand context?
 (example: Acme Banking, calm enterprise look)
 ══════════════════════════════════════
 
-Turn this into a short agent/Cursor rule I can save.
+Turn this into a short agent rule I can save.
 
 Include:
 • When it applies
@@ -2397,7 +2397,7 @@ Optimize for fewest agent turns.`,
   },
   {
     id: 'vibe-scaffold-cursor-rule',
-    title: 'Create a Cursor Rule File',
+    title: 'Create an Agent Rule File',
     description:
       'Add a project rule file agents will keep reading — biggest ongoing credit saver.',
     command:

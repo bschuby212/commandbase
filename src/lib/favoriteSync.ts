@@ -79,17 +79,9 @@ export function writeFavoritesToUrl(ids: Set<string>): void {
   }
 }
 
-export function buildFavoritesShareUrl(ids: Set<string>): string {
-  if (typeof window === 'undefined') return ''
-  const url = new URL(window.location.href)
-  const encoded = encodeFavoriteIds(ids)
-  url.hash = encoded ? `${HASH_PREFIX}${encoded}` : ''
-  return url.toString()
-}
-
 /**
- * Prefer URL favorites when present (opening a sync link on another device).
- * Otherwise use localStorage and mirror into the URL so bookmarks stay current.
+ * Prefer URL favorites when present.
+ * Otherwise use localStorage and mirror into the URL so the page stays shareable.
  */
 export function readInitialFavorites(): Set<string> {
   const fromUrl = readFavoritesFromUrl()
