@@ -1195,6 +1195,40 @@ Turn the filled-in ticket into an implementation plan for Codex. Do not code yet
     ],
   },
   {
+    id: 'codex-work-push-auth',
+    title: 'Codex/ChatGPT: Push Auth for Tool / Plugin',
+    description:
+      'Fill in one tool (e.g. Netlify, gh, Figma MCP) — get auth unblock steps without pasting secrets.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Tool / plugin that needs auth: 
+(e.g. Netlify CLI · GitHub CLI · Figma MCP · Slack plugin)
+What I’m trying to do after auth: 
+(e.g. force Netlify production deploy, open PR, read Figma)
+Where I’m stuck: 
+(e.g. not logged in · 401 · wrong account · no browser in this environment)
+══════════════════════════════════════
+
+Unblock auth for that one tool/plugin only. Give official login or token steps, where to store credentials (env/secret store — never paste secrets into chat), a verify command, then the exact retry command for my task.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'terminal',
+    keywords: [
+      'codex',
+      'chatgpt',
+      'auth',
+      'login',
+      'plugin',
+      'tool',
+      'netlify',
+      'token',
+      'work',
+      'fill',
+    ],
+  },
+  {
     id: 'codex-work-pick-model',
     title: 'Codex/ChatGPT: Which Model Fits?',
     description:

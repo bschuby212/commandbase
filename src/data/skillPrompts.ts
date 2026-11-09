@@ -7,6 +7,74 @@ import type { Command } from '../types/command'
  */
 export const skillPrompts: Command[] = [
   {
+    id: 'skill-push-auth-for-tool',
+    title: 'Push Auth for a Tool / Plugin',
+    description:
+      'Fill in the one tool or plugin — then prompt any AI to set up, fix, or unblock auth for it.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Tool / plugin that needs auth: 
+(e.g. Netlify CLI · GitHub CLI · Figma MCP · Slack · Notion · Cursor plugin · OpenAI Codex)
+What I’m trying to do: 
+(e.g. force production deploy, open a PR, read design tokens, post a message)
+Where I’m stuck: 
+(e.g. “not logged in”, 401, missing token, browser login loop, wrong account)
+Environment: 
+(e.g. work laptop · personal · CI · Cursor cloud agent)
+Must not do: 
+(e.g. paste secrets into chat, commit .env, use personal account on work repo)
+══════════════════════════════════════
+
+Help me get authenticated for the filled-in tool/plugin so I can finish the task.
+
+MISSION
+Unblock auth with the smallest safe steps — no secret dumping, no account guesswork.
+
+PHASE 1 — IDENTIFY
+Name the exact auth mechanism (CLI login, OAuth, personal access token, API key, MCP OAuth, browser cookie session).
+
+PHASE 2 — STEPS
+Give a numbered path for THIS tool only:
+1. How to start login / create a token (official path)
+2. Where the credential should live (env var name, OS keychain, Netlify/GitHub UI — not the chat)
+3. How to verify auth worked (status/whoami command)
+4. How to retry the original task after auth
+
+PHASE 3 — FAILURES
+Common failure modes for this tool and the fix for each (wrong account, expired token, missing scope, SSO, sandbox without browser).
+
+RULES
+• Never ask me to paste a secret/token into chat — tell me where to store it locally or in the host’s secret store
+• One tool only (the fill-in). Don’t digress into unrelated CLIs
+• Prefer official CLI/docs flows over brittle workarounds
+• If the environment can’t do interactive browser login, say so and give a token/env alternative
+
+OUTPUT
+Auth method · step-by-step · verify command · retry command for my original task · what not to commit.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'auth',
+      'login',
+      'oauth',
+      'token',
+      'plugin',
+      'tool',
+      'mcp',
+      'netlify',
+      'github',
+      'figma',
+      'unblock',
+      'skill',
+      'chatgpt',
+      'codex',
+    ],
+    tags: ['Skill', 'Setup'],
+  },
+  {
     id: 'skill-pick-best-model',
     title: 'Which Model Fits This Job?',
     description:

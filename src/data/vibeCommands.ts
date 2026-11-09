@@ -1382,10 +1382,130 @@ FINAL GATE
 
   // --- Netlify / deploy / env gotchas ---
   {
+    id: 'vibe-netlify-login',
+    title: 'Log In to Netlify CLI',
+    description: 'Authenticate the Netlify CLI (needed before force deploys).',
+    command: 'npx --yes netlify-cli login',
+    platform: 'github',
+    language: 'javascript',
+    category: 'Setup',
+    type: 'terminal',
+    keywords: ['netlify', 'login', 'auth', 'authenticate', 'cli', 'token'],
+    notes:
+      'Opens a browser. For CI/agents, use a NETLIFY_AUTH_TOKEN env secret instead of interactive login.',
+  },
+  {
+    id: 'vibe-netlify-status',
+    title: 'Check Netlify Auth & Site Link',
+    description: 'See whether the CLI is logged in and which site is linked.',
+    command: 'npx --yes netlify-cli status',
+    platform: 'github',
+    language: 'javascript',
+    category: 'Setup',
+    type: 'terminal',
+    keywords: ['netlify', 'status', 'auth', 'whoami', 'linked', 'troubleshoot'],
+  },
+  {
+    id: 'vibe-netlify-link',
+    title: 'Link Folder to Netlify Site',
+    description: 'Connect this repo folder to an existing Netlify site.',
+    command: 'npx --yes netlify-cli link',
+    platform: 'github',
+    language: 'javascript',
+    category: 'Setup',
+    type: 'terminal',
+    keywords: ['netlify', 'link', 'site', 'connect', 'setup'],
+  },
+  {
+    id: 'vibe-netlify-deploy-prod',
+    title: 'Force Production Deploy (Netlify CLI)',
+    description:
+      'Build and push a fresh production deploy when the site is not showing updates.',
+    command: 'npx --yes netlify-cli deploy --prod --build',
+    platform: 'github',
+    language: 'javascript',
+    category: 'Commits & Changes',
+    type: 'terminal',
+    keywords: [
+      'netlify',
+      'deploy',
+      'force',
+      'production',
+      'prod',
+      'publish',
+      'cli',
+      'update',
+    ],
+    notes:
+      'Requires auth (`netlify login` or NETLIFY_AUTH_TOKEN) and a linked site (`netlify link`). Use when Git deploys stall or the live site looks stale.',
+  },
+  {
+    id: 'vibe-netlify-deploy-draft',
+    title: 'Draft Deploy Preview (Netlify CLI)',
+    description: 'Ship a draft URL to check the build before promoting to prod.',
+    command: 'npx --yes netlify-cli deploy --build',
+    platform: 'github',
+    language: 'javascript',
+    category: 'Commits & Changes',
+    type: 'terminal',
+    keywords: ['netlify', 'deploy', 'draft', 'preview', 'cli'],
+  },
+  {
+    id: 'vibe-prompt-netlify-auth',
+    title: 'Unblock Netlify Auth, Then Force Deploy',
+    description:
+      'Fill in where you’re stuck — get auth steps, then the force production deploy command.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+Where I’m stuck: 
+(e.g. “Netlify site not updating” · CLI says not logged in · 401 on deploy · wrong team/site linked)
+Site name / URL (if known): 
+Environment: 
+(e.g. local Mac · work laptop · Cursor cloud agent)
+I can open a browser for login? (yes / no): 
+══════════════════════════════════════
+
+Unblock Netlify CLI auth for the filled-in situation, then force a production deploy so the live site shows the latest build.
+
+MISSION
+Get authenticated safely, confirm the linked site, then run a prod deploy.
+
+STEPS TO GIVE ME
+1. Auth: \`npx --yes netlify-cli login\` OR set \`NETLIFY_AUTH_TOKEN\` in the environment/secret store (never paste the token into chat)
+2. Verify: \`npx --yes netlify-cli status\`
+3. Link if needed: \`npx --yes netlify-cli link\`
+4. Force prod deploy: \`npx --yes netlify-cli deploy --prod --build\`
+5. How to confirm the live URL updated (deploy log URL + hard refresh)
+
+RULES
+• Do not ask for the token value in chat
+• If this environment can’t do browser login, prefer the auth-token secret path
+• One path only — auth → status → link → deploy
+
+OUTPUT
+Ordered commands I can copy · what “success” looks like · common failure fixes.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'netlify',
+      'auth',
+      'login',
+      'deploy',
+      'force',
+      'production',
+      'token',
+      'prompt',
+    ],
+    tags: ['Setup', 'Credits'],
+  },
+  {
     id: 'vibe-netlify-dev',
     title: 'Run Netlify Dev',
     description: 'Preview with Netlify redirects/functions locally.',
-    command: 'npx --yes netlify dev',
+    command: 'npx --yes netlify-cli dev',
     platform: 'github',
     language: 'javascript',
     category: 'Sessions',
@@ -1396,7 +1516,7 @@ FINAL GATE
     id: 'vibe-netlify-open',
     title: 'Open Netlify Site Admin',
     description: 'Jump to the Netlify dashboard for this linked site.',
-    command: 'npx --yes netlify open',
+    command: 'npx --yes netlify-cli open',
     platform: 'github',
     language: 'javascript',
     category: 'Navigation',

@@ -51,6 +51,11 @@ export type Command = {
   shortcut?: ShortcutKeys
   /** Optional discovery tags for AI prompts (Figma, QA, Accessibility, etc.). */
   tags?: string[]
+  /**
+   * When true, cards show a “Fill in first” cue. Auto-detected from a
+   * FILL THIS IN BEFORE PASTING block when omitted.
+   */
+  needsFillIn?: boolean
 }
 
 export type PrimaryFilter = 'all' | Platform
