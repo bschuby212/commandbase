@@ -7,6 +7,72 @@ import type { Command } from '../types/command'
  */
 export const skillPrompts: Command[] = [
   {
+    id: 'skill-pick-best-model',
+    title: 'Which Model Fits This Job?',
+    description:
+      'Fill the task and constraints, then ask any AI which model/mode is the best fit.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+What I need to do: 
+(e.g. refactor a messy React form, critique a SaaS banking dashboard, write AC from a ticket, debug a flaky CI, competitive teardown)
+Tools I can use: 
+(e.g. ChatGPT · Codex · Cursor · Claude Code · all of the above)
+Models / modes I can pick (if known): 
+(e.g. GPT-5 / o-series · Codex · Composer · Claude Sonnet/Opus · “not sure — suggest”)
+Priority (rank): quality · speed · cost/credits · privacy · depth of reasoning · UI/design taste
+Constraints: 
+(e.g. company data can’t leave work tools, need answer in <10 min, must edit the repo, recommendations only)
+══════════════════════════════════════
+
+Recommend the best model / mode / tool for the filled-in job. Do not do the job yet.
+
+MISSION
+Pick a fit that matches the task type and my priorities — not a generic “use the smartest model.”
+
+PHASE 1 — CLASSIFY THE JOB
+Label it: UI/design critique · implementation · debugging · planning/spec · research/writing · refactor · review. Note whether it needs tools (browser, terminal, repo) or chat-only.
+
+PHASE 2 — RECOMMEND
+Give:
+1. Best primary pick (tool + model/mode) and why it fits THIS job
+2. Runner-up if credits/speed matter
+3. What to avoid for this job (overkill or wrong strengths)
+4. How to brief it in 3–5 bullets so I don’t waste a turn
+5. When to switch models mid-task (e.g. plan on a strong reasoner → implement on a cheaper/faster coder)
+
+RULES
+• Be specific to my fill-ins; don’t ignore cost/privacy constraints
+• If my available models list is thin, say what you’d pick in general and what I should enable
+• No hype. Tradeoffs in plain language
+• Do not start the actual work unless I ask after the recommendation
+
+OUTPUT
+Primary pick · why · runner-up · avoid · starter brief · switch criteria.`,
+    platform: 'aiprompt',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'prompt',
+    keywords: [
+      'model',
+      'which model',
+      'best model',
+      'fit',
+      'gpt',
+      'codex',
+      'claude',
+      'cursor',
+      'composer',
+      'credits',
+      'cost',
+      'pick',
+      'recommend',
+      'chatgpt',
+      'skill',
+    ],
+    tags: ['Skill', 'Planning', 'Credits'],
+  },
+  {
     id: 'skill-competitive-analysis',
     title: 'Competitive Analysis (Fill Product)',
     description:

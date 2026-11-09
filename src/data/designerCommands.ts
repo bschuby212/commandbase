@@ -1195,6 +1195,40 @@ Turn the filled-in ticket into an implementation plan for Codex. Do not code yet
     ],
   },
   {
+    id: 'codex-work-pick-model',
+    title: 'Codex/ChatGPT: Which Model Fits?',
+    description:
+      'Fill the job and priorities, then get a model/tool recommendation before spending credits.',
+    command: `══════════════════════════════════════
+FILL THIS IN BEFORE PASTING
+══════════════════════════════════════
+What I need to do: 
+(e.g. UI critique for SaaS banking settings, implement a shadcn form, debug Netlify deploy)
+Tools available: 
+(e.g. ChatGPT · Codex · Cursor · Claude)
+Models / modes I can pick (or “not sure”): 
+Priority: quality · speed · cost/credits · privacy · design taste
+Constraints: 
+══════════════════════════════════════
+
+Recommend the best model/mode/tool for this job only. Do not do the work yet. Give: primary pick + why, runner-up for cheaper/faster, what to avoid, and a 3–5 bullet brief I should paste next.`,
+    platform: 'codex',
+    language: 'prompt',
+    category: 'Prompts',
+    type: 'terminal',
+    keywords: [
+      'codex',
+      'chatgpt',
+      'model',
+      'which model',
+      'best fit',
+      'credits',
+      'recommend',
+      'work',
+      'fill',
+    ],
+  },
+  {
     id: 'codex-work-competitive-analysis',
     title: 'Codex/ChatGPT: Competitive Analysis',
     description: 'Fill your product (e.g. SaaS banking app), then run a teardown.',
